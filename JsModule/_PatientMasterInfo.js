@@ -4,6 +4,7 @@ $(document).ready(function () {
     FillCurrentDate('txtOnlineBookingDate')
     let canvas = document.querySelector("#canvas");
     $('#ImgCaptured').hide();
+   // $('#ImgCaptured').hide();
 
     $('#start-camera').on('click', async function () {
         let stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
