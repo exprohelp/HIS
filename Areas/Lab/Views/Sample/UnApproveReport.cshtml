@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "UnApproveReport";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+
+<style>
+    .select-row {
+        background: #0076d0 !important;
+        color: #fff;
+    }
+
+    .scroll {
+        overflow: auto;
+        max-height: 300px;
+    }
+    .flex {
+        float: right;
+        width: 380px;
+        display: flex;
+        align-items: baseline;
+    }
+    .sampleTaken {
+        background: #bcffe0
+    }
+
+    .panel-body input, .panel-body select {
+        padding: 5px !important;
+    }
+
+    #tblApproveTestInfo tbody input[type=text] {
+        height: 22px;
+        margin-bottom: 2px;
+        width: 90%;
+        border-radius: 0;
+        border: 1px solid #89a3b3;
+    }
+</style>
+<script src="~/Areas/Lab/JsModule/UnApproveReport.js"></script>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading" style="background:#0076d0;padding:1px 10px; ">
+                        <p class="text-white">Un-Approve Report</p>
+                    </div>
+                    <div class="panel-body" style="background:#fff;padding: 7px;">
+                        <div class="row">                           
+                            <div class="col-md-3">
+                                <div class="fileinput fileinput-new input-group" data-provides="fileinput" style="display:inline-flex;align-items: baseline;">
+                                    <input type="text" class="form-control" value="OW-2223-00000020" id="txtVisitNo" placeholder="Visit No" />
+                                    <button class="btn-success" onclick="ApprovedTestInfo()" style="width:25%;border:none;height:27px"><i class="fa fa-search">&nbsp;</i>Get</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">                      
+                            <div class="col-md-12">
+                                <div class="scroll" style="min-height: 35vw; display:block; border:1px solid #2478a9; overflow:auto;padding-bottom:7px;">
+                                    <table class="table table-bordered" id="tblApproveTestInfo">
+                                        <thead>
+                                            <tr>
+                                                <th>Test Code</th>
+                                                <th>Test Name</th>
+                                                <th>Approve By</th>
+                                                <th>Approve Date</th>
+                                                <th style="width:30%">Remark</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-danger" onclick="UnApproveTest()" style="float:right;margin:10px"><i class="fa fa-sign-in">&nbsp;</i>Un-Approve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Indicator Report";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<style>
+    .select-row {
+        background: #186eb1 !IMPORTANT;
+        color: #fff;
+    }
+
+    .dietCategory {
+        cursor: pointer;
+        font-weight: bold !important;
+        color: #952006;
+    }
+
+    .flex {
+        display: flex !important;
+        align-items: center;
+    }
+
+    hr {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .scroll {
+        width: 100%;
+        background: #fff;
+        overflow: overlay;
+        max-height: 450px;
+        display: block;
+        margin: 0 0 5px 0;
+    }
+
+    .panel-body {
+        /*box-shadow: 1px 1px 10px #d2d2d2;*/
+        border-radius: 10px;
+        padding: 5px 3px 0px 3px;
+        position: relative;
+    }
+
+    .bn {
+        margin: 0px;
+        font-size: 10pt;
+        padding: 0px 10px;
+        border-radius: 0;
+        text-align: left;
+        height: 30px;
+    }
+
+    .bc {
+        border: 1px solid #00a65a;
+        border-radius: 0;
+    }
+</style>
+<script src="~/Areas/Dietician/JsModule/IndicatorReport.js"></script>
+<div id="page-content">
+    <dsiv class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel">
+                    <div class="panel-heading" style="background:#0076d0;padding: 4px;">
+                        <h4 class="text-white text-left">Indicator Report</h4>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-md-4 form-group">
+                            <label>Month</label>
+                            <div class="flex">
+                                <input type="month" id="txtMonth" class="form-control">
+                                <button class="btn btn-primary" onclick="GetReport()" style="margin:0;border-radius:0;height:28px;width: 35%;"><i class="fa fa-eye">&nbsp;</i>View</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <iframe id="iframe" src="" style="width:100%;height:75vh"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dsiv>
+</div>
+

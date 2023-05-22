@@ -1,0 +1,185 @@
+﻿
+@{
+    ViewBag.Title = "LLIndentAudit";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<script src="~/Areas/LinenLaundry/JsModule/LLIndentAudit.js"></script>
+
+<style>
+    #tblIndentInfo thead i.fa-filter {
+        cursor: pointer;
+        color: #f3d500;
+        font-size: 18px;
+    }
+
+    .mismatch {
+        background: #fba9a9;
+    }
+
+    .bn {
+        border: none;
+    }
+
+    .bc {
+        border-color: #06a08b;
+        border-radius: 0;
+    }
+
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .panel-body {
+        border: 1px solid #e1dede;
+        padding: 5px 3px 3px 3px !important;
+    }
+
+    .form-group label {
+        padding: 3px 0 4px 10px !important;
+    }
+
+
+    .selected {
+        background: DodgerBlue !important;
+        color: #fff;
+    }
+
+    .bg1 {
+        background: #fff2c1;
+    }
+
+    .text-white {
+        color: #fff;
+    }
+</style>
+
+<script src="~/Areas/LinenLaundry/JsModule/LLaundryReceiving.js"></script>
+<div id="page-content">
+    <div class="col-md-5">
+        <div class="">
+            <div class="">
+                <div class="panel">
+                    <div class="panel-heading" style="background:#0076d0;padding:2px;">
+                        <h4 class="text-white">Indent Audit</h4>
+                    </div>
+                    <div class="panel-body" style="background:#fff;padding: 8px 20px;">
+                        <div class="form-group">
+                            <div class="col-md-12" style="display:flex">
+                                <button type="button" style="white-space:pre" class="btn-success bn">Cart</button>
+                                <select class="form-control" id="ddlCartList"></select>
+                            </div>
+                            <div class="col-md-5" style="display:flex;margin-top:10px">
+                                <button type="button" style="white-space:pre;" class="btn-success bn">From</button>
+                                <input type="date" id="txtFrom" class="form-control" />
+                            </div>
+                            <div class="col-md-7" style="display:flex;margin-top:10px">
+                                <button type="button" style="white-space:pre;" class="btn-success bn">To</button>
+                                <input type="date" id="txtTo" class="form-control" style="padding:3px;" />
+                                <button type="button" id="btnGetStock" style="width: 50%;" onclick="IndentMovement('IndentMovement')" class="btn-success bn"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+                                <button type="button" id="btnGetStock" style="width: 50%;" onclick="IndentMovement('IndentMovementOnlyMisMatch')" class="btn-warning bn">MisMatch</button>
+                            </div>
+                            @*<div class="col-md-4">
+                                    <button type="button" id="btnXL" style="border-radius:0;padding:2px 7px" onclick="DownloadExcel()" class="btn btn-warning bn pull-right"><i class="fa fa-file-excel-o">&nbsp;</i>Excel Download</button>
+                                </div>*@
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <div class="table-responsive" style="max-height: 500px;">
+                                <table class="table table-bordered" id="tblIndentInfo">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:10%">Indent Date</th>
+                                            <th style="width:32%">Indent No <i class="fa fa-filter pull-right" onclick="IndentMovement('IndentMovementOnlyMisMatch')"></i></th>
+                                            <th class="text-right">Indent Qty</th>
+                                            <th class="text-right">Trf Qty</th>
+                                            <th class="text-right">Rcvd Qty</th>
+                                            <th style="width:1%">cmd</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="col-md-12">
+            <div class="panel" style="margin:0">
+                <div class="panel-heading" style="background:#0076d0;padding:2px;">
+                    <h4 class="text-white">Issue Details</h4>
+                </div>
+                <div class="panel-body" style="background:#fff;padding: 0 !important;height: 180px;">
+                    <div class="col-md-12" style="height: 170px;padding: 0px;margin: 3px 0px;border: 1px solid #2478a9;overflow: auto;">
+                        <div class="table-responsive" style="max-height: 500px;">
+                            <table class="table table-bordered" id="tblIssue">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th style="width:10%;text-align:right">Qty</th>
+                                        <th style="width:10%;text-align:right">Issue Qty</th>
+                                        <th style="width:20%">Issue Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel" style="margin:0">
+                <div class="panel-heading" style="background:#0076d0;padding:2px;">
+                    <h4 class="text-white">Transfer Details</h4>
+                </div>
+                <div class="panel-body" style="background:#fff;padding: 0 !important;height: 160px;">
+                    <div class="col-md-12" style="height: 150px;padding: 0px;margin: 3px 0px;border: 1px solid #2478a9;overflow: auto;">
+                        <div class="table-responsive" style="max-height: 500px;">
+                            <table class="table table-bordered" id="tblTransfer">
+                                <thead>
+                                    <tr>
+                                        <th style="width:17%">TranId</th>
+                                        <th>Item Name</th>
+                                        <th style="width:10%;text-align:right">Qty</th>
+                                        <th style="width:22%">Doc Date</th>
+                                        <th style="width:20%">Rcpt Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel" style="margin:0">
+                <div class="panel-heading" style="background:#0076d0;padding:2px;">
+                    <h4 class="text-white">Received Details</h4>
+                </div>
+                <div class="panel-body" style="background:#fff;padding: 0 !important;height: 170px;">
+                    <div class="col-md-12" style="height: 160px;padding: 0px;margin: 3px 0px;border: 1px solid #2478a9;overflow: auto;">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="tblReceived">
+                                <thead>
+                                    <tr>
+                                        <th style="width:17%">TranId</th>
+                                        <th>Item Name</th>
+                                        <th style="width:10%;text-align:right">Qty</th>
+                                        <th style="width:20%">Doc Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

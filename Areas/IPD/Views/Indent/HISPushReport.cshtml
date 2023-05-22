@@ -1,0 +1,266 @@
+﻿
+@{
+    ViewBag.Title = "HISPushReport";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/IPD/JsModule/Indent/HISPushReport.js"></script>
+<style>
+
+    #txtSearchPending, #txtSearchSummary {
+        background: white;
+        width: 205px;
+        display: inline;
+        margin-left: 2px;
+        border-radius: 19px;
+    }
+    .btnCustom {
+        height: 28px;
+        border-radius: 0;
+        margin: 0;
+        width: 25%;
+    }
+
+    .btntblCustom {
+        height: 17px;
+        line-height: 0;
+        font-size: 11px;
+    }
+
+    .title {
+        background: #92c1dd !important;
+        color: #fff;
+        padding: 2px 5px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .section {
+        border: none !important;
+    }
+
+    .personalInfo {
+        background: #fffce7;
+        pointer-events: none;
+    }
+
+        .personalInfo input {
+            background: #edebde;
+        }
+
+    .selectedReqTime {
+        border: 1px solid #1d8d07 !important;
+    }
+
+    div.ComponentQuantity {
+        padding: 1px;
+        overflow: auto;
+        display: inline-block;
+        font-size: 12px;
+        width: 100%;
+        white-space: nowrap;
+    }
+
+        div.ComponentQuantity span {
+            cursor: pointer;
+            color: #fff;
+            margin-left: 4px;
+            background: #b58a3a;
+            padding: 3px 4px;
+            border-radius: 5px;
+        }
+
+    #tblComponentsInfo tbody input[type=text] {
+        text-align: right;
+        height: 20px;
+        border-radius: 2px;
+        border: 1px solid #a19943;
+    }
+
+    .RequirementTime .col-md-3 {
+        padding: 0 0 0 7px;
+        width: 19.5%;
+    }
+
+    .RequirementTime .reqBox {
+        height: 111px;
+        border: 1px solid #ddd;
+    }
+
+    .RequirementTime label.head {
+        cursor: pointer;
+        color: #935353;
+        display: grid;
+        text-align: center;
+        font-size: 11px;
+        background: #e7e7e7;
+        padding: 1px;
+        height: 51px;
+    }
+
+        .RequirementTime label.head input[type=radio] {
+            height: 15px;
+        }
+
+    .RequirementTime .remark1 {
+        font-size: 11px;
+        text-align: center;
+        display: block;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .RequirementTime .remark2 {
+        font-size: 11px;
+        text-align: center;
+        display: block;
+    }
+
+    .ComponentQuantity .col-md-2 {
+        padding: 0 0 0 7px;
+        width: 12.2%;
+    }
+
+        .ComponentQuantity .col-md-2 label {
+            font-size: 11px;
+            height: 28px;
+            margin: 0;
+            display: flex;
+            align-items: flex-end;
+        }
+
+    .section .form-control {
+        border: 1px solid #9E9E9E;
+        height: 25px;
+        border-radius: 2px;
+        padding-left: 5px;
+    }
+
+    .section .form-group {
+        margin-bottom: 8px !important;
+    }
+
+    hr {
+        margin-top: 35px;
+        margin-bottom: 5px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .bc {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-color: #06a08b;
+    }
+
+    .btnRC {
+        height: 30px;
+        margin: -1px;
+        border-radius: 0;
+    }
+
+    .section {
+        margin-top: 5px;
+        padding: 1px;
+        border: 1px solid #2478a9;
+        height: 150px;
+    }
+
+    .title {
+        background: #2478a9;
+        color: #fff;
+        padding: 2px 5px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single {
+        height: 25px;
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+    }
+</style>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="border: 1px solid #ddd;padding: 0px;margin: 0 11px;">
+                    <ul class="nav nav-tabs" style="background:#f3efef">
+                        <li class="active"><a style="padding: 5px;" data-toggle="tab" href="#Pending"><i class="fa fa-clock-o">&nbsp;</i>Pending</a></li>
+                        <li><a data-toggle="tab" style="padding: 5px;" href="#Summary"><i class="fa fa-list">&nbsp;</i>Summary </a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="Pending" class="tab-pane fade in active" style="padding:5px">
+                            <div class="section" style="height:80vh;overflow:auto">
+                                <label class="title">
+                                <button onclick="HISPushPendency('HIS-PushPendency')" class="btn btn-warning btn-xs">Get Pending</button>
+                                Pending Details </label>
+                                <table class="table table-bordered" id="tblPendingDetails">
+                                    <thead>
+                                        <tr>
+                                            <th>Indent No</th>
+                                            <th>Sale Inv. No</th>
+                                            <th>Sale Date</th>
+                                            <th class="text-right">Total</th>
+                                            <th class="text-right">Discount</th>
+                                            <th class="text-right">Net</th>
+                                            <th style="width:1%">CMD</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="Summary" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row" style="padding: 7px;background: #cae9ff;">
+                                        <div class="col-md-7">
+                                            <div class="flex">
+                                                <input type="text" id="txtIPDNo" class="form-control bc" placeholder="IPD No" />
+                                                <button onclick="PushDataSummary('ByIPDNo')" class="btn btn-primary btnCustom"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+                                                <button onclick="PushDataSummary('-')" style="width: 61%;margin-left: 5px;" class="btn btn-warning btnCustom"><i class="fa fa-sign-in">&nbsp;</i>Get All Summary</button>
+                                                <input type="text" class="form-control" id="txtSearchSummary" onkeyup="searchTable('txtSearchSummary','tblPushDataSummary')" placeholder="Search.." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section" style="height:80vh;overflow:auto">
+                                        @*<label class="title">
+                                            <div class="flex">
+                                                <input type="text" class="form-control" placeholder="IPD No" />
+                                                <button onclick="PushDataSummary()" class="btn btn-warning btn-xs"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+
+                                                <button onclick="PushDataSummary()" class="btn btn-warning btn-xs"><i class="fa fa-sign-in">&nbsp;</i>Get All Summary</button>
+                                                Summary Details
+                                            </div></label>*@
+                                        <table class="table table-bordered" id="tblPushDataSummary">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hosp Ipop No</th>
+                                                    <th>Patient Name</th>
+                                                    <th class="text-right">T. Invoice</th>
+                                                    <th class="text-right">Push Count Inv</th>
+                                                    <th class="text-right">Pend. Count Inv</th>
+                                                    <th class="text-right">Tot. Amt</th>
+                                                    <th class="text-right">Push Amount</th>
+                                                    <th class="text-right">Pend. Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

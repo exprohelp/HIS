@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/ApplicationResource/JsModule/dashboard.js"></script>
+<style>
+    table tbody {
+        display: block;
+        width: 100%;
+        max-height: 450px;
+        overflow-y: scroll;
+    }
+
+        table thead, table tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+    #tblIPDReport tbody tr td:first-child, #tblIPDReport thead th:first-child {
+        width: 280px !important;
+        text-align: left !important;
+    }
+
+    #tblIPDReport thead th, #IPDReport tbody tr td {
+        width: 30px;
+        text-align: center;
+    }
+
+    hr {
+        margin-top: 35px;
+        margin-bottom: 5px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .custom-table {
+        width: 100%;
+        line-height: 29px;
+        font-size: 12px;
+    }
+
+    .fileinput.input-group {
+        display: flex;
+    }
+
+    .text-17 {
+        font-size: 17px;
+    }
+
+    .panel-body {
+        padding: 15px 15px 0px 20px;
+        position: relative;
+    }
+</style>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel">
+                    <div class="panel-body">
+                        @Html.Partial("speedtest")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

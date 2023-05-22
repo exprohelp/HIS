@@ -1,0 +1,232 @@
+﻿
+@{
+    ViewBag.Title = "DoctorSignature";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+@*<script src="~/Areas/IPD/JsModule/IPD/BloodRequisition.js"></script>*@
+<script src="~/Areas/Lab/JsModule/Master/LabDoctorSignature.js"></script>
+<style>
+    #imgSign {
+        max-height: 145px;
+        max-width: 100%;
+    }
+    .docInfo {
+        margin-top: 2px;
+        width: 100%;
+        display: none;
+        background: #f1f1f1;
+        text-align: left;
+        padding: 2px 5px;
+        border: 1px solid #e5e5e5;
+    }
+
+    .fileType {
+        background: #ede2d3;
+        padding: 3px 15px;
+        margin: 12px;
+        border-radius: 20px;
+    }
+
+    .personalInfo {
+        background: #fffce7;
+        pointer-events: none;
+    }
+
+        .personalInfo input {
+            background: #edebde;
+        }
+
+    .selectedReqTime {
+        border: 1px solid #1d8d07 !important;
+    }
+
+    div.ComponentQuantity {
+        padding: 1px;
+        overflow: auto;
+        display: inline-block;
+        font-size: 12px;
+        width: 100%;
+        white-space: nowrap;
+    }
+
+        div.ComponentQuantity span {
+            cursor: pointer;
+            color: #fff;
+            margin-left: 4px;
+            background: #b58a3a;
+            padding: 3px 4px;
+            border-radius: 5px;
+        }
+
+    #tblComponentsInfo tbody input[type=text] {
+        text-align: right;
+        height: 20px;
+        border-radius: 2px;
+        border: 1px solid #a19943;
+    }
+
+    .RequirementTime .col-md-3 {
+        padding: 0 0 0 7px;
+        width: 19.5%;
+    }
+
+    .RequirementTime .reqBox {
+        height: 111px;
+        border: 1px solid #ddd;
+    }
+
+    .RequirementTime label.head {
+        cursor: pointer;
+        color: #935353;
+        display: grid;
+        text-align: center;
+        font-size: 11px;
+        background: #e7e7e7;
+        padding: 1px;
+        height: 51px;
+    }
+
+        .RequirementTime label.head input[type=radio] {
+            height: 15px;
+        }
+
+    .RequirementTime .remark1 {
+        font-size: 11px;
+        text-align: center;
+        display: block;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .RequirementTime .remark2 {
+        font-size: 11px;
+        text-align: center;
+        display: block;
+    }
+
+    .ComponentQuantity .col-md-2 {
+        padding: 0 0 0 7px;
+        width: 12.2%;
+    }
+
+        .ComponentQuantity .col-md-2 label {
+            font-size: 11px;
+            height: 28px;
+            margin: 0;
+            display: flex;
+            align-items: flex-end;
+        }
+
+    .section .form-control {
+        border: 1px solid #9E9E9E;
+        height: 25px;
+        border-radius: 2px;
+        padding-left: 5px;
+    }
+
+    .section .form-group {
+        margin-bottom: 8px !important;
+    }
+
+    hr {
+        margin-top: 35px;
+        margin-bottom: 5px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .bc {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-color: #06a08b;
+    }
+
+    .btnRC {
+        height: 30px;
+        margin: -1px;
+        border-radius: 0;
+    }
+
+    .section {
+        margin-top: 5px;
+        padding: 1px;
+        border: 1px solid #2478a9;
+        height: 150px;
+    }
+
+    .title {
+        background: #2478a9;
+        color: #fff;
+        padding: 2px 5px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single {
+        height: 25px;
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+    }
+</style>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="section" style="height:90vh;">
+                    <label class="title">Doctor Details</label>
+                    <div class="row" style="margin:3px 0 2px 0">
+                        <div class="col-md-10">
+                            <div class="flex" style="">
+                                <label style="white-space:pre">Department : </label>
+                                <select id="ddlDepartment" onchange="GetDoctors()" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="height:530px;overflow:auto">
+                        <table class="table table-bordered" id="tblDoctors">
+                            <thead>
+                                <tr>
+                                    <th style='white-space:pre'>Doctor Id</th>
+                                    <th style='white-space:pre'>Doctor Name</th>
+                                    <th>Degree</th>
+                                    <th style="width:1%">CMD</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="section" style="height:auto;">
+                    <label class="title">Upload Doctor Signature</label>
+                    <div class="row" style="margin:3px 0 2px 0">
+                        <div class="col-md-12 text-center">
+                            @*<div class="flex" style="">
+                                    <label style="white-space:pre">Choose Sign : </label>
+                                    <input type="file" />
+                                </div>*@
+                            <label class="docInfo">Doctor Name : </label>
+                            <div style="border: 2px dashed #ddd;">
+                                <img id="imgSign" src="https://exprohelp.com/his/images/uploadIcon.jpg" />
+                            </div>
+                            <div style="display:inline-block">
+                                <input type="file" id="uploadSign" onchange="readURL(this)" class="hidden" />
+                                <button class="btn btn-warning" onclick="$('#uploadSign').trigger('click')"><i class="fa fa-file-image-o">&nbsp;</i>Choose Sign to Upload</button>
+                                <button class="btn btn-success" onclick="UploadSign()"><i class="fa fa-upload">&nbsp;</i>Upload Sign</button>
+                            </div>
+                            <label class="fileType"><b>Note :</b> file type should be <b class="text-danger">.jpg, .jpeg, .png.</b></label>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

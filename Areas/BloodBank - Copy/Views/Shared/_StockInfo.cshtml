@@ -1,0 +1,106 @@
+﻿<style>
+    .panel-heading {
+        padding: 5px !important;
+        background: #0076d0;
+    }
+
+        .panel-heading button {
+            float: right;
+            margin: -20px 0px;
+        }
+
+    .modalProcess .tblDonorInfoForProcess {
+        margin-bottom: 10px;
+        background: #ffffff;
+        border-bottom: 1px solid #dfdfdf;
+    }
+
+        .modalProcess .tblDonorInfoForProcess td {
+            background: #f3f3f3;
+            border: none;
+            padding: 5px !important;
+            font-size: 13px;
+        }
+
+    .modalProcess .tblApproveInfo {
+        margin-bottom: 10px;
+        background: #ffffff;
+        border-bottom: 1px solid #dfdfdf;
+    }
+
+        .modalProcess .tblApproveInfo td {
+            background: #fff;
+            border: none;
+            padding: 5px !important;
+            font-size: 13px;
+        }
+</style>
+<script src="~/Areas/BloodBank/JsModule/_StockInfo.js"></script>
+<div class="col-md-12">
+    <div class="section" style="height:400px;">
+        <label class="title">Donor Details</label>
+        <table class="table tblDonorInfoForProcess">
+            <tr>
+                <td><b>Donor ID</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoDonorID">-</td>
+                <td>&nbsp;</td>
+                <td><b>Donor Name</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoDonorName">-</td>
+                <td>&nbsp;</td>
+                <td><b>Gender</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoGender">-</td>
+                <td>&nbsp;</td>
+                <td><b>Blood Group</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoBloodGroup">-</td>
+            </tr>
+            <tr>
+                <td><b>Bag Type</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoBagType">-</td>
+                <td>&nbsp;</td>
+                <td><b>Tube No</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoTubeNo">-</td>
+                <td>&nbsp;</td>
+                <td><b>Entry Date</b></td>
+                <td><b>:</b></td>
+                <td class="txtInfoEntryDate">-</td>
+                <td>&nbsp;</td>
+                <td colspan="3"><b class="text-danger">(As Per Entry Date)</b></td>
+            </tr>
+        </table>
+
+        <div class="row" style="padding:0px 10px">
+            <div class="col-md-12">
+                <div class="section component-section" style="height:217px;">
+                    <label class="title">Stock Info</label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive vertiscrl" style="margin:0;overflow:auto;height:190px;border: 1px solid #2478a9;">
+                                <table id="tblStockDetails" class="table table-bordered" style="margin-bottom:6px">
+                                    <thead style="background: #00a65a;color: #fff;">
+                                        <tr>
+                                            <th style="width:1%;">#</th>
+                                            <th style="width:10%;">StockId</th>
+                                            <th>Component Name</th>
+                                            <th style="width: 5%;text-align:right">Qty</th>
+                                            <th style="width:16%;">Expiry Date</th>
+                                            <th style="width:16%;">Tube No</th>
+                                            <th style="width:5%;">Blood Group</th>                                           
+                                            <th style="width:25%;">Issue To / Hold For</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>

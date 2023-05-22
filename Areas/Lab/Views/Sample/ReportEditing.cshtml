@@ -1,0 +1,392 @@
+﻿
+@{
+    ViewBag.Title = "ReportEditing";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<script src="~/Areas/Lab/JsModule/ReportEditing.js?v1.0"></script>
+<style>
+    #tblTestInfo tbody .fa-check-circle {
+        font-size: 12px;
+    }
+
+    #tblTestInfo tbody .fa-snowflake-o {
+        font-size: 12px;
+        color: #f98a01;
+        cursor: pointer;
+    }
+
+    #tblTestInfo tbody td {
+        padding: 2px;
+    }
+
+    #tblTestInfo tbody td {
+        vertical-align: middle !important;
+    }
+
+        #tblTestInfo tbody td:nth-child(10) {
+            vertical-align: middle !important;
+            text-align: center !important;
+        }
+
+    .lowFlag {
+        vertical-align: middle !important;
+        text-align: center !important;
+        background: #ffeb3b;
+        color: #443a3a;
+    }
+
+    .highFlag {
+        vertical-align: middle !important;
+        text-align: center !important;
+        background: #e93114;
+        color: #fff;
+    }
+
+    i.test-comment {
+        margin-right: 3px;
+        border-radius: 25px;
+        color: #fff;
+        padding: 3px 4px;
+        float: left;
+        font-size: 10px;
+        line-height: 7px;
+        cursor: pointer;
+    }
+
+    .select-row {
+        background: #addbff;
+        color: #545353;
+    }
+
+    span[data-testname] button {
+        position: absolute;
+        right: 10%;
+        height: 18px;
+        line-height: 0;
+        margin-top: 4px;
+    }
+
+    span[data-testname] {
+        display: block;
+        max-width: 740px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .info-title {
+        margin: 0;
+        font-size: 13px;
+        background: #2478a9;
+        width: 100%;
+        padding: 2px 6px;
+        color: #fff;
+    }
+
+    .active {
+        color: green;
+    }
+
+    .text-white {
+        color: #fff !important;
+    }
+
+    hr {
+        margin-top: 35px;
+        margin-bottom: 5px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .custom-table {
+        width: 100%;
+        line-height: 29px;
+        font-size: 12px;
+    }
+
+        .custom-table td {
+            line-height: 24px;
+        }
+
+    .fileinput.input-group {
+        display: flex;
+    }
+
+    .text-17 {
+        font-size: 17px;
+    }
+
+    .scroll {
+        width: 100%;
+        background: #fff;
+        overflow: overlay;
+        max-height: 480px;
+        display: block;
+    }
+
+    .panel-body {
+        /*box-shadow: 1px 1px 10px #d2d2d2;*/
+        border-radius: 10px;
+        padding: 5px 3px 0px 3px;
+        position: relative;
+    }
+
+    .ml15 {
+        margin-left: 15px;
+    }
+
+    #tblTestInfo tbody .form-control {
+        border: 1px solid #aba8a8;
+        height: 23px;
+        margin: 1px 0;
+        padding: 2px;
+    }
+
+    #tblTestInfo tbody input.textValue {
+        margin-top: -24px;
+        width: 82%;
+        position: relative;
+    }
+</style>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ml15">
+                    <div class="">
+                        <div class="panel">
+                            <div class="panel-heading" style="background:#0076d0;padding: 4px;">
+                                <h4 class="text-white" style="font-size: 15px;">Report Editing</h4>
+                            </div>
+                            <div class="panel-body" style="height:85vh">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="ddlIpOpType">
+                                            <option>ALL</option>
+                                            <option>IPD</option>
+                                            <option>OPD</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" id="txtSearch" onkeyup="searchTable('txtSearch','tblReport')" class="form-control" placeholder="Filter.." style="padding:7px" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin:5px 0">
+                                    <div class="col-md-4" style="padding:0">
+                                        <select class="form-control" id="ddlStatus">
+                                            <option>Pending</option>
+                                            <option>Approved</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3" style="padding:0 3px">
+                                        <input type="date" id="txtFrom" class="form-control" style="padding:7px" />
+                                    </div>
+                                    <div class="col-md-3" style="padding:0 3px">
+                                        <input type="date" id="txtTo" class="form-control" style="padding:7px" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-warning" onclick="LabReporting('ALL:Report')"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin:5px 0">
+                                    <div class="col-md-4" style="padding:0">
+                                        <select class="form-control" id="ddlStatus" style="padding:7px">
+                                            <option>Mobile No</option>
+                                            <option>Barcode</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6" style="padding:0 3px">
+                                        <input type="text" id="txtInput" class="form-control" placeholder="Input.." />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-warning" onclick="LabReporting('ALL:Report')"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+                                    </div>
+                                </div>
+                                <hr style="margin:5px 0" />
+                                <div class="col-md-12">
+                                    <div class="table table-responsive">
+                                        <div class="scroll" style="max-height:64vh">
+                                            <table id="tblReport" class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Visit No</th>
+                                                        <th>Depart Name</th>
+                                                        <th>CMD</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="panel">
+                    <div class="panel-heading" style="background:#0076d0;padding: 4px;">
+                        <input type="button" onclick="Clear()" class="btn btn-success" value="New" />
+                        <h4 class="text-white pull-right" style="font-size: 15px;">Patient Details</h4>
+                    </div>
+                    <div class="panel-body" style="background:#fff;padding: 8px 5px;height:84vh">
+                        <div class="col-md-12">
+                            <table class="table-striped custom-table">
+                                <tr>
+                                    <td> <b>Patient Name. : </b><span data-petientname></span></td>
+                                    <td><b>Gender : </b><span data-gender></span></td>
+                                    <td><b>Age Info : </b><span data-age></span></td>
+                                </tr>
+                                <tr>
+                                    <td> <b>ipop_no : </b><span data-ipop></span></td>
+                                    <td><b>Visit No : </b><span data-visitno></span></td>
+                                    <td><b>Reg Date : </b><span data-regdate></span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4"><span data-testname></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="table table-responsive" style="margin: 0;border: 1px solid #2478a9;">
+                                <label class="info-title">Test Information</label>
+                                <div class="scroll" style="max-height: 63vh;overflow: auto;">
+                                    <table id="tblTestInfo" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th style='width:30%'>Test Name</th>
+                                                <th style='width:13%'>Value</th>
+                                                <th style='width:13%'>Text Value</th>
+                                                <th style='width:3%'>Flag</th>
+                                                <th style='width:13%'>Ref. Range</th>
+                                                <th style='width:10%'>Method</th>
+                                                <th style='width:9%'>Mac. Name</th>
+                                                <th style='width:9%;white-space:pre'>Mac. Reading</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="margin-top:10px">
+                            <div style="display:flex;align-items:baseline">
+                                <label style="white-space:pre">Approved By Doctor: </label>
+                                <div style="width:350px">
+                                    <select class="form-control" id="ddlApproveByDoctor"></select>
+                                </div>
+                                <button class="btn btn-warning" onclick="SaveTestResultEntry('Tested')"><i class="fa fa-sign-in">&nbsp;</i>Save</button>
+                                <button class="btn btn-danger"><i class="fa fa-times-circle">&nbsp;</i>Hold</button>
+                                <button class="btn btn-success" onclick="SaveTestResultEntry('Approved')"><i class="fa fa-check-circle">&nbsp;</i>Approve</button>
+                                <button class="btn btn-success" onclick="ApprovedTestInfo()"><i class="fa fa-check-circle">&nbsp;</i>Un-Approve</button>
+                                <button class="btn btn-primary" onclick="ShowHideEditor()"><i class="fa fa-print">&nbsp;</i>Print</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalTestPreview" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content" style="margin-top:5%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Test List</h5>
+                <button data-dismiss="modal" class="btn btn-danger btn-close btn-xs pull-right" style="margin: -16px 0;height: 16px;line-height: 0;">x</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <label id="lblTestList"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalTestComment" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content" style="margin-top:5%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Test Comment</h5>
+                <button data-dismiss="modal" class="btn btn-danger btn-close btn-xs pull-right" style="margin: -16px 0;height: 16px;line-height: 0;">x</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <textarea id="txtTestComment" class="form-control"></textarea>
+                        <button class="btn btn-success pull-right" onclick="TestComment()"><i>&nbsp;</i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalTemplateInfo" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content" style="margin-top:5%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Template Info</h5>
+                <button data-dismiss="modal" class="btn btn-danger btn-close btn-xs pull-right" style="margin: -16px 0;height: 16px;line-height: 0;">x</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table table-responsive">
+                            <div class="scroll" style="max-height:420px">
+                                <table id="tblTemplateInfo" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 1%;">#</th>
+                                            <th>Template Name</th>
+                                            <th style="width: 15%;">Date</th>
+                                            <th style="width: 1%;">CMD</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalUnApproveInfo" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="margin-top:15%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Approved Test Info</h5>
+                <button data-dismiss="modal" class="btn btn-danger btn-close btn-xs pull-right" style="margin: -16px 0;height: 16px;line-height: 0;">x</button>
+            </div>
+            <div class="modal-body" style="padding: 3px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table table-responsive">
+                            <div class="scroll" style="max-height:420px">
+                                <table id="tblApproveTestInfo" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 1%;padding:0"><input type="checkbox" checked /></th>
+                                            <th>Test Name</th>
+                                            <th>Approved By</th>
+                                            <th>Approved Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <button class="btn btn-danger pull-right" onclick="UnApproveTest()"><i class="fa fa-sign-in">&nbsp;</i>Un-Approve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/ckeditor/ckeditor.js"></script>

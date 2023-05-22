@@ -1,0 +1,501 @@
+﻿
+@{
+    ViewBag.Title = "BloodRequisition";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/IPD/JsModule/IPD/BloodRequisition.js"></script>
+<style>
+    .personalInfo {
+        background: #fffce7;
+        pointer-events: none;     
+    }
+        .personalInfo input {
+            background: #edebde;
+        }
+    .selectedReqTime {
+        border: 1px solid #1d8d07 !important;
+    }
+    div.ComponentQuantity {
+        padding: 1px;
+        overflow: auto;
+        display: inline-block;
+        font-size: 12px;
+        width: 100%;
+        white-space: nowrap;
+    }
+        div.ComponentQuantity span {
+            cursor: pointer;
+            color: #fff;
+            margin-left: 4px;
+            background: #b58a3a;
+            padding: 3px 4px;
+            border-radius: 5px;
+        }    
+    #tblComponentsInfo tbody input[type=text] {
+        text-align: right;
+        height: 20px;        
+        border-radius: 2px;
+        border: 1px solid #a19943;
+    }
+
+    .RequirementTime .col-md-3 {
+        padding: 0 0 0 7px;
+        width: 19.5%;
+    }
+
+    .RequirementTime .reqBox {
+        height: 111px;
+        border: 1px solid #ddd;
+    }
+
+    .RequirementTime label.head {
+        cursor: pointer;
+        color: #935353;
+        display: grid;
+        text-align: center;
+        font-size: 11px;
+        background: #e7e7e7;
+        padding: 1px;
+        height: 51px;
+    }
+
+        .RequirementTime label.head input[type=radio] {
+            height: 15px;
+        }
+
+    .RequirementTime .remark1 {
+        font-size: 11px;
+        text-align: center;
+        display: block;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .RequirementTime .remark2 {
+        font-size: 11px;
+        text-align: center;
+        display: block;
+    }
+
+    .ComponentQuantity .col-md-2 {
+        padding: 0 0 0 7px;
+        width: 12.2%;
+    }
+
+        .ComponentQuantity .col-md-2 label {
+            font-size: 11px;
+            height: 28px;
+            margin: 0;
+            display: flex;
+            align-items: flex-end;
+        }
+
+    .section .form-control {
+        border: 1px solid #9E9E9E;
+        height: 25px;
+        border-radius: 2px;
+        padding-left: 5px;
+    }
+
+    .section .form-group {
+        margin-bottom: 8px !important;
+    }
+
+    hr {
+        margin-top: 35px;
+        margin-bottom: 5px;
+        border: 0;
+        border-top: 1px solid #eee;
+    }
+
+    .flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .bc {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-color: #06a08b;
+    }
+
+    .btnRC {
+        height: 30px;
+        margin: -1px;
+        border-radius: 0;
+    }
+
+    .section {
+        margin-top: 5px;
+        padding: 1px;
+        border: 1px solid #2478a9;
+        height: 150px;
+    }
+
+    .title {
+        background: #2478a9;
+        color: #fff;
+        padding: 2px 5px;
+        margin: 0;
+        width: 100%;
+    }
+
+    .select2-container--default .select2-selection--single {
+        height: 25px;
+        background-color: #fff;
+        border: 1px solid #dbdbdb;
+        border-radius: 3px;
+    }
+</style>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="section" style="height:90vh;">
+                    <label class="title">Patient Details</label>
+                    <div style="height:560px;overflow:auto">
+                        <table class="table table-bordered" id="tblPatientInfo">
+                            <thead>
+                                <tr>
+                                    <th>IPDNo</th>
+                                    <th style="white-space:pre">Admit Date</th>
+                                    <th style="white-space:pre">Patient Name</th>
+                                    <th style="white-space:pre">Doctor Name</th>
+                                    <th style="width:1%">CMD</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a style="padding: 5px;" data-toggle="tab" href="#PatientDetails">Patient Indent</a></li>
+                    <li><a data-toggle="tab" style="padding: 5px;" href="#PrintReport">Print Report</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="PatientDetails" class="tab-pane fade in active" style="padding:0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section personalInfo" style="height:101px;">
+                                    <div class="row" style="margin:3px 0 2px 0">
+                                        <div class="col-md-6">
+                                            <div class="flex" style="">
+                                                <label style="white-space:pre">Patient Name : </label>
+                                                <input type="text" id="txtPatientName" class="form-control" placeholder="Patient Name" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Hospital : </label>
+                                                <input type="text" id="txtHospital" class="form-control" placeholder="Hospital" />&nbsp;
+                                                <input type="text" id="txtOtherHospital" class="form-control" placeholder="Other Hospital" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Age : </label>
+                                                <input type="text" id="txtAge" class="form-control" placeholder="Age" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Gender : </label>
+                                                <input type="text" id="txtGender" class="form-control" placeholder="Gender" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Address : </label>
+                                                <input type="text" id="txtAddress" class="form-control" placeholder="Address" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="flex">
+                                                <label style="white-space:pre">UHID : </label>
+                                                <input type="text" id="txtUHID" class="form-control" placeholder="UHID" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="flex">
+                                                <label style="white-space:pre">IPD No. : </label>
+                                                <input type="text" id="txtIPDNo" class="form-control" placeholder="IPD No" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Ward : </label>
+                                                <input type="text" id="txtWard" class="form-control" placeholder="Ward" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Bed : </label>
+                                                <input type="text" id="txtBed" class="form-control" placeholder="Bed" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="section" style="height:101px;">
+                                    <div class="row" style="margin:3px 0 2px 0">
+                                        <div class="col-md-6">
+                                            <div class="flex" style="">
+                                                <label style="white-space:pre">Consultant : </label>
+                                                <input type="text" id="txtConsultant" class="form-control" placeholder="Consultant" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Diagnosis : </label>
+                                                <input type="text" id="txtDiagnosis" class="form-control" placeholder="Diagnosis" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10 form-group">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Indication for Transfusion : </label>
+                                                <input type="text" id="txtIndicationForTransfusion" class="form-control" placeholder="Indication for Transfusion" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Hb% : </label>
+                                                <input type="text" id="txtHb" class="form-control" placeholder="Hb%" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Previous Transfusion : </label>
+                                                <label style="white-space:pre"><input type="radio" name="Transfusion" value="Yes" checked />&nbsp;Yes</label>
+                                                <label style="white-space:pre"><input type="radio" name="Transfusion" value="No" />&nbsp;No</label>&nbsp;
+                                                <input type="text" id="txtDonorNumber" class="form-control TransfusionHistory" placeholder="Donor Number" />&nbsp;
+                                                <input type="text" id="txtABORh" class="form-control TransfusionHistory" placeholder="ABO Rh" />&nbsp;
+                                                <input type="date" id="txtdateTransfuse" class="form-control TransfusionHistory" placeholder="Date" />&nbsp;
+                                                <input type="text" id="txtReactionAny" class="form-control TransfusionHistory" placeholder="Reaction If Any" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="section" style="height:65px;">
+                                    <label class="title">Obstetrics History For Female Patient Only</label>
+                                    <div class="row" style="margin:3px 0 2px 0">
+                                        <div class="col-md-4" style="padding:0 0 0 5px">
+                                            <div class="flex">
+                                                <label style="white-space:pre;">Pregnancy : </label>
+                                                <label style="white-space:pre"><input type="radio" name="Pregnancy" value="Y" checked />&nbsp;Yes</label>
+                                                <label style="white-space:pre;"><input type="radio" name="Pregnancy" value="N" />&nbsp;No</label>&nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="padding:0">
+                                            <div class="flex">
+                                                <label style="font-size: 11px;padding-left:3px;border-left: 1px solid #ddd;">H/O of haemolytic disease in new born </label>
+                                                <label style="white-space:pre"><input type="radio" name="haemolytic" value="Y" checked />&nbsp;Yes</label>
+                                                <label style="white-space:pre"><input type="radio" name="haemolytic" value="N" />&nbsp;No</label>&nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="padding:0 0 0 5px">
+                                            <div class="flex" style="">
+                                                <label style="font-size: 11px;padding-left:3px;border-left: 1px solid #ddd;">H/O of still birth/miscarriage </label>
+                                                <label style="white-space:pre"><input type="radio" name="miscarriage" value="Y" checked />&nbsp;Yes</label>
+                                                <label style="white-space:pre"><input type="radio" name="miscarriage" value="N" />&nbsp;No</label>&nbsp;
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="section" style="height:60px;">
+                                    <label class="title">
+                                        Component And Quantity
+                                        <button onclick="ComponentsInfo()" class="btn btn-warning btn-xs pull-right" style="height: 18px;line-height: 0;"><i class="fa fa-sign-in">&nbsp;</i>Add Component</button>
+                                    </label>
+                                    <div class="row" style="margin:3px 0 2px 0">
+                                        <div class="col-md-12" style="padding:0 0 0 5px">
+                                            <div class="ComponentQuantity"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="section" style="height:145px;">
+                                    <label class="title">Requirement Time</label>
+                                    <div class="row" style="margin:3px 0 2px 0">
+                                        <div class="col-md-12" style="padding:0 0 0 5px">
+                                            <div class="row RequirementTime">
+                                                <div class="col-md-3">
+                                                    <div class="reqBox">
+                                                        <label class="head"><input onchange="selectedReqTime(this)" type="radio" name="requirement" /> IMMEDIATE (Life Saving)</label>
+                                                        <label class="remark1">Saline Cross Match</label>
+                                                        <label class="remark2">Supply Time IMMEDIATE</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="reqBox">
+                                                        <label class="head"><input onchange="selectedReqTime(this)" type="radio" name="requirement" value="URGENT" />URGENT</label>
+                                                        <label class="remark1">Regular Cross Match</label>
+                                                        <label class="remark2">Supply Time 60-90 mins</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="reqBox">
+                                                        <label class="head"><input onchange="selectedReqTime(this)" type="radio" name="requirement" value="ROUTINE" />ROUTINE</label>
+                                                        <label class="remark1">Regular Cross Match</label>
+                                                        <label class="remark2">Supply Time >90 mins</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="reqBox">
+                                                        <label class="head"><input onchange="selectedReqTime(this)" type="radio" name="requirement" value="GROUPING & CROSS MATCHING RESERVE" />GROUPING & CROSS MATCHING RESERVE</label>
+                                                        <label class="remark1">Regular Cross Match</label>
+                                                        <label class="remark2">Reserved for 72 hours</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="reqBox">
+                                                        <label class="head"><input onchange="selectedReqTime(this)" type="radio" name="requirement" value="GROUPING & CROSS MATCHING ONLY" />GROUPING & CROSS MATCHING ONLY</label>
+                                                        <label class="remark1">Regular Cross Match</label>
+                                                        <label class="remark2">Supply Time >120 mins after call</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="section" style="height:40px;">
+                                    <div class="row" style="margin:3px 0 2px 0">
+                                        <div class="col-md-6">
+                                            <div class="flex" style="">
+                                                <label style="white-space:pre">Doctor Name : </label>
+                                                <select id="ddlDoctorName" onchange="doctorSign($('#ddlDoctorName option:selected').data('sign'))" class="form-control">
+                                                    <option>Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <div class="flex">
+                                                <label style="white-space:pre">Sign of Doctor : </label>
+                                                <img id="imgDoctorSign" style="width:109px" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-warning pull-right" onclick="Insert()" style="margin: 2px 12px;"><i class="fa fa-sign-in">&nbsp;</i>Submit</button>
+                        </div>
+                    </div>
+                    <div id="PrintReport" class="tab-pane fade">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section" style="height:90vh;">
+                                <label class="title">Patient Details</label>
+                                <div style="height:560px;overflow:auto">
+                                    <table class="table table-bordered" id="tblReportInfo">
+                                        <thead>
+                                            <tr>                                            
+                                                <th>IPD No</th>
+                                                <th>Indent No</th>
+                                                <th style="white-space:pre">Patient Name</th>
+                                                <th style="white-space:pre">Indent Date</th>                                               
+                                                <th style="width:1%">CMD</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                  
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalDonorSearch" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="margin-top:10%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Donor Search</h5>
+                <span data-dismiss="modal" class="btn-close">x</span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group flex">
+                            <span style="width:12%"><b>Search</b></span>
+                            <span style="width:4%"><b>:</b></span>
+                            <span style="width:85%">
+                                <div class="flex">
+                                    <div style="width:30%;margin-right: 2px;height: 27px;">
+                                        <select id="ddlSearchInput" class="form-control">
+                                            <option>Mobile No</option>
+                                            <option>Donor Name</option>
+                                            <option>Aadhar No</option>
+                                            <option>Donor Id</option>
+                                        </select>
+                                    </div>
+                                    <input type="text" id="txtSearchValue" style="height: 27px;width: 60%;border-color: #f39c12;" class="form-control text-uppercase bc" placeholder="Search.." autocomplete="off" />
+                                    <button onclick="SearchDonor()" style="height: 27px;" class="btn btn-warning btn-xs btnRC"><i class="fa fa-search">&nbsp;</i>Search</button>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="height:450px;overflow:auto;border:1px solid #009688;padding: 0;">
+                        <table id="tblDonorSearchInfo" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th style="white-space:nowrap">Donor Code</th>
+                                    <th>Donor Name</th>
+                                    <th>Gender</th>
+                                    <th>DOB</th>
+                                    <th>Mobile</th>
+                                    <th>Aadhar No</th>
+                                    <th style="width:1%">CMD</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalComponentQuantity" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="margin-top:10%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Component And Quantity</h5>
+                <span data-dismiss="modal" style="float:right;" class="btn-close">x</span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12" style="height:270px;overflow:auto;border:1px solid #2478a9;padding: 0;">
+                        <table id="tblComponentsInfo" class="table table-bordered" style="margin:0">
+                            <thead>
+                                <tr>
+                                    <th>Component ID</th>
+                                    <th>Component Name</th>
+                                    <th>Alias Name</th>
+                                    <th>Expiry</th>
+                                    <th class="text-right" style="width:13%">Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <button class="btn btn-warning pull-right" onclick="ComponentChoose()" style="margin: 7px;"><i class="fa fa-sign-in">&nbsp;</i>Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

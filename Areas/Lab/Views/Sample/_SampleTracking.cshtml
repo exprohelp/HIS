@@ -1,0 +1,53 @@
+﻿<script src="~/Areas/Lab/JsModule/_SampleTracking.js"></script>
+<style>
+    .bcTrack {
+        border: 1px solid #f39c12;
+        border-radius: 0;
+    }
+    .flex{
+        display:flex;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="flex bcTrack">           
+            <input id="txtTrackingBarcodeNo" type="text" class="form-control" placeholder="BarcodeNo" />
+            <button class="btn btn-warning bn" style="width:55%;padding:4px 5px" onclick="SampleTrackingInfo()"><i class="fa fa-sign-in">&nbsp;</i>Track</button>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalTrackingInfo" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 1300px;margin: 5% 0px 0px -21%;">
+            <div class="panel-heading flex" style="background:#0076d0;padding:3px 5px;">
+                <h5 class="text-white">Sample Tracking Info</h5>
+                <span data-dismiss="modal" class="btn-close">x</span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="scroll" style="height:505px;margin-top:10px; display:block; border:1px solid #2478a9; overflow:auto;padding-bottom:7px;">
+                            <table class="table table-bordered" id="tblSampleTrackingInfo">
+                                <thead>
+                                    <tr>
+                                        <th style="width:1%;">#</th>                                                                             
+                                        <th>Test Name</th>                                       
+                                        <th style="width: 10%;">Reg. Date</th>                                       
+                                        <th style="width: 9%;">Sample Colected</th>                                       
+                                        <th style="width: 11%;">Sample Collected By</th>                                       
+                                        <th style="width: 10%;">Sample Distributed</th>                                       
+                                        <th style="width: 12%;">Sample Distributed By</th>                                       
+                                        <th style="width: 10%;">Lab Received</th>                                       
+                                        <th style="width: 11%;">Lab Received By</th>                                       
+                                        <th>IsDispatched</th>                                       
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
