@@ -1,6 +1,8 @@
-﻿
+﻿var _panelId = '';
 $(document).ready(function () {
-    GetPanel();          
+    FillCurrentDate('txtFrom')
+    FillCurrentDate('txtTo')
+    GetPanel();
 });
 
 function GetPanel() {
@@ -19,11 +21,12 @@ function GetPanel() {
         success: function (data) {
             var tbody = "";
             if (Object.keys(data.ResultSet).length > 0) {
-                if (Object.keys(data.ResultSet.Table9).length > 0) {
-                    $.each(data.ResultSet.Table9, function (key, val) {
+                if (Object.keys(data.ResultSet.Table).length > 0) {
+                    $.each(data.ResultSet.Table, function (key, val) {
                         tbody += "<tr>";
-                        tbody += "<td>" + val.med_TemplateName + "</td>";
-                        tbody += "<td>" + val.Description + "</td>";                
+                        tbody += "<td>" + val.PanelId + "</td>";
+                        tbody += "<td>" + val.PanelName + "</td>";
+                        tbody += "<td><button onclick=selectedPanel(this) class='btn btn-warning btn-xs'><i class='fa fa-sign-in'></i></button></td>";
                         tbody += "</tr>";
                     });
                     $('#tblPanel tbody').append(tbody);
@@ -35,11 +38,14 @@ function GetPanel() {
         }
     });
 }
-function GetPanelItemByPanelId(pid) {
-    var url = config.baseUrl + "/api/Corporate/PanelQueries";
+function GetFundInfo() {
+    $('#tblFundInfo tbody').empty();
+    var url = config.baseUrl + "/api/Corporate/PanelQuerie";
     var objBO = {};
-    objBO.panel_id = pid;
-    objBO.Logic = 'GetPanelItemByPanelId';
+    objBO.PanelId = _panelId;
+    objBO.from = $('#txtFrom').val();
+    objBO.to = $('#txtTo').val();
+    objBO.Logic = 'GetFundInfo';
     $.ajax({
         method: "POST",
         url: url,
@@ -47,30 +53,95 @@ function GetPanelItemByPanelId(pid) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            if (data != '') {
-                $('#tblItem tbody').empty();
-                $.each(data.ResultSet.Table, function (key, val) {
-                    $('<tr><td>' + val.item_id + '</td><td>' + val.item_name + '</td><td>' + val.login_id + '</td><td>' + val.cr_date + '</td><td style="color:' + val.IsActive_color + '">' + val.IsActive + '</td>' +
-                        '<td class="text-green getManf" data-item_id=' + val.item_id + ' data-mfdid=' + val.item_name + '>' +
-                        '<category type="button" data-autoid=' + val.autoid + ' data-isactive=' + val.IsActive + ' class="btn btn-warning IsActive"><i class="fa fa-refresh"></i></category>' +
-                        '</td></tr>').appendTo($('#tblItem tbody'));
-                });
+            var tbody = "";
+            var temp = "";
+            if (Object.keys(data.ResultSet).length > 0) {
+                if (Object.keys(data.ResultSet.Table).length > 0) {
+                    $.each(data.ResultSet.Table, function (key, val) {
+                        if (temp != val.PanelName) {
+                            tbody += "<tr style='background:#d9d9d9'>";
+                            tbody += "<td colspan='7'>" + val.PanelName + "</td>";
+                            tbody += "</tr>";
+                            temp = val.PanelName;
+                        }
+                        tbody += "<tr>";
+                        tbody += "<td>" + val.UHID + "</td>";
+                        tbody += "<td>" + val.trn_date + "</td>";
+                        tbody += "<td>" + val.Amount + "</td>";
+                        tbody += "<td>" + val.RefNo + "</td>";
+                        tbody += "<td>" + val.RefDetail + "</td>";
+                        tbody += "<td>" + val.UtrDate + "</td>";
+                        tbody += "<td><button onclick=CancelFund(" + val.AutoId+") class='btn btn-danger btn-xs'><i class='fa fa-close'>&nbsp;</i>Cancel</button></td>";
+                        tbody += "</tr>";
+                    });
+                    $('#tblFundInfo tbody').append(tbody);
+                }
             }
-            else {
-                alert("Error");
-            };
         },
         error: function (response) {
             alert('Server Error...!');
         }
     });
 }
-function SearchMedicine(key) {
-    debugger;
-    var url = config.baseUrl + "/api/IPDNursing/SearchMedicine";
+function selectedPanel(elem) {
+    $('.panelInfo').empty();
+    selectRow(elem)
+    _panelId = $(elem).closest('tr').find('td:eq(0)').text();
+    var panelinfo = $(elem).closest('tr').find('td:eq(1)').text();
+    $('.panelInfo').html(panelinfo);
+    GetFundInfo();
+}
+function InsertFundManagement() {
+    if (_panelId == '') {
+        alert('Please Select Panel');
+        return;
+    }
+    if ($('#txtUHID').val() == '') {
+        alert('Please Provide UHID');
+        $('#txtUHID').focus();
+        return;
+    }
+    if ($('#txtAmount').val() == '') {
+        alert('Please Provide Amount');
+        $('#txtAmount').focus();
+        return;
+    }
+    if ($('#txtRefNo').val() == '') {
+        alert('Please Provide Ref No');
+        $('#txtRefNo').focus();
+        return;
+    }
+    if ($('#txtRefDetail').val() == '') {
+        alert('Please Provide Ref Detail');
+        $('#txtRefDetail').focus();
+        return;
+    }
+    if ($('#txtUTRNo').val() == '') {
+        alert('Please Provide UTR No.');
+        $('#txtUTRNo').focus();
+        return;
+    }
+    if ($('#txtUTRDate').val() == '') {
+        alert('Please Provide UTR Date');
+        $('#txtUTRDate').focus();
+        return;
+    }
+    var url = config.baseUrl + "/api/Corporate/InsertFundManagement";
     var objBO = {};
-    objBO.searchKey = key;
-    objBO.searchType = 'ETHICAL';
+    objBO.AutoId = 0;
+    objBO.PanelId = _panelId;
+    objBO.trn_date = '2023/05/23';
+    objBO.Amount = $('#txtAmount').val();
+    objBO.RefDetail = $('#txtRefDetail').val();
+    objBO.RefNo = $('#txtRefNo').val();
+    objBO.UHID = $('#txtUHID').val();
+    objBO.UTRNo = $('#txtUTRNo').val();
+    objBO.UTRDate = $('#txtUTRDate').val();
+    objBO.TnxType = '-';
+    objBO.Prm1 = '-';
+    objBO.Prm2 = '-';
+    objBO.login_id = Active.userId;
+    objBO.Logic = 'Insert';
     $.ajax({
         method: "POST",
         url: url,
@@ -78,16 +149,13 @@ function SearchMedicine(key) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            $('#tblnavigate tbody').empty();
-            if (data != '') {
-                console.log(data);
-                $.each(data.ResultSet.Table, function (key, val) {
-                    $('#tblnavigate').show();
-                    $('<tr class="searchitems" data-AlertMsg="' + val.AlertMsg + '" data-itemid=' + val.item_id + '><td>' + val.item_name + "</td></tr>").appendTo($('#tblnavigate tbody'));
-                });
+            if (data.includes('Success')) {
+                alert(data);
+                Clear()
+                GetFundInfo();
             }
             else {
-                alert("Error");
+                alert(data);
             };
         },
         error: function (response) {
@@ -95,17 +163,24 @@ function SearchMedicine(key) {
         }
     });
 }
-function InsertPanelItemExclude() {
-    if (Validate()) {
-        debugger;
-        var url = config.baseUrl + "/api/Corporate/ExcludeItemForPanel";
+function CancelFund(autoId) {
+    if (confirm('Are you sure to Cancel')) {
+        var url = config.baseUrl + "/api/Corporate/InsertFundManagement";
         var objBO = {};
-        objBO.hosp_id = Active.unitId;
-        objBO.panel_id = $('span[data-pid]').text();
-        objBO.item_id = $('#txtItemID').val();
+        objBO.AutoId = autoId;
+        objBO.PanelId = _panelId;
+        objBO.trn_date = '2023/05/23';
+        objBO.Amount = '-';
+        objBO.RefDetail = '-';
+        objBO.RefNo = '-';
+        objBO.UHID = '-';
+        objBO.UTRNo = '-';
+        objBO.UTRDate = '2023/05/23';
+        objBO.TnxType = '-';
+        objBO.Prm1 = '-';
+        objBO.Prm2 = '-';
         objBO.login_id = Active.userId;
-        objBO.Logic = 'Insert';
-
+        objBO.Logic = 'Cancel';
         $.ajax({
             method: "POST",
             url: url,
@@ -113,10 +188,9 @@ function InsertPanelItemExclude() {
             dataType: "json",
             contentType: "application/json;charset=utf-8",
             success: function (data) {
-                if (data == 'Successfully Saved') {
-                    Clear();
-                    var val = $('span[data-pid]').text();
-                    GetPanelItemByPanelId(val);
+                if (data.includes('Success')) {
+                    alert(data);
+                    GetFundInfo();
                 }
                 else {
                     alert(data);
@@ -128,50 +202,9 @@ function InsertPanelItemExclude() {
         });
     }
 }
-function UpdateStatus(autoid, IsActive) {
-    var url = config.baseUrl + "/api/Corporate/ExcludeItemForPanel";
-    var objBO = {};
-    objBO.auto_id = autoid;
-    objBO.isActive = IsActive;
-    objBO.Logic = 'UpdateStatus';
-    $.ajax({
-        method: "POST",
-        url: url,
-        data: JSON.stringify(objBO),
-        dataType: "json",
-        contentType: "application/json;charset=utf-8",
-        success: function (data) {
-            var val = $('span[data-pid]').text();
-            GetPanelItemByPanelId(val);
-        },
-        error: function (response) {
-            alert('Server Error...!');
-        }
-    });
-}
-
-//Validation
-function Validate() {
-    var product = $('#txtSearchProduct').val();
-    var pid = $('span[data-id]');
-
-    if (product == '') {
-        $('#txtSearchProduct').css({ 'border-color': 'red' });
-        alert('Please Provide Item Name..');
-        return false;
-    }
-    else {
-        $('#txtSearchProduct').removeAttr('style').focus();
-    }
-    if (pid == '') {
-        alert('Please Panel From Left Side..');
-        return false;
-    }
-    return true;
-}
 function Clear() {
-    $('input[type=text]').val('');
-    $('.msg').hide();
+    var input = document.querySelectorAll('input');
+    input.values = "";
 }
 
 
