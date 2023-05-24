@@ -10,7 +10,7 @@
     //    if ($.inArray(activeMenu, menuList) <0)
     //        IsAuthorizedMenu();
     //} 
-    //tet
+    //tetvsd
     if (window.location.pathname.toLowerCase() != '/' && window.location.pathname.toLowerCase() != '/admin/dashboard')
         IsAuthorizedMenu();
 
