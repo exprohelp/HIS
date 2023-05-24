@@ -205,11 +205,9 @@ function LoadRoleAndUnitFromLocallyStored() {
                 if ($(this).val() == Active.unitId) return this;
             }).attr('Selected', 'Selected');
         });
-
     }
-
-
 }
+
 function GetSubMenuByRoleAndLoginId(RoleId) {
     var url = config.baseUrl + "/api/ApplicationResource/GetAllotedMenuByEmpCode";
     var objBO = {};
