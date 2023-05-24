@@ -21,7 +21,6 @@
         GetStock("MovementReport", "Excel");
     });
 });
-//
 function AssetListByNo() {
    
     var url = config.baseUrl + "/api/Asset/Hosp_AssetMovementQueries";
