@@ -91,6 +91,40 @@ function selectedPanel(elem) {
     $('.panelInfo').html(panelinfo);
     GetFundInfo();
 }
+function ValidateUHID() {
+    if ($('#txtUHID').val() == '') {
+        alert('Please Provide UHID');
+        $('#txtUHID').focus();
+        return;
+    }   
+    var url = config.baseUrl + "/api/Corporate/PanelQuerie";
+    var objBO = {};
+    objBO.PanelId = _panelId;
+    objBO.UHID = $('#txtUHID').val();
+    objBO.from = '1900/01/01';
+    objBO.to = '1900/01/01';
+    objBO.Logic = 'ValidateUHID';
+    $.ajax({
+        method: "POST",
+        url: url,
+        data: JSON.stringify(objBO),
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+            var result = data.ResultSet.Table[0].result;   
+            if (result == 'Y') {
+                alert('UHID Validated Successfully.');
+            }
+            else {
+                alert('UHID Not Found.');
+                $('#txtUHID').val('');
+            }
+        },
+        error: function (response) {
+            alert('Server Error...!');
+        }
+    });
+}
 function InsertFundManagement() {
     if (_panelId == '') {
         alert('Please Select Panel');
