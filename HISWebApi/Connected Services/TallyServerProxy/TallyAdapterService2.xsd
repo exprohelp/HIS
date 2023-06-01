@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfVoucherData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VoucherData" nillable="true" type="tns:VoucherData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVoucherData" nillable="true" type="tns:ArrayOfVoucherData" />
+  <xs:complexType name="VoucherData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CrLedger" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DrLedger" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GenFrom" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Narration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VchType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VoucherDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VoucherNo" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VoucherData" nillable="true" type="tns:VoucherData" />
+  <xs:complexType name="DiagSalesSummary">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Balance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CurSalesReturn" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldPfRebate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldRebate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldRebateReturn" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldReceivableReturn" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldReceived" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldReceivedReturn" type="xs:decimal" />
+      <xs:element minOccurs="0" name="OldSalesReturn" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Rebate" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Received" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalSales" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DiagSalesSummary" nillable="true" type="tns:DiagSalesSummary" />
+  <xs:complexType name="ArrayOfGroupData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="GroupData" nillable="true" type="tns:GroupData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfGroupData" nillable="true" type="tns:ArrayOfGroupData" />
+  <xs:complexType name="GroupData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GrpName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Parent" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GroupData" nillable="true" type="tns:GroupData" />
+  <xs:complexType name="ArrayOfLedgerData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LedgerData" nillable="true" type="tns:LedgerData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLedgerData" nillable="true" type="tns:ArrayOfLedgerData" />
+  <xs:complexType name="LedgerData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GroupName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LedgerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpBalance" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LedgerData" nillable="true" type="tns:LedgerData" />
+  <xs:complexType name="SalaryInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Advances" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BasicLedger" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BasicSalary" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bonus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ESI" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmpCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmpName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmpStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FixedConveyance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HRA" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Loan" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PF" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PayableSalary" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reimburshment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SalaryProcessDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SpecialAllowance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaxDedAtSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TeleAllowance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UniqueID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WashingAllowance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="creditAccount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="debitAccount" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="exgratia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="medicalAllowance" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="narration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="trustDeduction" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SalaryInfo" nillable="true" type="tns:SalaryInfo" />
+  <xs:complexType name="ArrayOfVoucherDataVertical">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VoucherDataVertical" nillable="true" type="tns:VoucherDataVertical" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVoucherDataVertical" nillable="true" type="tns:ArrayOfVoucherDataVertical" />
+  <xs:complexType name="VoucherDataVertical">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Company" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Narration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SeqNo" type="xs:int" />
+      <xs:element minOccurs="0" name="VoucherNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="billNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="billType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ledgername" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="vchDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="vchType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VoucherDataVertical" nillable="true" type="tns:VoucherDataVertical" />
+</xs:schema>

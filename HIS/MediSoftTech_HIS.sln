@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1022
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediSoftTech_HIS", "MIS\MediSoftTech_HIS.csproj", "{39379FAB-ABB0-4798-8132-296C4C426FC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediSoftTech_HIS", "MediSoftTech_HIS.csproj", "{39379FAB-ABB0-4798-8132-296C4C426FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HISWebApi", "InventoryApi\HISWebApi.csproj", "{7F7D3B59-645B-46E2-A83F-49998C9FBA15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HISWebApi", "..\HISWebApi\HISWebApi.csproj", "{7F7D3B59-645B-46E2-A83F-49998C9FBA15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A34FE1E2-B5A0-40C6-9777-9C839E928CE5}
+		SolutionGuid = {C9D843DF-73A7-4DF7-986A-1BF05F8FD20E}
 	EndGlobalSection
 EndGlobal

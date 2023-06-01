@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="124ccf00-ab27-4415-9b3a-d4c5c7e8fa1e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.0.22/TallyInterface/TallyAdapterService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TallyAdapterService.xsd" MetadataType="Schema" ID="6a416911-a121-4d08-816a-42abbcab3bb6" SourceId="1" SourceUrl="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TallyAdapterService.disco" MetadataType="Disco" ID="211ab524-920a-4dcd-8bdc-e8be272ece07" SourceId="1" SourceUrl="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?disco" />
+    <MetadataFile FileName="TallyAdapterService.wsdl" MetadataType="Wsdl" ID="80bbcdd5-a67e-43f4-b4f7-9986c26b1d46" SourceId="1" SourceUrl="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?wsdl" />
+    <MetadataFile FileName="TallyAdapterService1.xsd" MetadataType="Schema" ID="ae6dcdd6-214c-4097-89fd-1927a5a94c48" SourceId="1" SourceUrl="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TallyAdapterService2.xsd" MetadataType="Schema" ID="f64bd9ad-249f-4c27-b75a-9ff7d1b33956" SourceId="1" SourceUrl="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

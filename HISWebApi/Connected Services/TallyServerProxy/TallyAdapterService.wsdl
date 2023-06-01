@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TallyAdapterService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.22/TallyInterface/TallyAdapterService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertDiagnosticSales_1314_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertDiagnosticSales_1314" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertDiagnosticSales_1314_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertDiagnosticSales_1314Response" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertDiagnosticSales_CurFinYear_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertDiagnosticSales_CurFinYear" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertDiagnosticSales_CurFinYear_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertDiagnosticSales_CurFinYearResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertPharmacySales_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertPharmacySales" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertPharmacySales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertPharmacySalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_CreateGroup_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_CreateGroup" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_CreateGroup_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_CreateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_CreateLedger_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_CreateLedger" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_CreateLedger_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_CreateLedgerResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertVouchers_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertVouchers" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertVouchers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertVouchersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertVouchers_Bulk_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertVouchers_Bulk" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_InsertVouchers_Bulk_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_InsertVouchers_BulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_ModifyVoucher_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_ModifyVoucher" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_ModifyVoucher_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_ModifyVoucherResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_ImportData_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_ImportData" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_ImportData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_ImportDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_ModifyVouchers1_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_ModifyVouchers1" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_ModifyVouchers1_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_ModifyVouchers1Response" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_PharmacyVoucherEntry_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_PharmacyVoucherEntry" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_PharmacyVoucherEntry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_PharmacyVoucherEntryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_PharmacyVoucherEntryTemp_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_PharmacyVoucherEntryTemp" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_PharmacyVoucherEntryTemp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_PharmacyVoucherEntryTempResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_SalaryEntry_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_SalaryEntry" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_SalaryEntry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_SalaryEntryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_DonationEntry_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_DonationEntry" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_DonationEntry_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_DonationEntryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_CompanyNameForTally_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyNameForTally" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_CompanyNameForTally_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompanyNameForTallyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_VoucherEntryNew_InputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_VoucherEntryNew" />
+  </wsdl:message>
+  <wsdl:message name="ITallyAdapterService_Tally_VoucherEntryNew_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Tally_VoucherEntryNewResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITallyAdapterService">
+    <wsdl:operation name="Tally_InsertDiagnosticSales_1314">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertDiagnosticSales_1314" message="tns:ITallyAdapterService_Tally_InsertDiagnosticSales_1314_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertDiagnosticSales_1314Response" message="tns:ITallyAdapterService_Tally_InsertDiagnosticSales_1314_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertDiagnosticSales_CurFinYear">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertDiagnosticSales_CurFinYear" message="tns:ITallyAdapterService_Tally_InsertDiagnosticSales_CurFinYear_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertDiagnosticSales_CurFinYearResponse" message="tns:ITallyAdapterService_Tally_InsertDiagnosticSales_CurFinYear_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertPharmacySales">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertPharmacySales" message="tns:ITallyAdapterService_Tally_InsertPharmacySales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertPharmacySalesResponse" message="tns:ITallyAdapterService_Tally_InsertPharmacySales_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_CreateGroup">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_CreateGroup" message="tns:ITallyAdapterService_Tally_CreateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_CreateGroupResponse" message="tns:ITallyAdapterService_Tally_CreateGroup_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_CreateLedger">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_CreateLedger" message="tns:ITallyAdapterService_Tally_CreateLedger_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_CreateLedgerResponse" message="tns:ITallyAdapterService_Tally_CreateLedger_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertVouchers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertVouchers" message="tns:ITallyAdapterService_Tally_InsertVouchers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertVouchersResponse" message="tns:ITallyAdapterService_Tally_InsertVouchers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertVouchers_Bulk">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertVouchers_Bulk" message="tns:ITallyAdapterService_Tally_InsertVouchers_Bulk_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_InsertVouchers_BulkResponse" message="tns:ITallyAdapterService_Tally_InsertVouchers_Bulk_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_ModifyVoucher">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_ModifyVoucher" message="tns:ITallyAdapterService_Tally_ModifyVoucher_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_ModifyVoucherResponse" message="tns:ITallyAdapterService_Tally_ModifyVoucher_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_ImportData">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_ImportData" message="tns:ITallyAdapterService_Tally_ImportData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_ImportDataResponse" message="tns:ITallyAdapterService_Tally_ImportData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_ModifyVouchers1">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_ModifyVouchers1" message="tns:ITallyAdapterService_Tally_ModifyVouchers1_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_ModifyVouchers1Response" message="tns:ITallyAdapterService_Tally_ModifyVouchers1_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_PharmacyVoucherEntry">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_PharmacyVoucherEntry" message="tns:ITallyAdapterService_Tally_PharmacyVoucherEntry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_PharmacyVoucherEntryResponse" message="tns:ITallyAdapterService_Tally_PharmacyVoucherEntry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_PharmacyVoucherEntryTemp">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_PharmacyVoucherEntryTemp" message="tns:ITallyAdapterService_Tally_PharmacyVoucherEntryTemp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_PharmacyVoucherEntryTempResponse" message="tns:ITallyAdapterService_Tally_PharmacyVoucherEntryTemp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_SalaryEntry">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_SalaryEntry" message="tns:ITallyAdapterService_Tally_SalaryEntry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_SalaryEntryResponse" message="tns:ITallyAdapterService_Tally_SalaryEntry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_DonationEntry">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_DonationEntry" message="tns:ITallyAdapterService_Tally_DonationEntry_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_DonationEntryResponse" message="tns:ITallyAdapterService_Tally_DonationEntry_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CompanyNameForTally">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/CompanyNameForTally" message="tns:ITallyAdapterService_CompanyNameForTally_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/CompanyNameForTallyResponse" message="tns:ITallyAdapterService_CompanyNameForTally_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Tally_VoucherEntryNew">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_VoucherEntryNew" message="tns:ITallyAdapterService_Tally_VoucherEntryNew_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITallyAdapterService/Tally_VoucherEntryNewResponse" message="tns:ITallyAdapterService_Tally_VoucherEntryNew_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITallyAdapterService" type="tns:ITallyAdapterService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Tally_InsertDiagnosticSales_1314">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_InsertDiagnosticSales_1314" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertDiagnosticSales_CurFinYear">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_InsertDiagnosticSales_CurFinYear" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertPharmacySales">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_InsertPharmacySales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_CreateGroup">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_CreateGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_CreateLedger">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_CreateLedger" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertVouchers">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_InsertVouchers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_InsertVouchers_Bulk">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_InsertVouchers_Bulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_ModifyVoucher">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_ModifyVoucher" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_ImportData">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_ImportData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_ModifyVouchers1">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_ModifyVouchers1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_PharmacyVoucherEntry">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_PharmacyVoucherEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_PharmacyVoucherEntryTemp">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_PharmacyVoucherEntryTemp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_SalaryEntry">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_SalaryEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_DonationEntry">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_DonationEntry" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompanyNameForTally">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/CompanyNameForTally" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Tally_VoucherEntryNew">
+      <soap:operation soapAction="http://tempuri.org/ITallyAdapterService/Tally_VoucherEntryNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TallyAdapterService">
+    <wsdl:port name="BasicHttpBinding_ITallyAdapterService" binding="tns:BasicHttpBinding_ITallyAdapterService">
+      <soap:address location="http://192.168.0.22/TallyInterface/TallyAdapterService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

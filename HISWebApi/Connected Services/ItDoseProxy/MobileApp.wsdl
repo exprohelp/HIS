@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="LoadDoctor">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadDoctorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDoctorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDepartment">
+        <s:complexType />
+      </s:element>
+      <s:element name="LoadDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDepartmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDepartmentWiseDoctor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DepartmentName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDepartmentWiseDoctorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDepartmentWiseDoctorResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadTimeSlot">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoctorId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadTimeSlotResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadTimeSlotResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateOTP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UHID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateOTPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateOTPResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateAppointment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UHID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DoctorId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeseaseDesc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateAppointmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateAppointmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewInvestigationReportHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MobileNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ViewInvestigationReportHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ViewInvestigationReportHistoryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintInvestigationReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Test_ID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="LabreportType" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintInvestigationReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PrintInvestigationReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadAppointmentHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadAppointmentHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadAppointmentHistoryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDischargeSummary">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadDischargeSummaryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadDischargeSummaryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateDirectAppointment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="firstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="age" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="gender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobile" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DoctorId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppTime" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DeseaseDesc" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerateDirectAppointmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateDirectAppointmentResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintOutsourceInvestigationReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LedgerTransactionNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrintOutsourceInvestigationReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PrintOutsourceInvestigationReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOPDPresciptionCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LoadOPDPresciptionCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LoadOPDPresciptionCardResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LoadDoctorSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDoctor" />
+  </wsdl:message>
+  <wsdl:message name="LoadDoctorSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDoctorResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDepartment" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentWiseDoctorSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDepartmentWiseDoctor" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentWiseDoctorSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDepartmentWiseDoctorResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadTimeSlotSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadTimeSlot" />
+  </wsdl:message>
+  <wsdl:message name="LoadTimeSlotSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadTimeSlotResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateOTPSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateOTP" />
+  </wsdl:message>
+  <wsdl:message name="GenerateOTPSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateAppointmentSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateAppointment" />
+  </wsdl:message>
+  <wsdl:message name="GenerateAppointmentSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateAppointmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="ViewInvestigationReportHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:ViewInvestigationReportHistory" />
+  </wsdl:message>
+  <wsdl:message name="ViewInvestigationReportHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:ViewInvestigationReportHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvestigationReportSoapIn">
+    <wsdl:part name="parameters" element="tns:PrintInvestigationReport" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvestigationReportSoapOut">
+    <wsdl:part name="parameters" element="tns:PrintInvestigationReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadAppointmentHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:LoadAppointmentHistory" />
+  </wsdl:message>
+  <wsdl:message name="LoadAppointmentHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:LoadAppointmentHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDischargeSummarySoapIn">
+    <wsdl:part name="parameters" element="tns:LoadDischargeSummary" />
+  </wsdl:message>
+  <wsdl:message name="LoadDischargeSummarySoapOut">
+    <wsdl:part name="parameters" element="tns:LoadDischargeSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GenerateDirectAppointmentSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateDirectAppointment" />
+  </wsdl:message>
+  <wsdl:message name="GenerateDirectAppointmentSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateDirectAppointmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrintOutsourceInvestigationReportSoapIn">
+    <wsdl:part name="parameters" element="tns:PrintOutsourceInvestigationReport" />
+  </wsdl:message>
+  <wsdl:message name="PrintOutsourceInvestigationReportSoapOut">
+    <wsdl:part name="parameters" element="tns:PrintOutsourceInvestigationReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadOPDPresciptionCardSoapIn">
+    <wsdl:part name="parameters" element="tns:LoadOPDPresciptionCard" />
+  </wsdl:message>
+  <wsdl:message name="LoadOPDPresciptionCardSoapOut">
+    <wsdl:part name="parameters" element="tns:LoadOPDPresciptionCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="LoadDoctorHttpGetIn" />
+  <wsdl:message name="LoadDoctorHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentHttpGetIn" />
+  <wsdl:message name="LoadDepartmentHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentWiseDoctorHttpGetIn">
+    <wsdl:part name="DepartmentName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentWiseDoctorHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadTimeSlotHttpGetIn">
+    <wsdl:part name="DoctorId" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadTimeSlotHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateOTPHttpGetIn">
+    <wsdl:part name="UHID" type="s:string" />
+    <wsdl:part name="Phone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateOTPHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateAppointmentHttpGetIn">
+    <wsdl:part name="UHID" type="s:string" />
+    <wsdl:part name="DoctorId" type="s:string" />
+    <wsdl:part name="AppDate" type="s:string" />
+    <wsdl:part name="AppTime" type="s:string" />
+    <wsdl:part name="DeseaseDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateAppointmentHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ViewInvestigationReportHistoryHttpGetIn">
+    <wsdl:part name="MobileNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ViewInvestigationReportHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvestigationReportHttpGetIn">
+    <wsdl:part name="Test_ID" type="s:string" />
+    <wsdl:part name="LabreportType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvestigationReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadAppointmentHistoryHttpGetIn">
+    <wsdl:part name="Mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadAppointmentHistoryHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDischargeSummaryHttpGetIn">
+    <wsdl:part name="Mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDischargeSummaryHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateDirectAppointmentHttpGetIn">
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="age" type="s:string" />
+    <wsdl:part name="gender" type="s:string" />
+    <wsdl:part name="mobile" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="DoctorId" type="s:string" />
+    <wsdl:part name="AppDate" type="s:string" />
+    <wsdl:part name="AppTime" type="s:string" />
+    <wsdl:part name="DeseaseDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateDirectAppointmentHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintOutsourceInvestigationReportHttpGetIn">
+    <wsdl:part name="LedgerTransactionNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintOutsourceInvestigationReportHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadOPDPresciptionCardHttpGetIn">
+    <wsdl:part name="Mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadOPDPresciptionCardHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDoctorHttpPostIn" />
+  <wsdl:message name="LoadDoctorHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentHttpPostIn" />
+  <wsdl:message name="LoadDepartmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentWiseDoctorHttpPostIn">
+    <wsdl:part name="DepartmentName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDepartmentWiseDoctorHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadTimeSlotHttpPostIn">
+    <wsdl:part name="DoctorId" type="s:string" />
+    <wsdl:part name="Date" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadTimeSlotHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateOTPHttpPostIn">
+    <wsdl:part name="UHID" type="s:string" />
+    <wsdl:part name="Phone" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateOTPHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateAppointmentHttpPostIn">
+    <wsdl:part name="UHID" type="s:string" />
+    <wsdl:part name="DoctorId" type="s:string" />
+    <wsdl:part name="AppDate" type="s:string" />
+    <wsdl:part name="AppTime" type="s:string" />
+    <wsdl:part name="DeseaseDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateAppointmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="ViewInvestigationReportHistoryHttpPostIn">
+    <wsdl:part name="MobileNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ViewInvestigationReportHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvestigationReportHttpPostIn">
+    <wsdl:part name="Test_ID" type="s:string" />
+    <wsdl:part name="LabreportType" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintInvestigationReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadAppointmentHistoryHttpPostIn">
+    <wsdl:part name="Mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadAppointmentHistoryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDischargeSummaryHttpPostIn">
+    <wsdl:part name="Mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadDischargeSummaryHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateDirectAppointmentHttpPostIn">
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="firstName" type="s:string" />
+    <wsdl:part name="lastName" type="s:string" />
+    <wsdl:part name="age" type="s:string" />
+    <wsdl:part name="gender" type="s:string" />
+    <wsdl:part name="mobile" type="s:string" />
+    <wsdl:part name="address" type="s:string" />
+    <wsdl:part name="DoctorId" type="s:string" />
+    <wsdl:part name="AppDate" type="s:string" />
+    <wsdl:part name="AppTime" type="s:string" />
+    <wsdl:part name="DeseaseDesc" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GenerateDirectAppointmentHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintOutsourceInvestigationReportHttpPostIn">
+    <wsdl:part name="LedgerTransactionNo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="PrintOutsourceInvestigationReportHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadOPDPresciptionCardHttpPostIn">
+    <wsdl:part name="Mobile" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="LoadOPDPresciptionCardHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="MobileAppSoap">
+    <wsdl:operation name="LoadDoctor">
+      <wsdl:input message="tns:LoadDoctorSoapIn" />
+      <wsdl:output message="tns:LoadDoctorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <wsdl:input message="tns:LoadDepartmentSoapIn" />
+      <wsdl:output message="tns:LoadDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <wsdl:input message="tns:LoadDepartmentWiseDoctorSoapIn" />
+      <wsdl:output message="tns:LoadDepartmentWiseDoctorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <wsdl:input message="tns:LoadTimeSlotSoapIn" />
+      <wsdl:output message="tns:LoadTimeSlotSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <wsdl:input message="tns:GenerateOTPSoapIn" />
+      <wsdl:output message="tns:GenerateOTPSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <wsdl:input message="tns:GenerateAppointmentSoapIn" />
+      <wsdl:output message="tns:GenerateAppointmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <wsdl:input message="tns:ViewInvestigationReportHistorySoapIn" />
+      <wsdl:output message="tns:ViewInvestigationReportHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <wsdl:input message="tns:PrintInvestigationReportSoapIn" />
+      <wsdl:output message="tns:PrintInvestigationReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <wsdl:input message="tns:LoadAppointmentHistorySoapIn" />
+      <wsdl:output message="tns:LoadAppointmentHistorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <wsdl:input message="tns:LoadDischargeSummarySoapIn" />
+      <wsdl:output message="tns:LoadDischargeSummarySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <wsdl:input message="tns:GenerateDirectAppointmentSoapIn" />
+      <wsdl:output message="tns:GenerateDirectAppointmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <wsdl:input message="tns:PrintOutsourceInvestigationReportSoapIn" />
+      <wsdl:output message="tns:PrintOutsourceInvestigationReportSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <wsdl:input message="tns:LoadOPDPresciptionCardSoapIn" />
+      <wsdl:output message="tns:LoadOPDPresciptionCardSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MobileAppHttpGet">
+    <wsdl:operation name="LoadDoctor">
+      <wsdl:input message="tns:LoadDoctorHttpGetIn" />
+      <wsdl:output message="tns:LoadDoctorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <wsdl:input message="tns:LoadDepartmentHttpGetIn" />
+      <wsdl:output message="tns:LoadDepartmentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <wsdl:input message="tns:LoadDepartmentWiseDoctorHttpGetIn" />
+      <wsdl:output message="tns:LoadDepartmentWiseDoctorHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <wsdl:input message="tns:LoadTimeSlotHttpGetIn" />
+      <wsdl:output message="tns:LoadTimeSlotHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <wsdl:input message="tns:GenerateOTPHttpGetIn" />
+      <wsdl:output message="tns:GenerateOTPHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <wsdl:input message="tns:GenerateAppointmentHttpGetIn" />
+      <wsdl:output message="tns:GenerateAppointmentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <wsdl:input message="tns:ViewInvestigationReportHistoryHttpGetIn" />
+      <wsdl:output message="tns:ViewInvestigationReportHistoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <wsdl:input message="tns:PrintInvestigationReportHttpGetIn" />
+      <wsdl:output message="tns:PrintInvestigationReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <wsdl:input message="tns:LoadAppointmentHistoryHttpGetIn" />
+      <wsdl:output message="tns:LoadAppointmentHistoryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <wsdl:input message="tns:LoadDischargeSummaryHttpGetIn" />
+      <wsdl:output message="tns:LoadDischargeSummaryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <wsdl:input message="tns:GenerateDirectAppointmentHttpGetIn" />
+      <wsdl:output message="tns:GenerateDirectAppointmentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <wsdl:input message="tns:PrintOutsourceInvestigationReportHttpGetIn" />
+      <wsdl:output message="tns:PrintOutsourceInvestigationReportHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <wsdl:input message="tns:LoadOPDPresciptionCardHttpGetIn" />
+      <wsdl:output message="tns:LoadOPDPresciptionCardHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MobileAppHttpPost">
+    <wsdl:operation name="LoadDoctor">
+      <wsdl:input message="tns:LoadDoctorHttpPostIn" />
+      <wsdl:output message="tns:LoadDoctorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <wsdl:input message="tns:LoadDepartmentHttpPostIn" />
+      <wsdl:output message="tns:LoadDepartmentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <wsdl:input message="tns:LoadDepartmentWiseDoctorHttpPostIn" />
+      <wsdl:output message="tns:LoadDepartmentWiseDoctorHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <wsdl:input message="tns:LoadTimeSlotHttpPostIn" />
+      <wsdl:output message="tns:LoadTimeSlotHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <wsdl:input message="tns:GenerateOTPHttpPostIn" />
+      <wsdl:output message="tns:GenerateOTPHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <wsdl:input message="tns:GenerateAppointmentHttpPostIn" />
+      <wsdl:output message="tns:GenerateAppointmentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <wsdl:input message="tns:ViewInvestigationReportHistoryHttpPostIn" />
+      <wsdl:output message="tns:ViewInvestigationReportHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <wsdl:input message="tns:PrintInvestigationReportHttpPostIn" />
+      <wsdl:output message="tns:PrintInvestigationReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <wsdl:input message="tns:LoadAppointmentHistoryHttpPostIn" />
+      <wsdl:output message="tns:LoadAppointmentHistoryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <wsdl:input message="tns:LoadDischargeSummaryHttpPostIn" />
+      <wsdl:output message="tns:LoadDischargeSummaryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <wsdl:input message="tns:GenerateDirectAppointmentHttpPostIn" />
+      <wsdl:output message="tns:GenerateDirectAppointmentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <wsdl:input message="tns:PrintOutsourceInvestigationReportHttpPostIn" />
+      <wsdl:output message="tns:PrintOutsourceInvestigationReportHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <wsdl:input message="tns:LoadOPDPresciptionCardHttpPostIn" />
+      <wsdl:output message="tns:LoadOPDPresciptionCardHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MobileAppSoap" type="tns:MobileAppSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoadDoctor">
+      <soap:operation soapAction="http://tempuri.org/LoadDoctor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <soap:operation soapAction="http://tempuri.org/LoadDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <soap:operation soapAction="http://tempuri.org/LoadDepartmentWiseDoctor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <soap:operation soapAction="http://tempuri.org/LoadTimeSlot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <soap:operation soapAction="http://tempuri.org/GenerateOTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <soap:operation soapAction="http://tempuri.org/GenerateAppointment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <soap:operation soapAction="http://tempuri.org/ViewInvestigationReportHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <soap:operation soapAction="http://tempuri.org/PrintInvestigationReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <soap:operation soapAction="http://tempuri.org/LoadAppointmentHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <soap:operation soapAction="http://tempuri.org/LoadDischargeSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <soap:operation soapAction="http://tempuri.org/GenerateDirectAppointment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <soap:operation soapAction="http://tempuri.org/PrintOutsourceInvestigationReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <soap:operation soapAction="http://tempuri.org/LoadOPDPresciptionCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileAppSoap12" type="tns:MobileAppSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LoadDoctor">
+      <soap12:operation soapAction="http://tempuri.org/LoadDoctor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <soap12:operation soapAction="http://tempuri.org/LoadDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <soap12:operation soapAction="http://tempuri.org/LoadDepartmentWiseDoctor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <soap12:operation soapAction="http://tempuri.org/LoadTimeSlot" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <soap12:operation soapAction="http://tempuri.org/GenerateOTP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <soap12:operation soapAction="http://tempuri.org/GenerateAppointment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <soap12:operation soapAction="http://tempuri.org/ViewInvestigationReportHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <soap12:operation soapAction="http://tempuri.org/PrintInvestigationReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <soap12:operation soapAction="http://tempuri.org/LoadAppointmentHistory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <soap12:operation soapAction="http://tempuri.org/LoadDischargeSummary" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <soap12:operation soapAction="http://tempuri.org/GenerateDirectAppointment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <soap12:operation soapAction="http://tempuri.org/PrintOutsourceInvestigationReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <soap12:operation soapAction="http://tempuri.org/LoadOPDPresciptionCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileAppHttpGet" type="tns:MobileAppHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="LoadDoctor">
+      <http:operation location="/LoadDoctor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <http:operation location="/LoadDepartment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <http:operation location="/LoadDepartmentWiseDoctor" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <http:operation location="/LoadTimeSlot" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <http:operation location="/GenerateOTP" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <http:operation location="/GenerateAppointment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <http:operation location="/ViewInvestigationReportHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <http:operation location="/PrintInvestigationReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <http:operation location="/LoadAppointmentHistory" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <http:operation location="/LoadDischargeSummary" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <http:operation location="/GenerateDirectAppointment" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <http:operation location="/PrintOutsourceInvestigationReport" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <http:operation location="/LoadOPDPresciptionCard" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MobileAppHttpPost" type="tns:MobileAppHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="LoadDoctor">
+      <http:operation location="/LoadDoctor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartment">
+      <http:operation location="/LoadDepartment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDepartmentWiseDoctor">
+      <http:operation location="/LoadDepartmentWiseDoctor" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadTimeSlot">
+      <http:operation location="/LoadTimeSlot" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateOTP">
+      <http:operation location="/GenerateOTP" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateAppointment">
+      <http:operation location="/GenerateAppointment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ViewInvestigationReportHistory">
+      <http:operation location="/ViewInvestigationReportHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintInvestigationReport">
+      <http:operation location="/PrintInvestigationReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadAppointmentHistory">
+      <http:operation location="/LoadAppointmentHistory" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadDischargeSummary">
+      <http:operation location="/LoadDischargeSummary" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GenerateDirectAppointment">
+      <http:operation location="/GenerateDirectAppointment" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrintOutsourceInvestigationReport">
+      <http:operation location="/PrintOutsourceInvestigationReport" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoadOPDPresciptionCard">
+      <http:operation location="/LoadOPDPresciptionCard" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MobileApp">
+    <wsdl:port name="MobileAppSoap" binding="tns:MobileAppSoap">
+      <soap:address location="http://192.168.4.10/mobileapp/MobileApp.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileAppSoap12" binding="tns:MobileAppSoap12">
+      <soap12:address location="http://192.168.4.10/mobileapp/MobileApp.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileAppHttpGet" binding="tns:MobileAppHttpGet">
+      <http:address location="http://192.168.4.10/mobileapp/MobileApp.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MobileAppHttpPost" binding="tns:MobileAppHttpPost">
+      <http:address location="http://192.168.4.10/mobileapp/MobileApp.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
