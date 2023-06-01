@@ -2,7 +2,6 @@
 $(window).on('load', function () {
     isLogin();               
 });
-
 function isLogin() {
     var Username = sessionStorage.getItem('Username');
     var UserID = sessionStorage.getItem('UserID');
