@@ -184,6 +184,7 @@
     <Compile Include="Controllers\Dietician\DieticianController.cs" />
     <Compile Include="Controllers\DoctorAppController.cs" />
     <Compile Include="Controllers\EDP\EDPController.cs" />
+    <Compile Include="Controllers\Finance\FinanceController.cs" />
     <Compile Include="Controllers\IPD\IPDBillingController.cs" />
     <Compile Include="Controllers\IPD\IPDDoctorController.cs" />
     <Compile Include="Controllers\IPD\IPDNursingController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Models\Corporate.cs" />
     <Compile Include="Models\DoctorMasters.cs" />
+    <Compile Include="Models\Finance.cs" />
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\MenuMaster.cs" />
     <Compile Include="Models\MobileApp.cs" />
@@ -268,6 +270,7 @@
     <Compile Include="Repository\Dietician\Diet.cs" />
     <Compile Include="Repository\EDP\PanelRateItem.cs" />
     <Compile Include="Repository\EDP\PanelRateItemLink.cs" />
+    <Compile Include="Repository\Finance\Finance.cs" />
     <Compile Include="Repository\IPD\HISDBLayer.cs" />
     <Compile Include="Repository\IPD\IPD.cs" />
     <Compile Include="Repository\IPD\Nursing\IPDBilling.cs" />

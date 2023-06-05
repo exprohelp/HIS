@@ -920,7 +920,7 @@
                                 <div class="col-md-3">
                                     <div id="divPres">
                                         <div class="category"><span class="title">Previous Prescription</span><button data-target="#modalOtherServices" data-toggle="modal" class="btn btn-warning btn-xs pull-right"><i class="fa fa-plus"></i></button> </div>
-                                        <div class="section" style="min-height:340px;max-height:340px;">
+                                        <div class="section" style="min-height:502px;max-height:502px;">
                                             <div class="" style="min-height:335px;max-height:335px;">
                                                 <div class="">
                                                     <div class="col-md-12 bottom-tab">
@@ -941,55 +941,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="divPres">
-                                        <div class="category">
-                                            <span class="title" style="padding:3px 35px 2px 6px">
-                                                <button onclick="DeleteAllVisualAcuity()" class="btn btn-danger btn-xs btnMore"><i class="fa fa-trash">&nbsp;</i>ALL</button>
-                                                Visual Acuity&nbsp;<button onclick="GetPrevVisualAcuity()" class="btn btn-warning btn-xs btnMore"><i class="fa fa-sign-in">&nbsp;</i>Previous</button>
-                                            </span>
-                                            <button class="btn btn-success pull-right" style="margin:1px 5px;height: 22px;line-height:20px" onclick="InsertVisualAcuity()"><i class="fa fa-check-circle">&nbsp;</i>Save</button>
-                                        </div>
-                                        <div class="section" style="min-height: 131px;">
-                                            <div style="overflow:auto;padding:1px;">
-                                                <table class="table table-bordered" id="tblVisualAcuity">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th class="text-center">Right</th>
-                                                            <th class="text-center">Left</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">Un-Aided</button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">With Pin Hole</button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">With Prv Glass</button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">Prv Spect Power-Distance</button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">Prv Spect Power-Near</button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                            <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-3">
                                     <div id="divChiefComplaints">
@@ -1861,7 +1813,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalVisualAcuity" role="dialog">
+<div class="modal fade" id="modalVisualAcuity" role="dialog" style="z-index:9999">
     <div class="modal-dialog modal-md">
         <div class="modal-content" style="margin-top:20%;height:200px;">
             <!-- Modal Header -->
@@ -1916,8 +1868,8 @@
     </div>
 </div>
 <div class="modal fade" id="modalOtherServices" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="margin-top:20%;height:255px;">
+    <div class="modal-dialog modal-lg" style="width:1325px">
+        <div class="modal-content" style="margin-top:10%;height:255px;">
             <!-- Modal Header -->
             <div class="modal-header bg-success" style="background: #007792;color:#fff;padding: 1px 10px;">
                 <h4 class="modal-title">
@@ -1931,23 +1883,73 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
-                            <div class="col-md-4 text-center" style="border-right:1px solid #ddd">
-                                <div class="category"><span class="title">Ratina Sigment</span><button class="btn btn-success pull-right" style="margin:1px 36px;height: 22px;line-height:20px;visibility:hidden" disabled><i class="fa fa-check-circle">&nbsp;</i></button></div>
+                            <div class="col-md-4">
+                                <div id="divPres">
+                                    <div class="category">
+                                        <span class="title" style="padding:3px 35px 2px 6px">
+                                            <button onclick="DeleteAllVisualAcuity()" class="btn btn-danger btn-xs btnMore"><i class="fa fa-trash">&nbsp;</i>ALL</button>
+                                            Visual Acuity&nbsp;<button onclick="GetPrevVisualAcuity()" class="btn btn-warning btn-xs btnMore"><i class="fa fa-sign-in">&nbsp;</i>Previous</button>
+                                        </span>
+                                        <button class="btn btn-success pull-right" style="margin:1px 3px;height: 21px;line-height:0" onclick="InsertVisualAcuity()"><i class="fa fa-check-circle">&nbsp;</i>Save</button>
+                                    </div>
+                                    <div class="section" style="min-height: 131px;">
+                                        <div style="overflow:auto;padding:1px;">
+                                            <table class="table table-bordered" id="tblVisualAcuity">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th class="text-center">Right</th>
+                                                        <th class="text-center">Left</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">Un-Aided</button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">With Pin Hole</button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">With Prv Glass</button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">Prv Spect Power-Distance</button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="flex" style="border: 1px solid #00a65a;padding:0 !important;border-bottom: 1px solid #f9fafe"><button class="btn btn-success btn-xs btn-row">Prv Spect Power-Near</button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Right" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                        <td><input type="text" class="form-control" placeholder="Left" /><button class="btn btn-warning btn-xs fillValue"><i class="fa fa-check"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center" style="border-right:1px solid #ddd">
+                                <div class="category"><span class="title" style="padding:3px 93px 2px 6px;top:4px">Ratina Sigment</span><button class="btn btn-success pull-right" style="margin:1px 36px;height: 22px;line-height:20px;visibility:hidden" disabled><i class="fa fa-check-circle">&nbsp;</i></button></div>
                                 <div style="min-height: 180px;max-height:180px;overflow:auto;border: 1px solid #2478a9;padding: 3px 5px;">
                                     <img src="~/images/PostSig.png" class="img-responsive" style="padding:8px 0;" />
-                                    <label class="other-services-confirmation"><input id="PosteriorRatina" onchange="UpdateEyeOtherInfo()" type="checkbox" name="RatinaSigment" />&nbsp;Posterior Ratina Sigment</label>
+                                    <label class="other-services-confirmation"><input id="PosteriorRatina" onchange="InsertVisualAcuity()" type="checkbox" name="RatinaSigment" />&nbsp;Posterior Ratina Sigment</label>
                                 </div>
-
                             </div>
-                            <div class="col-md-5 text-center" style="border-right:1px solid #ddd">
-                                <div class="category"><span class="title">Eye Lens</span><button class="btn btn-success pull-right" style="margin:1px 94px;height: 22px;line-height:20px;visibility:hidden" disabled><i class="fa fa-check-circle">&nbsp;</i></button></div>
+                            <div class="col-md-3 text-center" style="border-right:1px solid #ddd">
+                                <div class="category"><span class="title" style="padding:1px 242px 2px 6px;top:0">Eye Lens</span></div>
                                 <div style="min-height: 180px;max-height:180px;overflow:auto;border: 1px solid #2478a9;padding: 3px 5px;">
                                     <img src="~/images/AnteriorSeg.png" class="img-responsive" style="padding:25px 43px" />
-                                    <label class="other-services-confirmation"><input id="EyeLens" onchange="UpdateEyeOtherInfo()" type="checkbox" name="Lens" />&nbsp;Eye Concave Lens</label>
+                                    <label class="other-services-confirmation"><input id="EyeLens" onchange="InsertVisualAcuity()" type="checkbox" name="Lens" />&nbsp;Eye Concave Lens</label>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="category"><span class="title"><button onclick="DeleteAllReport()" class="btn btn-danger btn-xs btnMore"><i class="fa fa-trash">&nbsp;</i>ALL</button>&nbsp;Report</span><button class="btn btn-success pull-right" style="margin:1px;height: 22px;line-height:20px" onclick="UpdateEyeOtherInfo()"><i class="fa fa-check-circle">&nbsp;</i></button></div>
+                            <div class="col-md-2">
+                                <div class="category"><span class="title"><button onclick="DeleteAllReport()" class="btn btn-danger btn-xs btnMore"><i class="fa fa-trash">&nbsp;</i>ALL</button>&nbsp;Report</span></div>
                                 <div style="min-height: 180px;max-height:180px;overflow:auto;border: 1px solid #2478a9;padding: 3px 5px;">
                                     <table class="table table-bordered" id="tblOtherInfo">
                                         <thead>

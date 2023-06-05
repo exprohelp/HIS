@@ -333,7 +333,7 @@ function InOutMarking() {
         success: function (data) {
             if (data.includes('Success')) {
                 alert('Appointment Closed Successfully..');
-                window.location.href = 'OPD_ViewConsultation';
+                window.location.href = config.rootUrl+'/OPD/Appointment/OPD_ViewConsultation?mid=SM186';
                 sessionStorage.removeItem('AppId');
             }
             else {

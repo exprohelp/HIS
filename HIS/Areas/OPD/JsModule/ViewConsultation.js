@@ -20,7 +20,7 @@ $(document).ready(function () {
         selectRow($(this));
         _AppId = AppId;
         _doctorId = DoctorId;
-        InOutMarking('DoctorRoom_CALL');
+        InOutMarking('DoctorRoom_CALL','');
     });
     $('#tblEmergencyAppList tbody').on('click', '#btnView', function () {
         var AppId = $(this).closest('tr').find('td:eq(1)').text();
@@ -42,23 +42,25 @@ $(document).ready(function () {
         selectRow($(this));
         _AppId = AppId;
         _doctorId = DoctorId;
-        InOutMarking('DoctorRoom_CALL');
+        InOutMarking('DoctorRoom_CALL','');
     });
     $('#tblEmergencyAppList tbody').on('click', '#btnIn', function () {
         var AppId = $(this).closest('tr').find('td:eq(1)').text();
         var DoctorId = $(this).closest('tr').find('td:eq(2)').text();
+        var dashboard = $(this).data('dashboard');
         selectRow($(this));
         _AppId = AppId;
         _doctorId = DoctorId;
-        InOutMarking('DoctorRoom_IN');
+        InOutMarking('DoctorRoom_IN', dashboard);
     });
     $('#tblOtherAppList tbody').on('click', '#btnIn', function () {
         var AppId = $(this).closest('tr').find('td:eq(1)').text();
         var DoctorId = $(this).closest('tr').find('td:eq(2)').text();
+        var dashboard = $(this).data('dashboard');
         selectRow($(this));
         _AppId = AppId;
         _doctorId = DoctorId;
-        InOutMarking('DoctorRoom_IN');
+        InOutMarking('DoctorRoom_IN', dashboard);
     });
 });
 function GetDoctorList() {
@@ -132,7 +134,7 @@ function ViewConsultation() {
                         tbody += "<td style='background:#fff;'>";
                         tbody += "<button class='btn btn-success btn-xs' id='btnCall' " + val.IsCalled + ">Call</button>";
                         if (val.IsIn == 'disabled')
-                            tbody += "<button class='btn btn-warning btn-xs' disabled style='Background:" + val.IsIn_Color + "' id='btnIn'>In</button><div id='skill'><div class='circle'></div></div>";
+                            tbody += "<button class='btn btn-warning btn-xs' disabled style='Background:" + val.IsIn_Color + "' data-dashboard='" + val.Dept + "' id='btnIn'>In</button><div id='skill'><div class='circle'></div></div>";
                         else
                             tbody += "<button class='btn btn-warning btn-xs' style='Background:" + val.IsIn_Color + "' id='btnView' data-dashboard='" + val.Dept + "'>View</button><div id='skill'><div class='circle'></div></div>";
                         tbody += "</td>";
@@ -158,7 +160,7 @@ function ViewConsultation() {
                         tbody1 += "<td style='background:#fff;'>";
                         tbody1 += "<button class='btn btn-success btn-xs' id='btnCall' " + val.IsCalled + ">Call</button>";
                         if (val.IsIn == 'disabled')
-                            tbody1 += "<button class='btn btn-warning btn-xs' disabled style='Background:" + val.IsIn_Color + "' id='btnIn'>In</button><div id='skill'><div class='circle'></div></div>";
+                            tbody1 += "<button class='btn btn-warning btn-xs' disabled  style='Background:" + val.IsIn_Color + "' data-dashboard='" + val.Dept + "' id='btnIn'>In</button><div id='skill'><div class='circle'></div></div>";
                         else
                             tbody1 += "<button class='btn btn-warning btn-xs' style='Background:" + val.IsIn_Color + "' data-dashboard='" + val.Dept + "' id='btnView'>View</button><div id='skill'><div class='circle'></div></div>";
                         tbody1 += "</td>";
@@ -195,7 +197,7 @@ function ViewConsultation() {
         }
     });
 }
-function InOutMarking(logic) {
+function InOutMarking(logic, dashboard) {
     $('#tblEmergencyAppList tbody,#tblOtherAppList tbody').removeClass('btnRound*');
     $('#tblEmergencyAppList tbody,#tblOtherAppList tbody').find('#skill*').hide();
 
@@ -236,7 +238,7 @@ function InOutMarking(logic) {
                     $('#tblEmergencyAppList tbody tr.select-row,#tblOtherAppList tbody tr.select-row').removeClass('btnRound*');
                     $('#tblEmergencyAppList tbody tr.select-row,#tblOtherAppList tbody tr.select-row').find('#skill*').hide();
                     sessionStorage.setItem('AppId', _AppId);
-                    window.location.href = "/OPD/Prescription/OPD_Dashboard";
+                    window.location.href = config.rootUrl + "/OPD/Prescription/" + dashboard;
                 }
                 if (objBO.Logic == "DoctorRoom_Absent") {
                     $('#tblEmergencyAppList tbody tr.select-row,#tblOtherAppList tbody tr.select-row').find('#btnCall').prop('disabled', true);

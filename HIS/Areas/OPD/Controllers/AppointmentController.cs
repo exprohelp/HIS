@@ -38,6 +38,10 @@ namespace MediSoftTech_HIS.Areas.OPD.Controllers
         {
             return View();
         }
+        public ActionResult DoctorDisplayView()
+        {
+            return View();
+        }
         public ActionResult DoctorDisplay()
         {
             return View();

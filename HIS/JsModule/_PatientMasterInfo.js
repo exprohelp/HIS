@@ -401,7 +401,6 @@ function GetCityByState(sId, logic) {
             alert('Server Error...!');
         }
     });
-
 }
 function GetStateByCountry(cId, logic) {
     var url = config.baseUrl + "/api/Appointment/Opd_AppointmentQueries";

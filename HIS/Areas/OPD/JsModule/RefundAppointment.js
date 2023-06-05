@@ -31,20 +31,20 @@ function GetOPDRefund() {
 		contentType: "application/json;charset=utf-8",
 		dataType: "JSON",
 		async: false,
-		success: function (data) {
-			
+        success: function (data) {
+            console.log(data)
 			if (data.ResultSet.Table.length > 0) {
 				 total = 0;
 				 amount = 0;
 				$('#txtTotal').val(0);
 				$('#txtTransactionNo').val('');
-				$('#txtTranNo,textarea').val('');
-				$('#txtTranNo').val(objBO.prm_1);
+				$('#txtTranNo,textarea').val('');          
 				$('#tblDetails tbody').empty();
 				$('#tblPayment tbody').empty();
 				var tbody = "";
 				var html = "";
-				$.each(data.ResultSet.Table, function (key, val) {
+                $.each(data.ResultSet.Table, function (key, val) {
+                    $('#txtTranNo').val(val.TnxId);
 					if (val.trnStatus == 'Refunded') {
 						tbody += "<tr style='background:#ffb8b8'>";
 					}
@@ -105,47 +105,49 @@ function GetOPDRefund() {
 	});
 }
 function AppointmentCancellation() {
-	if (Validation()) {
-		var url = config.baseUrl + "/api/Appointment/Opd_AppointmentCancellation";
-		var objBO = {};
-		var item = [];
-		objBO.hosp_id = Active.unitId;
-		objBO.oldTnxId = $('#txtTranNo').val();
-		objBO.CancelReason = $('#txtRemark').val();
-		$('#tblPayment tbody tr.item').each(function () {
-			var itemid = $(this).find('td:eq(0)').text();
-			item.push(itemid);
-		});
-		objBO.ItemIdList = item.join(',');
-		objBO.amount = $('#txtTotal').val();
-		objBO.PayMode = $('#ddlPayMode option:selected').text();
-		objBO.IPAddress = '-';
-		objBO.login_id = Active.userId;
-		$.ajax({
-			method: "POST",
-			url: url,
-			data: JSON.stringify(objBO),
-			contentType: "application/json;charset=utf-8",
-			dataType: "JSON",
-			async: false,
-			success: function (data) {
-				if (data.includes('Success')) {
-					alert(data);
-					$('#txtTranNo,textarea').val('');
-					$('#ddlPayMode').prop('selectedIndex', '0').change();
-					$('#tblDetails tbody').empty();
-					$('#tblPayment tbody').empty();
-					$('#txtTotal tbody').val(0);
-				}
-				else {
-					alert(data);
-				};
-			},
-			error: function (response) {
-				alert('Server Error...!');
-			}
-		});
-	}
+    if (Validation()) {
+        if (confirm('are you sure to cancel?')) {
+            var url = config.baseUrl + "/api/Appointment/Opd_AppointmentCancellation";
+            var objBO = {};
+            var item = [];
+            objBO.hosp_id = Active.unitId;
+            objBO.oldTnxId = $('#txtTranNo').val();
+            objBO.CancelReason = $('#txtRemark').val();
+            $('#tblPayment tbody tr.item').each(function () {
+                var itemid = $(this).find('td:eq(0)').text();
+                item.push(itemid);
+            });
+            objBO.ItemIdList = item.join(',');
+            objBO.amount = $('#txtTotal').val();
+            objBO.PayMode = $('#ddlPayMode option:selected').text();
+            objBO.IPAddress = '-';
+            objBO.login_id = Active.userId;
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: JSON.stringify(objBO),
+                contentType: "application/json;charset=utf-8",
+                dataType: "JSON",
+                async: false,
+                success: function (data) {
+                    if (data.includes('Success')) {
+                        alert(data);
+                        $('#txtTranNo,textarea').val('');
+                        $('#ddlPayMode').prop('selectedIndex', '0').change();
+                        $('#tblDetails tbody').empty();
+                        $('#tblPayment tbody').empty();
+                        $('#txtTotal tbody').val(0);
+                    }
+                    else {
+                        alert(data);
+                    };
+                },
+                error: function (response) {
+                    alert('Server Error...!');
+                }
+            });
+        }
+    }
 }
 function Receipt(tnxid) {
 	var url = "../Print/AppointmentReceipt?TnxId=" + tnxid + "&ActiveUser=" + Active.userName;

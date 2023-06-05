@@ -442,7 +442,6 @@ function GetVisitTypeByDoctor(DoctorId) {
         }
     });
 }
-
 function GetDoctorSchedule(doctor) {
     var url = config.baseUrl + "/api/Appointment/Opd_AppointmentQueries";
     var objBO = {};
@@ -496,7 +495,6 @@ function GetDoctorSchedule(doctor) {
         }
     });
 }
-
 function GetAppointmentRate(UHID, panelId, item) {
     var url = config.baseUrl + "/api/Appointment/Opd_AppointmentQueries";
     var objBO = {};
@@ -540,10 +538,6 @@ function GetAppointmentRate(UHID, panelId, item) {
         }
     });
 }
-
-
-
-
 function InsertSource() {
     if (ValidateSource()) {
         var url = config.baseUrl + "/api/Appointment/Opd_InsertAppointmentAssets";
@@ -888,6 +882,7 @@ function Opd_AppointmentBooking() {
                         if (data.includes('|')) {
                             $('#txtTnxIdForPrint').text(tnxid);
                             Receipt(tnxid);
+                            $('#start-camera').trigger('click');
                         }
                         Clear();
                     }
@@ -1062,6 +1057,7 @@ function Opd_AppointmentBooking1() {
                             Receipt(tnxid);
                             GetVisitTypeByDoctor(objBooking.DoctorId);
                             Clear();
+                            $('#start-camera').trigger('click');
                         }
                         else {
                             alert(json.Message);

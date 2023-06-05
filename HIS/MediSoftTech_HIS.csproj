@@ -342,10 +342,13 @@
     <Content Include="Areas\MenuMaster\Views\Master\GroupMenuAllotment.cshtml" />
     <Content Include="Areas\MenuMaster\Views\Master\MenuAllotmentMaster.cshtml" />
     <Content Include="Areas\MenuMaster\Views\web.config" />
+    <Content Include="Areas\MIS\JsModule\Finance\DailyCollectionReport.js" />
+    <Content Include="Areas\MIS\JsModule\Finance\UserwiseCollectionReport.js" />
     <Content Include="Areas\Online\JsModule\CMEPayment.js" />
     <Content Include="Areas\Online\JsModule\CMERegistration.js" />
     <Content Include="Areas\OPD\JsModule\BookAppointment.js" />
     <Content Include="Areas\OPD\JsModule\DoctorDisplay.js" />
+    <Content Include="Areas\OPD\JsModule\DoctorDisplayView.js" />
     <Content Include="Areas\OPD\JsModule\OPDDashboard.js" />
     <Content Include="Areas\OPD\JsModule\OPDRegister.js" />
     <Content Include="Areas\OPD\JsModule\Prescription\CPOE_DoctorTemplate.js" />
@@ -1739,7 +1742,9 @@
     <Compile Include="Areas\Masters\MastersAreaRegistration.cs" />
     <Compile Include="Areas\MenuMaster\Controllers\MasterController.cs" />
     <Compile Include="Areas\MenuMaster\MenuMasterAreaRegistration.cs" />
+    <Compile Include="Areas\MIS\Controllers\FinanceController.cs" />
     <Compile Include="Areas\MIS\Controllers\MISReportController.cs" />
+    <Compile Include="Areas\MIS\Controllers\PrintController.cs" />
     <Compile Include="Areas\MIS\MISAreaRegistration.cs" />
     <Compile Include="Areas\Online\Controllers\OnlineController.cs" />
     <Compile Include="Areas\Online\Controllers\PayIngenicoController.cs" />
@@ -2054,6 +2059,9 @@
     <Content Include="Areas\Lab\Views\Master\DoctorSignature - Copy.cshtml" />
     <Content Include="Areas\IPD\Views\Indent\HISPushReport.cshtml" />
     <Content Include="Areas\Corporate\Views\Panel\FundManagement.cshtml" />
+    <Content Include="Areas\MIS\Views\Finance\DailyCollectionReport.cshtml" />
+    <Content Include="Areas\MIS\Views\Finance\UserwiseCollectionReport.cshtml" />
+    <Content Include="Areas\OPD\Views\Appointment\DoctorDisplayView.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -2270,6 +2278,7 @@
     <Folder Include="Areas\MenuMaster\Models\" />
     <Folder Include="Areas\MenuMaster\Views\Shared\" />
     <Folder Include="Areas\MIS\Models\" />
+    <Folder Include="Areas\MIS\Views\Print\" />
     <Folder Include="Areas\MIS\Views\Shared\" />
     <Folder Include="Areas\OPD\Models\" />
     <Folder Include="Areas\OPD\Views\Print\" />

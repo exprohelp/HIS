@@ -1302,6 +1302,16 @@ function InsertVisualAcuity() {
     objBO.right_PrvSpectPowerDist = $('#tblVisualAcuity tbody tr:eq(3)').find('td:eq(1)').find('input:text').val();
     objBO.left_PrvSpectPowerNear = $('#tblVisualAcuity tbody tr:eq(4)').find('td:eq(2)').find('input:text').val();
     objBO.right_PrvSpectPowerNear = $('#tblVisualAcuity tbody tr:eq(4)').find('td:eq(1)').find('input:text').val();
+
+    objBO.PosteriorRatinaSegment = ($('input[id=PosteriorRatina]').is(':checked') == true) ? 'Y' : 'N';
+    objBO.EyeLens = ($('input[id=EyeLens]').is(':checked') == true) ? 'Y' : 'N';
+    objBO.left_MCT = $('#tblOtherInfo tbody tr:eq(0)').find('td:eq(2)').find('input:text').val();
+    objBO.right_MCT = $('#tblOtherInfo tbody tr:eq(0)').find('td:eq(1)').find('input:text').val();
+    objBO.left_AT = $('#tblOtherInfo tbody tr:eq(1)').find('td:eq(2)').find('input:text').val();
+    objBO.right_AT = $('#tblOtherInfo tbody tr:eq(1)').find('td:eq(1)').find('input:text').val();
+    objBO.left_Gonioscopy = $('#tblOtherInfo tbody tr:eq(2)').find('td:eq(2)').find('select option:selected').text();
+    objBO.right_Gonioscopy = $('#tblOtherInfo tbody tr:eq(2)').find('td:eq(1)').find('select option:selected').text();
+
     objBO.prm_1 = '-';
     objBO.prm_2 = '-';
     objBO.login_id = Active.userId;
@@ -1319,6 +1329,42 @@ function InsertVisualAcuity() {
             }
             else {
                // alert(data);
+            };
+        },
+        error: function (response) {
+            alert('Server Error...!');
+        }
+    });
+}
+function UpdateEyeOtherInfo() {
+    var url = config.baseUrl + "/api/Prescription/CPOE_OPTHVisualAcuityInsertUpdate";
+    var objBO = {};
+    objBO.app_no = sessionStorage.getItem('AppId');
+    objBO.PosteriorRatinaSegment = ($('input[id=PosteriorRatina]').is(':checked') == true) ? 'Y' : 'N';
+    objBO.EyeLens = ($('input[id=EyeLens]').is(':checked') == true) ? 'Y' : 'N';
+    objBO.left_MCT = $('#tblOtherInfo tbody tr:eq(0)').find('td:eq(2)').find('input:text').val();
+    objBO.right_MCT = $('#tblOtherInfo tbody tr:eq(0)').find('td:eq(1)').find('input:text').val();
+    objBO.left_AT = $('#tblOtherInfo tbody tr:eq(1)').find('td:eq(2)').find('input:text').val();
+    objBO.right_AT = $('#tblOtherInfo tbody tr:eq(1)').find('td:eq(1)').find('input:text').val();
+    objBO.left_Gonioscopy = $('#tblOtherInfo tbody tr:eq(2)').find('td:eq(2)').find('select option:selected').text();
+    objBO.right_Gonioscopy = $('#tblOtherInfo tbody tr:eq(2)').find('td:eq(1)').find('select option:selected').text();
+    objBO.prm_1 = '-';
+    objBO.prm_2 = '-';
+    objBO.login_id = Active.userId;
+    objBO.Logic = 'UpdateEyeOtherInfo';
+    $.ajax({
+        method: "POST",
+        url: url,
+        data: JSON.stringify(objBO),
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (data) {
+            if (data.includes('Success')) {
+                //alert(data)
+                GetOtherInfo();
+            }
+            else {
+                // alert(data);
             };
         },
         error: function (response) {
@@ -1378,42 +1424,7 @@ function GetOtherInfo() {
         }
     });
 }
-function UpdateEyeOtherInfo() {
-    var url = config.baseUrl + "/api/Prescription/CPOE_OPTHVisualAcuityInsertUpdate";
-    var objBO = {};
-    objBO.app_no = sessionStorage.getItem('AppId');
-    objBO.PosteriorRatinaSegment = ($('input[id=PosteriorRatina]').is(':checked')==true)?'Y':'N';
-    objBO.EyeLens = ($('input[id=EyeLens]').is(':checked') == true) ? 'Y' : 'N';
-    objBO.left_MCT = $('#tblOtherInfo tbody tr:eq(0)').find('td:eq(2)').find('input:text').val();
-    objBO.right_MCT = $('#tblOtherInfo tbody tr:eq(0)').find('td:eq(1)').find('input:text').val();
-    objBO.left_AT = $('#tblOtherInfo tbody tr:eq(1)').find('td:eq(2)').find('input:text').val();
-    objBO.right_AT = $('#tblOtherInfo tbody tr:eq(1)').find('td:eq(1)').find('input:text').val();
-    objBO.left_Gonioscopy = $('#tblOtherInfo tbody tr:eq(2)').find('td:eq(2)').find('select option:selected').text();
-    objBO.right_Gonioscopy = $('#tblOtherInfo tbody tr:eq(2)').find('td:eq(1)').find('select option:selected').text();
-    objBO.prm_1 = '-';
-    objBO.prm_2 = '-';
-    objBO.login_id = Active.userId;
-    objBO.Logic = 'UpdateEyeOtherInfo';
-    $.ajax({
-        method: "POST",
-        url: url,
-        data: JSON.stringify(objBO),
-        dataType: "json",
-        contentType: "application/json;charset=utf-8",
-        success: function (data) {
-            if (data.includes('Success')) {
-                //alert(data)
-                GetOtherInfo();
-            }
-            else {
-                // alert(data);
-            };   
-        },
-        error: function (response) {
-            alert('Server Error...!');
-        }
-    });
-}
+
 //Advice Items operation
 function InsertAdviceItem() {
     var url = config.baseUrl + "/api/master/CPOE_OPTHInsertUpdateMaster";
@@ -2030,15 +2041,15 @@ function GetSpecInfo() {
                     $.each(data.ResultSet.Table, function (key, val) {
                         count++;
                         if (val.SpecType == 'Distance') {
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(1)').find('input').val(val.left_Sph);
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(2)').find('input').val(val.left_Cyl);
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(3)').find('input').val(val.left_Axis);
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(4)').find('input').val(val.left_VA);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(5)').find('input').val(val.left_Sph);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(6)').find('input').val(val.left_Cyl);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(7)').find('input').val(val.left_Axis);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(8)').find('input').val(val.left_VA);
 
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(5)').find('input').val(val.right_Sph);
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(6)').find('input').val(val.right_Cyl);
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(7)').find('input').val(val.right_Axis);
-                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(8)').find('input').val(val.right_VA);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(1)').find('input').val(val.right_Sph);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(2)').find('input').val(val.right_Cyl);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(3)').find('input').val(val.right_Axis);
+                            $('#tblSpecDetail tbody tr:eq(0)').find('td:eq(4)').find('input').val(val.right_VA);
 
                             $('input[value=Const]').prop('checked', (val.Const == 'Y') ? true : false);
                             $('input[value=Bifocal]').prop('checked', (val.Bifocal == 'Y') ? true : false);
@@ -2142,15 +2153,15 @@ function DistanceSpecInfo() {
     InsertDistanceSpecInfo()
 }
 function NearSpecInfo() {   
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(5)').find('input').val($('#txtNearLeftEyeSph').val());
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(6)').find('input').val($('#txtLeftCyl').val());
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(7)').find('input').val($('#txtLeftAxis').val());
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(8)').find('input').val($('#txtNearLeftEyeVA').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(1)').find('input').val($('#txtNearLeftEyeSph').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(2)').find('input').val($('#txtLeftCyl').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(3)').find('input').val($('#txtLeftAxis').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(4)').find('input').val($('#txtNearLeftEyeVA').val());
 
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(1)').find('input').val($('#txtNearRightEyeSph').val());
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(2)').find('input').val($('#txtRightCyl').val());
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(3)').find('input').val($('#txtRightAxis').val());
-    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(4)').find('input').val($('#txtNearRightEyeVA').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(5)').find('input').val($('#txtNearRightEyeSph').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(6)').find('input').val($('#txtRightCyl').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(7)').find('input').val($('#txtRightAxis').val());
+    $('#tblSpecDetail tbody tr:eq(1)').find('td:eq(8)').find('input').val($('#txtNearRightEyeVA').val());
     $('#modalNear').modal('hide');  
     InsertDistanceSpecInfo()
 }
