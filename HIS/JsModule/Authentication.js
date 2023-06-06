@@ -9,8 +9,7 @@
     //    console.log("debugger1 : "+(activeMenu))
     //    if ($.inArray(activeMenu, menuList) <0)
     //        IsAuthorizedMenu();
-    //} 
-    //tetvsd
+    //}    
     if (window.location.pathname.toLowerCase() != '/' && window.location.pathname.toLowerCase() != '/admin/dashboard')
         IsAuthorizedMenu();
 
