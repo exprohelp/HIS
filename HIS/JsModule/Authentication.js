@@ -75,6 +75,7 @@ function IsAuthorizedMenu() {
     objBO.SubMenuId = query()['mid'];
     objBO.EmpCode = Active.userId;
     objBO.Logic = 'IsAuthorizedMenu';
+
     $.ajax({
         method: "POST",
         url: url,

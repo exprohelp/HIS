@@ -1,18 +1,20 @@
-﻿using HIS.Repository;
+﻿using HiQPdf;
+using HIS.Repository;
 using HISWebApi.Models;
-using iTextSharp.text.html.simpleparser;
 using MediSoftTech_HIS.App_Start;
 using MediSoftTech_HIS.Repository;
 using System;
 using System.Data;
+using System.IO;
 using System.Text;
 using System.Web.Mvc;
 using static HISWebApi.Models.IPDBO;
 
 namespace MediSoftTech_HIS.Areas.OPD.Controllers
-{
+{    
     public class PrintController : Controller
     {
+ 
         // GET: OPD/Print
         public FileResult AppointmentReceipt(string TnxId, string ActiveUser, string Logic = "PrintAppointmentReceipt")
         {
@@ -260,6 +262,384 @@ namespace MediSoftTech_HIS.Areas.OPD.Controllers
             return pdfConverter.ConvertToPdf(h.ToString(), b.ToString(), "-", "MedicineBillReport.pdf");
         }
         public FileResult AdvicePreview(string app_no)
+        {
+            PdfGenerator pdfConverter = new PdfGenerator();
+            AppointmentQueries obj = new AppointmentQueries();
+            obj.AppointmentId = app_no;
+            obj.Logic = "PatientForAdvice";
+            dataSet dsResult = APIProxy.CallWebApiMethod("Appointment/Opd_AppointmentQueries", obj);
+            DataSet ds = dsResult.ResultSet;
+            string _result = string.Empty;
+            StringBuilder b = new StringBuilder();
+            StringBuilder h = new StringBuilder();
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                b.Append("<div style='font-family:sans-serif;font-size:85%;border:1px solid #000;'>");
+                b.Append("<span style='-webkit-transform: rotate(-90deg);position:fixed;font-size:11px;left:-86px;top:28%;width:23%'>Powered By : Chandan Hospital Ltd.</span>");
+                b.Append("<div style='width:100%;float:left;margin-top:-12px;padding:8px'>");
+                string headerImageFile = HttpContext.Server.MapPath(@"/Content/logo/logo.png");
+                b.Append("<div style='text-align:left;width:30%;float:left'>");
+                b.Append("<img src=" + headerImageFile + " style='width:170px;margin-top:18px;' />");
+                b.Append("</div>");
+                b.Append("<div style='text-align:left;width:70%;float:right;'>");
+                b.Append("<h3 style='font-weight:bold;margin-bottom:-2px'>Chandan HealthCare Ltd</h3>");
+                b.Append("<span style='text-align:left;'>Sector G, Jankipuram, Biotech Park, Kursi Road, Lucknow, Pin - 226021</span><br/>");
+                b.Append("<span style='text-align:left;'>Tel. : (0522) 2354834, 2351112, 2351151, Fax (0522) 2353372, 4035888</span><br/>");
+                b.Append("<span style='text-align:left;'><b>Website : www.chandan.co.in, GSTIN : 09AACCC1996N1Z2</b></span>");
+                b.Append("</div>");
+                b.Append("</div>");
+                b.Append("<hr/>");
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    b.Append("<table style='width:100%;font-size:13px;text-align:left;border:0px solid #dcdcdc;'>");
+                    b.Append("<tr>");
+                    b.Append("<td><b>Patient Name</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["patient_name"].ToString() + "</td>");
+                    b.Append("<td>&nbsp;</td>");
+                    b.Append("<td><b>UHID No.</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["UHID"].ToString() + "</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td><b>Age/Gender</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["Age"].ToString() + "</td>");
+                    b.Append("<td>&nbsp;</td>");
+                    b.Append("<td><b>Appointment Date</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["AppDate"].ToString() + "</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td><b>Doctor</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["DoctorName"].ToString() + "</td>");
+                    b.Append("<td>&nbsp;</td>");
+                    b.Append("<td><b>Appointment Type</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["appType"].ToString() + "</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td><b>Mobile No.</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["mobile_no"].ToString() + "</td>");
+                    b.Append("<td>&nbsp;</td>");
+                    b.Append("<td><b>Valid To</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["AppDate"].ToString() + "</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td><b>Panel</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td>" + dr["PanelName"].ToString() + "</td>");
+                    b.Append("<td>&nbsp;</td>");
+                    b.Append("<td><b>Barcode</b></td>");
+                    b.Append("<td><b>:</b></td>");
+                    b.Append("<td><img src=" + BarcodeGenerator.GenerateBarCode(dr["UHID"].ToString(), 225, 25) + " style='width:150px;height:100%'/></td>");
+                    b.Append("</tr>");
+                    b.Append("</table>");
+                }
+            }
+
+            b.Append("<div style='float:left;width:100%;border:1px solid #000;margin-left:-1px'>");
+            //Left Block Start
+            b.Append("<div style='float:left;width:26%;border-right:1px solid #000;min-height:840px;position:relative;'>");
+
+
+            if (ds.Tables.Count > 0 && ds.Tables[3].Rows.Count > 0)
+            {
+                //Vital Sign
+                b.Append("<div style='width:95%;margin:5px;font-size:13px;'>");
+                b.Append("<p style='text-align:left;margin:0'><b>Vital Sign :</b></p>");
+                b.Append("<table style='width:99%;font-size:10px;line-height:8px;margin-left:3px;'>");
+                foreach (DataRow dr in ds.Tables[3].Rows)
+                {
+                    b.Append("<tr>");
+                    b.Append("<td>Weight</td>");
+                    b.Append("<td>:</td>");
+                    b.Append("<td>" + dr["WT"].ToString() + " kg</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td>Temprature</td>");
+                    b.Append("<td>:</td>");
+                    b.Append("<td>" + dr["Temprarture"].ToString() + " °C</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td>Pulse</td>");
+                    b.Append("<td>:</td>");
+                    b.Append("<td>" + dr["Pulse"].ToString() + " °C</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td>B/P</td>");
+                    b.Append("<td>:</td>");
+                    b.Append("<td style='white-space: nowrap;'>" + dr["BP_Sys"].ToString() + " Mm/Hg</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td>SPO2</td>");
+                    b.Append("<td>:</td>");
+                    b.Append("<td>" + dr["SPO2"].ToString() + "</td>");
+                    b.Append("</tr>");
+                    b.Append("<tr>");
+                    b.Append("<td>Height</td>");
+                    b.Append("<td>:</td>");
+                    b.Append("<td>" + dr["HT"].ToString() + " cm</td>");
+                    b.Append("</tr>");
+                }
+                b.Append("</table>");
+                b.Append("</div>");
+            }
+            //Declaration For Template Items
+            var T00001 = string.Empty;
+            var T00002 = string.Empty;
+            var T00003 = string.Empty;
+            var T00005 = string.Empty;
+            var T00006 = string.Empty;
+            var T00007 = string.Empty;
+            var T00008 = string.Empty;
+            var T00009 = string.Empty;
+            var T00010 = string.Empty;
+            var T00015 = string.Empty;
+            var tbody = string.Empty;
+            //Left Block End			
+            if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[1].Rows)
+                {
+                    if (dr["TemplateId"].ToString() == "T00001")
+                    {
+                        T00001 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00002")
+                    {
+                        T00002 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00003")
+                    {
+                        T00003 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00005")
+                    {
+                        T00005 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00006")
+                    {
+                        T00006 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00007")
+                    {
+                        T00007 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00008")
+                    {
+                        T00008 += dr["ItemName"].ToString() + ",";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00009")
+                    {
+                        T00009 += "<tr><td>" + dr["ItemName"].ToString() + "</td></tr>";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00010")
+                    {
+                        T00010 += "<tr><td>" + dr["ItemName"].ToString() + "</td></tr>";
+                    }
+                    if (dr["TemplateId"].ToString() == "T00015")
+                    {
+                        T00015 += dr["ItemName"].ToString() + ",";
+                    }
+                }
+            }
+            if (ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+            {
+                var count = 0;
+                foreach (DataRow dr in ds.Tables[2].Rows)
+                {
+                    count++;
+                    tbody += "<tr>" +
+                "<td style='padding-left:3px;'>" + count + "</td><td style='padding-left:3px;'>" + dr["Item_name"].ToString() + "</td><td style='padding-left:3px;'>" + dr["med_dose"].ToString() + "</td><td style='padding-left:3px;'>" + dr["med_times"].ToString() + "</td><td style='padding-left:3px;'>" + dr["med_duration"].ToString() + "</td><td style='padding-left:3px;'>" + dr["med_intake"].ToString() + "</td><td style='padding-left:3px;'>" + dr["med_route"].ToString() + "</td><td style='padding-left:3px;'>" + dr["qty"].ToString() + "</td><td style='padding-left:3px;'>" + dr["remark"].ToString() + "</td>" +
+                "</tr>";
+                }
+            }
+            if (!string.IsNullOrEmpty(T00009))
+            {
+                //Investigation
+                b.Append("<div style='width:95%;margin:5px;font-size:13px;'>");
+                b.Append("<p style='text-align:left;margin:0'><b>Investigation :</b></p>");
+                b.Append("<table style='width:99%;font-size:10px;line-height:12px;margin-left:3px;'>");
+                b.Append(T00009);
+                b.Append("</table>");
+                b.Append("</div>");
+            }
+
+            if (!string.IsNullOrEmpty(T00010))
+            {
+                //Procedure
+                b.Append("<div style='width:95%;margin:5px;font-size:13px;'>");
+                b.Append("<p style='text-align:left;margin:0'><b>Procedure :</b></p>");
+                b.Append("<table style='width:99%;font-size:10px;line-height:12px;margin-left:3px;'>");
+                b.Append(T00010);
+                b.Append("</table>");
+                b.Append("</div>");
+            }
+
+
+            b.Append("<div style='width:95%;margin:0 5px;font-size:12px;border:1px solid #ccc;position:relative;bottom:0;'>");
+            b.Append("<p style='text-align:center;margin:0;'>Note<hr style='width:90%;text-align:center;'/></p>");
+            if (ds.Tables.Count > 0 && ds.Tables[4].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[4].Rows)
+                {
+                    b.Append("<div style='width:100%;font-size:10px;line-height:8px;margin-top:-10px;'>");
+                    b.Append(dr["content"].ToString());
+                    b.Append("</div>");
+                }
+            }
+            b.Append("</div>");
+            b.Append("</div>");
+            //Right Block Start
+            b.Append("<div style='float:right;width:73%;padding-top:5px;position:relative;min-height:840px;'>");
+            if (!string.IsNullOrEmpty(T00001))
+            {
+                //Provisional Diagnosis Begin
+                b.Append("<div style='width:95%;font-size:13px;'>");
+                b.Append("<p style='text-align:left;margin:0'><b>Provisional Diagnosis :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00001.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //Provisional Diagnosis End	
+            }
+            if (!string.IsNullOrEmpty(T00002))
+            {
+                //Chief Complaint Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>Chief Complaint :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00002.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //Chief Complaint End
+            }
+            if (!string.IsNullOrEmpty(T00003))
+            {
+                //Sign & Symptoms Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>Sign & Symptoms :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00003.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //Sign & Symptoms End
+            }
+            if (!string.IsNullOrEmpty(tbody))
+            {
+                //Medicine Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                string rx = HttpContext.Server.MapPath(@"/Content/logo/rx.png");
+                b.Append("<p style='text-align:left;margin:0'><img src=" + rx + " style='width:15px;margin-bottom:-7px;' /></p>");
+                b.Append("<table style='width:100%;float:left;font-size:9px;margin:10px 0;text-align:left;border-collapse: collapse;' border='1' >" +
+                    "<tr>" +
+                    "<th style='padding-left:3px;'>Sr</th><th style='padding-left:3px;'>Name</th><th style='padding-left:3px;'>Dose</th><th style='padding-left:3px;'>Times</th><th style='padding-left:3px;'>Duration</th><th style='padding-left:3px;'>Meal</th><th style='padding-left:3px;'>Route</th><th style='padding-left:3px;'>Qty</th><th style='padding-left:3px;'>Remarks</th>" +
+                    "</tr>" +
+                    tbody +
+                    "</table>");
+                b.Append("</div>");
+                //Medicine End
+            }
+            if (!string.IsNullOrEmpty(T00005))
+            {
+
+                //Doctor Notes Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>Doctor Notes :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00005.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //Doctor Notes End
+            }
+            if (!string.IsNullOrEmpty(T00006))
+            {
+                //Allergies Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>Allergies :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00006.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //Allergies End
+            }
+            if (!string.IsNullOrEmpty(T00015))
+            {
+                //History Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>History :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00015.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //History End
+            }
+            if (!string.IsNullOrEmpty(T00007))
+            {
+                //History Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>Past Medication :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00007.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //History End
+            }
+            if (!string.IsNullOrEmpty(T00008))
+            {
+                //History Begin
+                b.Append("<div style='width:95%;font-size:13px;'><br>");
+                b.Append("<p style='text-align:left;margin:0'><b>Doctor Advice :</b></p>");
+                b.Append("<span style='font-size:12px;'>" + T00008.TrimEnd(',') + "</span>");
+                b.Append("</div>");
+                //History End
+            }
+            //if (!string.IsNullOrEmpty(T00006))
+            //{
+            //Transfer & Referral Begin 
+            //b.Append("<div style='width:95%;font-size:13px;'><br>");
+            //b.Append("<p style='text-align:left;margin:0'><b>Transfer & Referral :</b></p>");
+            //b.Append("<span style='font-size:12px;'>Viral Fever, Anti Headache Fluence, Constipation, Acute Gastric, URTI Visit</span>");
+            //b.Append("</div>");
+            //Transfer & Referral End
+            //}
+            if (ds.Tables.Count > 0 && ds.Tables[5].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[5].Rows)
+                {
+                    //Doctor Details Bottom Begin
+                    b.Append("<div style='width:95%;position:absolute;bottom:0'>");
+                    b.Append("<h3 style='text-align:right;margin:0;padding:0'><img style='float:right' src='" + dr["SignVirtualPath"].ToString() + "'/><br/><br/><br/>" + dr["DoctorName"].ToString() + "</h3>");
+                    b.Append("<h4 style='text-align:right;margin:0 10px 10px'>" + dr["degree"].ToString() + "</h4>");
+                    b.Append("</div>");
+                    //Doctor Details Bottom End
+                }
+            }
+            b.Append("</div>"); //Right Block End
+            b.Append("</div>");
+
+            b.Append("</div>");
+            pdfConverter.Header_Enabled = false;
+            pdfConverter.Footer_Enabled = true;
+            pdfConverter.Footer_Hight = 35;
+            pdfConverter.Header_Hight = 120;
+            pdfConverter.PageMarginLeft = 10;
+            pdfConverter.PageMarginRight = 10;
+            pdfConverter.PageMarginBottom = 10;
+            pdfConverter.PageMarginTop = 10;
+            pdfConverter.PageMarginTop = 10;
+            pdfConverter.PageName = "A4";
+            pdfConverter.PageOrientation = "Portrait";
+
+
+            //FileStream fs = new FileStream(Server.MapPath("pdf") + "\\" + "First PDF document.pdf", FileMode.Create);
+            //PdfDocument pdfDocument = new PdfDocument();
+            //Document document = new iText.Layout.Document(PageSize.A4, 25, 25, 30, 30);    
+
+            //Document doc = new Document(PageSize.A4, 10, 10, 10, 10);
+            //var output = new FileStream(Server.MapPath("MyFirstPDF.pdf"), FileMode.Create);
+            //var writer = PdfWriter.GetInstance(doc, output);
+
+            //iText.Kernel.Pdf.PdfWriter pdfWriter=new iText.Kernel.Pdf.PdfWriter()
+
+            //HtmlConverter.ConvertToPdf(b.ToString(), writer);
+            //return File(pdfDest, "application/pdf");     
+
+
+        //return new FileStreamResult(workStream, "application/pdf");
+      return pdfConverter.ConvertToPdf(h.ToString(), b.ToString(), "-", "Preview.pdf");
+    }
+    public FileResult AdvicePreview1(string app_no)
         {
             PdfGenerator pdfConverter = new PdfGenerator();
             AppointmentQueries obj = new AppointmentQueries();

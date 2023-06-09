@@ -6,11 +6,13 @@ var _testCode;
 var _autoTestId;
 var _observationId;
 $(document).ready(function () {
+
     CKEDITOR.replace("txtTestComment");
     CKEDITOR.editorConfig = function (config) {
         config.removePlugins = 'blockquote,save,flash,iframe,tabletools,pagebreak,templates,about,showblocks,newpage,language,print,div';
         config.removeButtons = 'Print,Form,TextField,Textarea,Button,CreateDiv,PasteText,PasteFromWord,Select,HiddenField,Radio,Checkbox,ImageButton,Anchor,BidiLtr,BidiRtl,Font,Format,Styles,Preview,Indent,Outdent';
     };
+
     RowSequence(['#tblObservationDetails']);
     CloseSidebar();
     $('select').select2();
@@ -193,7 +195,7 @@ function ReportDetail() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            console.log(data)
+            console.log("TEST",data)
             if (Object.keys(data.ResultSet).length > 0) {
                 if (Object.keys(data.ResultSet.Table).length > 0) {
                     $.each(data.ResultSet.Table, function (key, val) {
@@ -290,54 +292,74 @@ function ReportDetail() {
 
                                 $.each(data.ResultSet.Table2, function (key, val1) {
                                     if (val.AutoTestId == val1.AutoTestId) {
-                                        if (temp != val1.HeaderName && val1.HeaderName != '-') {
-                                            tbody += "<tr style='background:#f9e7bf'>";
-                                            tbody += "<td colspan='8'>" + val1.HeaderName + "</td>";
+                                        if (val1.r_type == 'Text') {
+                                            if (val1.IsTested == 1)
+                                                tbody += "<tr style='background:#fbc7a9'>";
+                                            else
+                                                tbody += "<tr>";
+
+                                            tbody += "<td colspan='8'><i onclick=ShowHideEditor(this) class='fa fa-snowflake-o'>&nbsp;</i>" + val1.TestName;
+                                            tbody += "<button data-testcode=" + val1.testcode + " onclick=ApproveTest(this) class='btn btn-success btn-xs pull-right'><i class='fa fa-check-circle'>&nbsp;</i>Approve</button>";
+                                            tbody += "<button data-testcode=" + val1.testcode + " onclick=TemplateByTestCode(this) class='btn btn-warning btn-xs pull-right'><i class='fa fa-file'>&nbsp;</i>Template</button>";
+                                            tbody += "</td>";
                                             tbody += "</tr>";
-                                            temp = val1.HeaderName;
+                                            tbody += "<tr class=" + val1.r_type + ">";
+                                            tbody += "<td class='hide'>" + val1.AutoTestId + "</td>";
+                                            tbody += "<td class='hide'>" + val1.testcode + "</td>";
+                                            tbody += "<td colspan='8'><textarea id='txtTestContent" + val1.AutoTestId + "' class='form-control'></textarea></td>";
+                                            tbody += "<td class='hide'>" + val1.report_content + "</td>";
+                                            tbody += "</tr>";
+                                        } else {
+                                            if (temp != val1.HeaderName && val1.HeaderName != '-') {
+                                                tbody += "<tr style='background:#f9e7bf'>";
+                                                tbody += "<td colspan='8'>" + val1.HeaderName + "</td>";
+                                                tbody += "</tr>";
+                                                temp = val1.HeaderName;
+                                            }
+                                            tbody += "<tr class=" + val.r_type + ">";
+                                            if (val1.IsTested == 1)
+                                                tbody += "<tr style='background:#fbc7a9' class=" + val.r_type + ">";
+
+                                            if (val1.IsApproved == 1)
+                                                tbody += "<tr style='background:#bbffc9' class=" + val.r_type + ">";
+
+                                            tbody += "<td class='hide'>" + val1.AutoTestId + "</td>";
+                                            tbody += "<td class='hide'>" + val1.testcode + "</td>";
+                                            tbody += "<td class='hide'>" + val1.ObservationId + "</td>";
+                                            tbody += "<td class='hide'>" + val1.min_value + "</td>";
+                                            tbody += "<td class='hide'>" + val1.max_value + "</td>";
+                                            tbody += "<td class='hide'>" + val1.result_unit + "</td>";
+                                            var bgComment = (val1.test_comment != '') ? '#f98a01' : '#b3b0b0';
+
+                                            if (val1.IsApproved == 1)
+                                                tbody += "<td><i style='background:" + bgComment + "' class='test-comment'>cm</i>" + val1.ObservationName + "<i class='fa fa-check-circle pull-right text-success'></i></td>";
+                                            else
+                                                tbody += "<td><i style='background:" + bgComment + "' class='test-comment'>cm</i>" + val1.ObservationName + "</td>";
+
+                                            tbody += "<td><input type='text' value='" + val1.read_1 + "' data-min='" + val1.min_value + "' data-max='" + val1.max_value + "' class='form-control value'/></td>";
+                                            tbody += "<td>";
+                                            tbody += "<select class='form-control textValue'>";
+
+                                            for (var i = 0; i < val1.DefaultValue.split('|').length; i++)
+                                                tbody += "<option>" + val1.DefaultValue.split('|')[i];
+
+                                            tbody += "</select>";
+                                            tbody += "<input value='" + val1.read_2 + "' class='form-control textValue'/>";
+                                            tbody += "</td>";
+                                            if (val1.ab_flag == 'L')
+                                                tbody += "<td class='lowFlag'>" + val1.ab_flag + "</td>";
+                                            else if (val1.ab_flag == 'H')
+                                                tbody += "<td class='highFlag'>" + val1.ab_flag + "</td>";
+                                            else
+                                                tbody += "<td>" + val1.ab_flag + "</td>";
+
+                                            tbody += "<td>" + val1.min_value + ' - ' + val1.max_value + ' ' + val1.result_unit + "</td>";
+                                            tbody += "<td>" + val1.method_name + "</td>";
+                                            tbody += "<td>" + val1.mac_name + "</td>";
+                                            tbody += "<td>" + val1.mac_reading + "</td>";
+                                            tbody += "<td class='hide'>" + val1.test_comment + "</td>";
+                                            tbody += "</tr>";
                                         }
-                                        tbody += "<tr class=" + val.r_type + ">";
-                                        if (val1.IsTested == 1)
-                                            tbody += "<tr style='background:#fbc7a9' class=" + val.r_type + ">";
-
-                                        if (val1.IsApproved == 1)
-                                            tbody += "<tr style='background:#bbffc9' class=" + val.r_type + ">";
-
-                                        tbody += "<td class='hide'>" + val1.AutoTestId + "</td>";
-                                        tbody += "<td class='hide'>" + val1.testcode + "</td>";
-                                        tbody += "<td class='hide'>" + val1.ObservationId + "</td>";
-                                        tbody += "<td class='hide'>" + val1.min_value + "</td>";
-                                        tbody += "<td class='hide'>" + val1.max_value + "</td>";
-                                        tbody += "<td class='hide'>" + val1.result_unit + "</td>";
-                                        var bgComment = (val1.test_comment != '') ? '#f98a01' : '#b3b0b0';
-                                        if (val1.IsApproved == 1)
-                                            tbody += "<td><i style='background:" + bgComment + "' class='test-comment'>cm</i>" + val1.ObservationName + "<i class='fa fa-check-circle pull-right text-success'></i></td>";
-                                        else
-                                            tbody += "<td><i style='background:" + bgComment + "' class='test-comment'>cm</i>" + val1.ObservationName + "</td>";
-
-                                        tbody += "<td><input type='text' value='" + val1.read_1 + "' data-min='" + val1.min_value + "' data-max='" + val1.max_value + "' class='form-control value'/></td>";
-                                        tbody += "<td>";
-                                        tbody += "<select class='form-control textValue'>";
-
-                                        for (var i = 0; i < val1.DefaultValue.split('|').length; i++)
-                                            tbody += "<option>" + val1.DefaultValue.split('|')[i];
-
-                                        tbody += "</select>";
-                                        tbody += "<input value='" + val1.read_2 + "' class='form-control textValue'/>";
-                                        tbody += "</td>";
-                                        if (val1.ab_flag == 'L')
-                                            tbody += "<td class='lowFlag'>" + val1.ab_flag + "</td>";
-                                        else if (val1.ab_flag == 'H')
-                                            tbody += "<td class='highFlag'>" + val1.ab_flag + "</td>";
-                                        else
-                                            tbody += "<td>" + val1.ab_flag + "</td>";
-
-                                        tbody += "<td>" + val1.min_value + ' - ' + val1.max_value + ' ' + val1.result_unit + "</td>";
-                                        tbody += "<td>" + val1.method_name + "</td>";
-                                        tbody += "<td>" + val1.mac_name + "</td>";
-                                        tbody += "<td>" + val1.mac_reading + "</td>";
-                                        tbody += "<td class='hide'>" + val1.test_comment + "</td>";
-                                        tbody += "</tr>";
                                     }
                                 });
                             }
