@@ -6,6 +6,9 @@
 
 <script src="~/Areas/Lab/JsModule/ReportEditing.js?v1.0"></script>
 <style>
+    .flex {
+        display: flex;
+    }
     #tblTestInfo tbody .fa-check-circle {
         font-size: 12px;
     }
@@ -262,9 +265,10 @@
                                                 <th style='width:13%'>Text Value</th>
                                                 <th style='width:3%'>Flag</th>
                                                 <th style='width:13%'>Ref. Range</th>
-                                                <th style='width:10%'>Method</th>
+                                                <th style='width:1%'>cmd</th>
+                                                @*<th style='width:10%'>Method</th>
                                                 <th style='width:9%'>Mac. Name</th>
-                                                <th style='width:9%;white-space:pre'>Mac. Reading</th>
+                                                <th style='width:9%;white-space:pre'>Mac. Reading</th>*@
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -282,7 +286,7 @@
                                 <button class="btn btn-danger"><i class="fa fa-times-circle">&nbsp;</i>Hold</button>
                                 <button class="btn btn-success" onclick="SaveTestResultEntry('Approved')"><i class="fa fa-check-circle">&nbsp;</i>Approve</button>
                                 <button class="btn btn-success" onclick="ApprovedTestInfo()"><i class="fa fa-check-circle">&nbsp;</i>Un-Approve</button>
-                                <button class="btn btn-primary" onclick="ShowHideEditor()"><i class="fa fa-print">&nbsp;</i>Print</button>
+                                <button class="btn btn-primary" onclick="Print()"><i class="fa fa-print">&nbsp;</i>Print</button>
                             </div>
                         </div>
                     </div>
@@ -383,6 +387,31 @@
                             </div>
                         </div>
                         <button class="btn btn-danger pull-right" onclick="UnApproveTest()"><i class="fa fa-sign-in">&nbsp;</i>Un-Approve</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalUploadDocument" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" style="margin-top:70%;">
+            <div class="panel-heading" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Upload Report</h5>
+                <button data-dismiss="modal" class="btn btn-danger btn-close btn-xs pull-right" style="float: right;margin: -16px 0;height: 16px;line-height: 0;">x</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group flex">
+                            <span style="width:20%">Upload</span>
+                            <span style="width:4%">:</span>
+                            <span style="width:76%;margin-right:7px">
+                                <input type="file" id="uploadFile" class="form-control border-imp" />                               
+                                <img id="imgFile" class="hide" />
+                            </span>
+                            <input type="button" id="btnSave" class="btn-success btn-flat" onclick="UploadLabReport()" value="Upload" />
+                        </div>
                     </div>
                 </div>
             </div>

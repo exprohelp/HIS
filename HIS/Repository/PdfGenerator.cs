@@ -5,6 +5,7 @@ namespace HIS.Repository
 {
     public class PdfGenerator
     {
+        int pageCounter = 0;
         public string HeaderSource { set; get; }
         public int PageMarginLeft { set; get; }
         public int PageMarginRight { set; get; }
@@ -104,7 +105,9 @@ namespace HIS.Repository
         {
             PdfPage pdfPage = eventParams.PdfPage;
             int pdfPageNumber = eventParams.PdfPageNumber;
+            pageCounter = eventParams.PdfPageNumber;
             pdfPage.DisplayHeader = true;
+
             if ((HeaderSource == "IPDBill" || HeaderSource == "IPDDischargeReport") && pdfPageNumber == 1)
             {
                 // set the header and footer visibility in first page

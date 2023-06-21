@@ -1,6 +1,7 @@
 ﻿using HIS.Repository;
 using HISWebApi.Models;
 using MediSoftTech_HIS.App_Start;
+using MediSoftTech_HIS.Areas.Lab.Repository;
 using System;
 using System.Data;
 using System.Linq;
@@ -10,9 +11,7 @@ using System.Web.Mvc;
 namespace MediSoftTech_HIS.Areas.Lab.Controllers
 {
     public class PrintController : Controller
-    {
-
-        //GET:Lab/Print
+    {        
         public FileResult SampleTransferSheet(string DispatchNo)
         {
             PdfGenerator pdfConverter = new PdfGenerator();
@@ -135,6 +134,7 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
             DataSet ds = dsResult.ResultSet;
             string _result = string.Empty;
             string temp = "-";
+            string deptReport = "";
             StringBuilder b = new StringBuilder();
             StringBuilder h = new StringBuilder();
             StringBuilder f = new StringBuilder();
@@ -142,120 +142,134 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
             int deptCounter = 0;
             var ObsReport = ds.Tables[2].AsEnumerable().Select(y => new
             {
-                SubCatName = y.Field<string>("SubCatName"),
-                TestName = y.Field<string>("TestName"),
-                report_content = y.Field<string>("report_content"),
-                r_type = y.Field<string>("r_type"),
+                SubCatName = y.Field<string>("SubCatName")
             }).GroupBy(x => x.SubCatName).ToList();
+            //  b.Append("<div style='width:100%;height:2480px;border:1px solid #ddd;position: relative'>");
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    h.Append("<div style='width:1200px;font-size:25px;float:left;margin-top:-12px;padding:8px;font-family:calibri'>");
+                    string chandanLogo = HttpContext.Server.MapPath(@"/Content/logo/logo.png");
+                    h.Append("<div style='text-align:left;width:32%;float:left'>");
+                    h.Append("<img src=" + chandanLogo + " style='width:180px;margin-top:5px;' />");
+                    h.Append("</div>");
+                    h.Append("<div style='text-align:left;width:auto;float:left;width:43%;'>");
+                    h.Append("<h2 style='font-weight:bold;margin:0'>" + dr["Hospital_Name"].ToString() + "</h2>");
+                    h.Append("<span style='text-align:left;'>" + dr["Full_Address"].ToString() + "</span><br/>");
+                    h.Append("<span style='text-align:left;'><b>Landline No : </b>" + dr["LandlineNo"].ToString() + "</span><br/>");
+                    //b.Append("<span style='text-align:left;'><b>Email ID : </b>" + dr["EmailID"].ToString() + "</span><br/>");
+                    h.Append("<span style='text-align:left;'><b>CIN No: " + dr["cin_no"].ToString() + "</b></span><br/>");
+                    h.Append("</div>");
+                    h.Append("<div style='text-align:left;width:25%;float:left'>");
+                    h.Append("<img src=" + chandanLogo + " style='width:180px;' />");
+                    h.Append("</div>");
+                    h.Append("</div>");
+                    h.Append("<hr/>");
+                }
+            }
+            if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[1].Rows)
+                {
+                    h.Append("<table style='width:1200px;font-size:22px;font-family:calibri;text-align:left;background:#ececec;'>");
+                    h.Append("<tr>");
+                    h.Append("<td><b>Patient Name</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td><b>" + dr["patient_name"].ToString() + "</b></td>");
+                    h.Append("<td colspan='4'>&nbsp;</td>");
+                    h.Append("<td><b>Registered On</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+                    h.Append("</tr>");
+                    h.Append("<tr>");
+                    h.Append("<td><b>Age/Gender</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["ageInfo"].ToString() + "</td>");
+                    h.Append("<td colspan='4'>&nbsp;</td>");
+                    h.Append("<td><b>Collected</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+                    h.Append("</tr>");
+                    h.Append("<tr>");
+                    h.Append("<td><b>UHID/MR NO</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["UHID"].ToString() + "</td>");
+                    h.Append("<td colspan='4'>&nbsp;</td>");
+                    h.Append("<td><b>Received</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+                    h.Append("</tr>");
+                    h.Append("<tr>");
+                    h.Append("<td><b>Visit ID</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
+                    h.Append("<td colspan='4'>&nbsp;</td>");
+                    h.Append("<td><b>Reported</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+                    h.Append("</tr>");
+                    h.Append("<tr>");
+                    h.Append("<td><b>Ref Doctor</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["ref_name"].ToString() + "</td>");
+                    h.Append("<td colspan='4'>&nbsp;</td>");
+                    h.Append("<td><b>Status</b></td>");
+                    h.Append("<td><b>:</b></td>");
+                    h.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
+                    h.Append("</tr>");
+                    h.Append("</table>");
+                }                
+            }
+
+            var deptName = "BIOCHEMISTRY";
             foreach (var report in ObsReport)
             {
+                deptReport = report.First().SubCatName;
                 deptCounter++;
                 if (deptCounter > 1)
                 {
                     b.Append("<h3 style='page-break-after: always;'><br><br></h3>");
                 }
 
-                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow dr in ds.Tables[0].Rows)
-                    {
-                        b.Append("<div style='width:100%;float:left;margin-top:-12px;padding:8px'>");
-                        string chandanLogo = HttpContext.Server.MapPath(@"/Content/logo/logo.png");
-                        b.Append("<div style='text-align:left;width:32%;float:left'>");
-                        b.Append("<img src=" + chandanLogo + " style='width:120px;margin-top:5px;' />");
-                        b.Append("</div>");
-                        b.Append("<div style='text-align:left;width:auto;float:left;width:43%;'>");
-                        b.Append("<h2 style='font-weight:bold;margin:0'>" + dr["Hospital_Name"].ToString() + "</h2>");
-                        b.Append("<span style='text-align:left;'>" + dr["Full_Address"].ToString() + "</span><br/>");
-                        b.Append("<span style='text-align:left;'><b>Landline No : </b>" + dr["LandlineNo"].ToString() + "</span><br/>");
-                        //b.Append("<span style='text-align:left;'><b>Email ID : </b>" + dr["EmailID"].ToString() + "</span><br/>");
-                        b.Append("<span style='text-align:left;'><b>CIN No: " + dr["cin_no"].ToString() + "</b><br/><b>GSTIN : " + dr["gst_no"].ToString() + "</b></span><br/>");
-                        b.Append("</div>");
-                        b.Append("<div style='text-align:left;width:25%;float:left'>");
-                        b.Append("<img src=" + chandanLogo + " style='width:120px;' />");
-                        b.Append("</div>");
-                        b.Append("</div>");
-                        b.Append("<hr/>");
-                    }
-                }
 
-                if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
-                {
-                    foreach (DataRow dr in ds.Tables[1].Rows)
-                    {
-                        b.Append("<table style='width:100%;font-size:14px;text-align:left;background:#ececec;'>");
-                        b.Append("<tr>");
-                        b.Append("<td><b>Patient Name</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td><b>" + dr["patient_name"].ToString() + "</b></td>");
-                        b.Append("<td colspan='4'>&nbsp;</td>");
-                        b.Append("<td><b>Registered On</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["RegDate"].ToString() + "</td>");
-                        b.Append("</tr>");
-                        b.Append("<tr>");
-                        b.Append("<td><b>Age/Gender</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["ageInfo"].ToString() + "</td>");
-                        b.Append("<td colspan='4'>&nbsp;</td>");
-                        b.Append("<td><b>Collected</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["RegDate"].ToString() + "</td>");
-                        b.Append("</tr>");
-                        b.Append("<tr>");
-                        b.Append("<td><b>UHID/MR NO</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["UHID"].ToString() + "</td>");
-                        b.Append("<td colspan='4'>&nbsp;</td>");
-                        b.Append("<td><b>Received</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["RegDate"].ToString() + "</td>");
-                        b.Append("</tr>");
-                        b.Append("<tr>");
-                        b.Append("<td><b>Visit ID</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
-                        b.Append("<td colspan='4'>&nbsp;</td>");
-                        b.Append("<td><b>Reported</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["RegDate"].ToString() + "</td>");
-                        b.Append("</tr>");
-                        b.Append("<tr>");
-                        b.Append("<td><b>Ref Doctor</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["ref_name"].ToString() + "</td>");
-                        b.Append("<td colspan='4'>&nbsp;</td>");
-                        b.Append("<td><b>Status</b></td>");
-                        b.Append("<td><b>:</b></td>");
-                        b.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
-                        b.Append("</tr>");
-                        b.Append("</table>");
-                    }
-                }
-                if (report.First().r_type != "Text")
-                {
-                    b.Append("<table border='0' style='width:100%;font-size:13px;border-collapse: collapse;margin-top:10px;'>");
-                    b.Append("<table border='0' style='width:100%;font-size:13px;border-collapse: collapse;margin-top:10px;'>");
-                    b.Append("<tr>");
-                    b.Append("<th style='text-align:left;padding-left:4px;'>Test Name</th>");
-                    b.Append("<th style='text-align:left;padding-right:4px;'>Result</th>");
-                    b.Append("<th style='text-align:left;padding-right:4px;'>Unit</th>");
-                    b.Append("<th style='text-align:left;padding-right:4px;'>Bio. Ref. Interval</th>");
-                    b.Append("<th style='text-align:left;padding-right:4px;'>Method</th>");
-                    b.Append("</tr>");
-                }
                 var ObsTest = ds.Tables[2].AsEnumerable().Where(z => z.Field<string>("SubCatName") == report.First().SubCatName).Select(y => new
                 {
                     AutoTestId = y.Field<Int64>("AutoTestId"),
                     ObsCount = y.Field<Int64>("ObsCount"),
+                    TestSeqNo = y.Field<Int64>("TestSeqNo"),
                     TestName = y.Field<string>("TestName"),
-                }).GroupBy(x => x.AutoTestId).ToList();
+                    report_content = y.Field<string>("report_content"),
+                    r_type = y.Field<string>("r_type"),
+                    samp_type = y.Field<string>("samp_type"),
+                    Interpretation = y.Field<string>("Interpretation")
+                }).OrderBy(y => y.TestSeqNo).ToList();
                 if (ObsTest.Count > 0)
                 {
+                  
+                    b.Append("<hr/>");
+                    b.Append("<h3 style='text-align:center;margin-top:5px;'>" + report.First().SubCatName + " REPORTS</h3>");
+                    var tempCatName = "";
                     foreach (var dr in ObsTest)
                     {
-                        Int64 AutoTestId = dr.First().AutoTestId;
-                        Int64 ObsCount = dr.First().ObsCount;
+                        if (tempCatName != dr.r_type)
+                        {
+                            if (dr.r_type != "Text")
+                            {
+                                b.Append("<table border='0' style='width:100%;font-size:13px;border-collapse: collapse;margin-top:-10px;'>");
+                                b.Append("<tr>");
+                                b.Append("<th style='width:35%;text-align:left;padding-left:4px;'>Test Name</th>");
+                                b.Append("<th style='width:18%;text-align:left;padding-right:4px;'>Result</th>");
+                                b.Append("<th style='width:2%;text-align:left;padding-right:4px;'></th>");
+                                b.Append("<th style='width:10%;text-align:left;padding-right:4px;'>Unit</th>");
+                                b.Append("<th style='width:25%;text-align:left;padding-right:4px;'>Bio. Ref. Interval</th>");
+                                b.Append("<th style='width:10%;text-align:left;padding-right:4px;'>Method</th>");
+                                b.Append("</tr>");
+                            }
+                            tempCatName = dr.r_type;
+                        }
+                        Int64 AutoTestId = dr.AutoTestId;
+                        Int64 ObsCount = dr.ObsCount;
                         var ObsDetail = ds.Tables[3].AsEnumerable().Where(x => x.Field<Int64>("AutoTestId") == AutoTestId).Select(y => new
                         {
                             ObservationName = y.Field<string>("ObservationName"),
@@ -266,76 +280,156 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
                             ObsSeqNo = y.Field<Int64>("ObsSeqNo"),
                             sample_type = y.Field<string>("sample_type"),
                             HeaderName = y.Field<string>("HeaderName"),
-                            method_name = y.Field<string>("method_name")
-                        }).ToList();
-                        b.Append("<h3 style='text-align:center;margin:0'>" + report.First().SubCatName + " REPORTS</h3>");
+                            method_name = y.Field<string>("method_name"),
+                            test_comment = y.Field<string>("test_comment")
 
-                        b.Append("<h4 style='background:#ddd;;padding-left:4px;margin-bottom:2px;'>" + report.First().TestName + "</h4>");
+                        }).ToList();
+
                         if (ObsCount == 1)
                         {
+
                             foreach (var obj1 in ObsDetail)
                             {
                                 b.Append("<tr>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.ObservationName + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.reading + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.result_unit + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.RefRange + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.method_name + "</td>");
+                                b.Append("<td style='width:35%;text-align:left;padding-left:4px;'>" + obj1.ObservationName + ", <span style='font-size:10px'>" + dr.samp_type + "</span>" + "</td>");
+                                if (obj1.ab_flag == "L" || obj1.ab_flag == "H")
+                                    b.Append("<td style='width:18%;text-align:left;padding-left:4px;'><b>" + obj1.reading + "</b></td>");
+                                else
+                                    b.Append("<td style='width:18%;text-align:left;padding-left:4px;'>" + obj1.reading + "</td>");
+
+
+                                b.Append("<td style='width:2%;text-align:left;padding-left:4px;font-size:11px;margin-right:5px'>" + obj1.ab_flag + "</td>");
+                                b.Append("<td style='width:10%;text-align:left;padding-left:4px;font-size:11px'>" + obj1.result_unit + "</td>");
+                                b.Append("<td style='width:25%;text-align:left;padding-left:4px;font-size:11px'>" + obj1.RefRange + "</td>");
+                                b.Append("<td style='width:10%;text-align:left;padding-left:4px;'>" + obj1.method_name + "</td>");
                                 b.Append("</tr>");
+                                if (!string.IsNullOrEmpty(obj1.test_comment))
+                                {
+                                    b.Append("<tr>");
+                                    b.Append("<td colspan='6'>" + obj1.test_comment + "</td>");
+                                    b.Append("</tr>");
+                                }
+
+                                if (!string.IsNullOrEmpty(dr.Interpretation))
+                                {
+                                    b.Append("<tr>");
+                                    b.Append("<td colspan='6'><b>Test Interpretation : </b></td>");
+                                    b.Append("</tr>");
+                                    b.Append("<tr>");
+                                    b.Append("<td colspan='6'>" + dr.Interpretation + "</td>");
+                                    b.Append("</tr>");
+                                }
                             }
                         }
                         else
                         {
+                            b.Append("<tr>");
+                            b.Append("<td colspan='6' style='padding-left:10px;line-height:10px'></td>");
+                            b.Append("</tr>");
+                            b.Append("<tr>");
+                            b.Append("<td colspan='6' style='background:#ddd;text-align:left;padding-left:4px;'>" + dr.TestName + ", <span style='font-size:10px'>" + dr.samp_type + "</span>" + "</td>");
+                            b.Append("</tr>");
+
                             foreach (var obj1 in ObsDetail)
                             {
+
                                 if (temp != obj1.HeaderName)
                                 {
                                     b.Append("<tr>");
-                                    b.Append("<td colspan='5' style='font-size:14px;text-decoration:underline;padding-left:4px;'><b>" + obj1.HeaderName + "</b></td>");
+                                    b.Append("<td colspan='6' style='font-size:14px;text-decoration:underline;padding-left:4px;'><b>" + obj1.HeaderName + "</b></td>");
                                     b.Append("</tr>");
                                     temp = obj1.HeaderName;
                                 }
+
                                 b.Append("<tr>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.ObservationName + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.reading + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.result_unit + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.RefRange + "</td>");
-                                b.Append("<td style='text-align:left;padding-left:4px;'>" + obj1.method_name + "</td>");
+                                b.Append("<td style='width:35%;text-align:left;padding-left:4px;'>" + obj1.ObservationName + "</td>");
+                                if (obj1.ab_flag == "L" || obj1.ab_flag == "H")
+                                    b.Append("<td style='width:18%;text-align:left;padding-left:4px;'><b>" + obj1.reading + "</b></td>");
+                                else
+                                    b.Append("<td style='width:18%;text-align:left;padding-left:4px;'>" + obj1.reading + "</td>");
+
+
+                                b.Append("<td style='width:2%;text-align:left;padding-left:4px;font-size:11px;margin-right:5px'>" + obj1.ab_flag + "</td>");
+                                b.Append("<td style='width:10%;text-align:left;padding-left:4px;font-size:11px'>" + obj1.result_unit + "</td>");
+                                b.Append("<td style='width:25%;text-align:left;padding-left:4px;font-size:11px'>" + obj1.RefRange + "</td>");
+                                b.Append("<td style='width:10%;text-align:left;padding-left:4px;'>" + obj1.method_name + "</td>");
+                                b.Append("</tr>");
+                                if (obj1.test_comment != null || obj1.test_comment != "")
+                                {
+                                    b.Append("<tr>");
+                                    b.Append("<td colspan='6'>" + obj1.test_comment + "</td>");
+                                    b.Append("</tr>");
+                                }
+
+                            }
+                            if (ObsDetail.Count > 1)
+                            {
+                                if (dr.Interpretation != null || dr.Interpretation != "")
+                                {
+                                    b.Append("<tr>");
+                                    b.Append("<td colspan='6'>" + dr.Interpretation + "</td>");
+                                    b.Append("</tr>");
+                                }
+
+                                b.Append("<tr>");
+                                b.Append("<td colspan='6'><hr/></td>");
                                 b.Append("</tr>");
                             }
+
+                        }
+                        if (dr.r_type == "Text")
+                        {
+                            b.Append("<tr>");
+                            b.Append("<td colspan='6' style='text-align:left;padding-left:4px;'>" + dr.TestName + "</td>");
+                            b.Append("</tr>");
+
+                            b.Append("<tr>");
+                            b.Append("<td colspan='6' style='text-align:left;padding-left:4px;'>" + dr.report_content + "</td>");
+                            b.Append("</tr>");
                         }
                     }
+                    b.Append("</table>");
                 }
-                b.Append("</table>");
-                if (report.First().r_type == "Text")
-                {
-                    b.Append(report.First().report_content);
-                }
-            }
-            f.Append("<div style='width:100%;float:left;margin-top:5px;zoom:1.5'>");
-            f.Append("<div style='width:50%;float:right;margin-top:85px;text-align:center'>");
-            f.Append("<hr/>Authorized Signature");
-            f.Append("</div>");
-            f.Append("</div>");
-            f.Append("<div style='width:100%;float:left'><br/>");
-            f.Append("<p><hr style='margin-top:-14px;margin-bottom:-14px;border:1px solid #000'></p>");
-            var Barcode = BarcodeGenerator.GenerateBarCode("123213", 40, 70);
-            f.Append("<img src='" + Barcode + "' style='width:100px;margin-top:5px;' />");
-            f.Append("<p><hr style='margin-top:-14px;margin-bottom:-14px;border:1px solid #000'></p>");
-            f.Append("</div>");
 
-            pdfConverter.Header_Enabled = false;
+                // if (deptName != report.First().SubCatName)
+                // {
+                //b.Append("<div style='width:100%;float:left;margin-top:5px;position:absolute;bottom:10px;right:10px'>");
+                //b.Append("<div style='width:50%;float:right;margin-top:75px;text-align:center'>");
+                //b.Append("<hr/>Authorized Signature");
+                //b.Append("</div>");
+                //b.Append("</div>");
+                //  deptName = report.First().SubCatName;
+                // }
+            }
+            f.Append("<div style='width:100%;float:right;text-align:center;margin-bottom:5px'>");
+            f.Append("<table style='width:1200px;font-size:22px;font-family:calibri;text-align:center; border-collapse: collapse;border: 1px solid black;'>");
+            f.Append("<tr>");
+            f.Append("<td style='width:400px;'>-</td>");
+            f.Append("<td style='width:400px;'>-</td>");
+            f.Append("<td style='width:400px;'>");
+            f.Append("<img src='http://exprohelp.com/HospDoc//Profile/Signature/DR00033_Sign.jpg' style='height:80px'><hr>");
+            f.Append("Dr. Manmeet Singh<br>MBBS, MD (Pathalogy)");
+            f.Append("</td>");
+            f.Append("</tr>");
+            f.Append("</table>");
+
+
+            pdfConverter.Header_Enabled = true;
             pdfConverter.Footer_Enabled = true;
-            pdfConverter.Footer_Hight = 135;
-            pdfConverter.Header_Hight = 70;
+            pdfConverter.Footer_Hight = 110;
+            pdfConverter.Header_Hight = 150;
             pdfConverter.PageMarginLeft = 10;
             pdfConverter.PageMarginRight = 10;
-            pdfConverter.PageMarginBottom = 10;
-            pdfConverter.PageMarginTop = 10;
+            pdfConverter.PageMarginBottom = 5;
             pdfConverter.PageMarginTop = 10;
             pdfConverter.PageName = "A4";
             pdfConverter.PageOrientation = "Portrait";
             return pdfConverter.ConvertToPdf(h.ToString(), b.ToString(), f.ToString(), "Print-Invoice.pdf");
+        }
+        public FileResult PrintLabReport(string visitNo)
+        {
+            GenReport rep = new GenReport();
+            return rep.PrintLabReport("OW-2324-00000088");
         }
     }
 }

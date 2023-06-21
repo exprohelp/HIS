@@ -64,6 +64,10 @@ namespace MediSoftTech_HIS.Areas.LinenLaundry.Controllers
         {
             return View();
         }
+        public ActionResult LLDamageTransfer()
+        {
+            return View();
+        }
         public ActionResult LLDistribution()
 		{
 			//var encodedString = "MTIzNA==";

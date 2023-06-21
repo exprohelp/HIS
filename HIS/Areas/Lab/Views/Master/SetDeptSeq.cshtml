@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "SetDeptSeq";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/Lab/JsModule/Master/SetDeptSeq.js"></script>
+<style>
+    .info-title {
+        margin: 0;
+        font-size: 13px;
+        background: #2478a9;
+        width: 100%;
+        padding: 2px 6px;
+        color: #fff;
+    }
+
+    .panel {
+        margin-bottom: 2px !important;
+    }
+
+    .panel-heading {
+        border: none;
+        border-radius: 0;
+        padding: 1px 5px;
+        background-color: #ffe8bf !important;
+        color: #4e4b4b !important;
+    }
+
+    .scroll {
+        height: 82vh;
+        overflow: auto;
+        border: 1px solid #2478a9;
+    }
+
+    .panel-body {
+        padding: 2px 0;
+        margin-top: 1px;
+    }
+
+    .form-group {
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        height: 20px;
+        padding: 2px !important
+    }
+
+    h4, .h4, h5, .h5, h6, .h6 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        font-size: 15px;
+    }
+
+    .modal-header {
+        min-height: 16.42857143px;
+        padding: 2px 12px;
+        border-bottom: 1px solid #dfe8f1;
+        background: #e3e3e3;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 20px !important;
+        padding-left: 0px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 16px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        top: 40%;
+    }
+</style>
+<div id="page-content">
+    <div class="col-md-7">
+        <div class="row">
+            <div class="panel panel-primary" style="margin:0 2px">
+                <div class="panel-heading">
+                    <h4>Set Department and Test Sequence</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-5" style="padding:2px">
+                        <label><input type="radio" checked onchange="$('#ddlSubCategory').prop('disabled',false)" name="group" value="investigation" />&nbsp;Investigation</label>
+                        <label><input type="radio" onchange="$('#ddlSubCategory').prop('disabled', true);$('#tblInvestigation tbody').empty();" name="group" value="department" />&nbsp;Department</label>
+                    </div>
+                    <div class="col-sm-5" style="padding:2px">
+                        <select id="ddlSubCategory" class="form-control border-imp"></select>
+                    </div>
+                    <div class="col-sm-2" style="padding:2px">
+                        <button id="btnGet" type="submit" class="btn btn-xs btn-success"><i class="fa fa-search">&nbsp;</i>Get</button>
+                        <button id="btnSet" type="submit" class="btn btn-xs btn-warning" onclick="SetSeqOfInvestigation()"><i class="fa fa-sign-in">&nbsp;</i>Set</button>
+                    </div>
+
+                    @*<input type="text" id="txtSearchInvestigation" class="form-control" autocomplete="off" placeholder="Search Test" style="border:1px solid #86b3de" />*@
+                    <div class="col-md-12 form-group" style="padding:0">
+                        <div class="table-responsive scroll">
+                            <table class="table table-bordered" id="tblInvestigation">
+                                <thead>
+                                    <tr>
+                                        <th style="width:15%">Code</th>
+                                        <th style="width:10%">Seq No</th>
+                                        <th>Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

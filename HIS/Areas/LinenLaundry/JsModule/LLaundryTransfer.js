@@ -67,10 +67,7 @@ function LinenStocks() {
 				tbody += "<input type='text' id='txtInStock' class='form-control bc' autocomplete='off' style='width:13%' disabled value='" + val.InStock + "'/>";
 
 				tbody += "<button class='bn btn-success' style='width:15%;margin-left: 3px;'>Trf-Qty</button>";
-				tbody += "<input type='text' id='txtTrfQty' class='form-control bc' autocomplete='off' style='width:13%;border-color: #00a65a;' placeholder='Trf Qty'/>";
-
-				tbody += "<button class='bn btn-success' style='width:24%;margin-left: 5px;'>Damage-Qty</button>";
-				tbody += "<input type='text' class='form-control bc' style='width:13%;border-color: #00a65a;' autocomplete='off' value='0' id='txtDamageQty' placeholder='Damage Qty'/>";
+				tbody += "<input type='text' id='txtTrfQty' class='form-control bc' autocomplete='off' style='width:13%;border-color: #00a65a;' placeholder='Trf Qty'/>";				
 
 				tbody += "<input type='text' class='form-control bc' style='width:30%;border-color: #00a65a;margin-left: 3px;' autocomplete='off' id='txtRemarks' placeholder='Remark'/>";
 
@@ -101,23 +98,20 @@ function Dispatch(elem) {
 	var url = config.baseUrl + "/api/LinenLaundry/LL_TransferStock";
 	var objBO = {};
 	var stqty = $(elem).closest('tr').find('td:eq(1)').find('#txtInStock').val();
-	var qty = $(elem).closest('tr').find('td:eq(1)').find('#txtTrfQty').val();
-	var damage_qty = $(elem).closest('tr').find('td:eq(1)').find('#txtDamageQty').val();
-	var trf_qty = eval(qty) + eval(damage_qty);
+	var qty = $(elem).closest('tr').find('td:eq(1)').find('#txtTrfQty').val();	
 	if ($('#ddlCartList option:selected').text() == "Select") {
 		alert('Transfer from Cart not selected');
 		return;
 	}
-	if (eval(trf_qty) > eval(stqty)) {
-		$(elem).closest('tr').find('td:eq(1)').find('#txtTrfQty').val('');
-		$(elem).closest('tr').find('td:eq(1)').find('#txtDamageQty').val(0);
-		alert('Total of Transfer Quantity and Damage Qty should not be greater than stock quantity');
+    if (eval(qty) > eval(stqty)) {
+		$(elem).closest('tr').find('td:eq(1)').find('#txtTrfQty').val('');		
+		alert('Transfer Quantity should not be greater than stock quantity');
 		return;
 	}
 	objBO.lot_no = $('#txtLotNo').val();
 	objBO.ItemId = $(elem).closest('tr').find('td:eq(0)').find('input:text').data('itemid');
 	objBO.qty = qty;
-	objBO.damage_qty = damage_qty;
+	objBO.damage_qty = 0;
 	objBO.trf_to = 'Washing';
 	objBO.trf_remark = $(elem).closest('tr').find('td:eq(1)').find('#txtRemarks').val();
 	objBO.trf_from = $('#ddlCartList option:selected').val();
@@ -134,8 +128,7 @@ function Dispatch(elem) {
 		success: function (data) {		
 			if (data.includes("Success")) {
 				var lotNo = data.split('|')[1];			
-				$(elem).closest('tr').find('td:eq(1)').find('#txtTrfQty').val('');
-				$(elem).closest('tr').find('td:eq(1)').find('#txtDamageQty').val(0);
+				$(elem).closest('tr').find('td:eq(1)').find('#txtTrfQty').val('');				
                 GetItemsByCartId();
        			StoreStocks(objBO.ItemId, elem);
 			}
@@ -170,8 +163,7 @@ function GetItemsByCartId() {
 					htmldata += '<tr>';
 					//htmldata += '<td>' + val.item_id + '</td>';
 					htmldata += '<td>' + val.item_name + '</td>';
-					htmldata += '<td class="text-right">' + val.qty + '</td>';
-					htmldata += '<td class="text-right">' + val.damage_qty + '</td>';
+					htmldata += '<td class="text-right">' + val.qty + '</td>';				
 					htmldata += '<td><button class="btn-danger bn" onclick=selectRow(this);DispatchDelete(' + val.Rec_Id + ')><i class="fa fa-trash"></i></button></td>';
 					$('#txtLotNo').val(val.lot_no);
 				});

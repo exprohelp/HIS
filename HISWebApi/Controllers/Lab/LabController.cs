@@ -290,5 +290,53 @@ namespace HISWebApi.Controllers
         }
 
         #endregion Sample
+        [HttpPost]
+        [Route("UploadLabReport")]
+        public async Task<HttpResponseMessage> UploadLabReport()
+        {
+            HttpResponseMessage response = new HttpResponseMessage();
+            SubmitStatus ss = new SubmitStatus();
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                ss.Status = 0;
+                ss.Message = "This is not multipart content";
+                response = Request.CreateResponse(HttpStatusCode.UnsupportedMediaType, "This is not multipart content");
+            }
+            try
+            {
+                string outFileName = string.Empty;
+                string vertual_path = string.Empty;
+                byte[] fileBytes = null;
+                var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
+                var json = await filesReadToProvider.Contents[0].ReadAsStringAsync();               
+                LabDrSignature obj = JsonConvert.DeserializeObject<LabDrSignature>(json);
+                //Json String of object  ipUploadDocument to be send at first or 0 index parameter  
+                Regex regex = new Regex(@"^[\w/\:.-]+;base64,");
+                if (obj.photo_path == "Y")
+                {
+                    string base64File = regex.Replace(obj.Base64String, string.Empty);
+                    fileBytes = Convert.FromBase64String(base64File);
+                }
+                obj.signvirtualpath = "/Lab/Report/" + System.DateTime.Now.Year+"/"+ obj.signid + obj.doctorname;
+                obj.signphysicalpath = obj.doctorname;              
+                ss.Message = labdrsign.DoctorSignatireInsertUpdate(obj);
+                if (ss.Message.Contains("Success"))
+                {
+                    if (obj.photo_path == "Y" && fileBytes != null)
+                    {
+                        obj.ImageName = obj.signid + obj.doctorname;
+                        string UploadMsg = UploadClass.UploadLabReport(out vertual_path, out outFileName, fileBytes, obj.ImageName);
+                    }
+                }
+                response = Request.CreateResponse(HttpStatusCode.OK, ss);
+            }
+            catch (Exception ex)
+            {
+                ss.Status = 0;
+                ss.Message = ex.Message;
+                response = Request.CreateResponse(HttpStatusCode.OK, ss);
+            }
+            return response;
+        }
     }
 }

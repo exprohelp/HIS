@@ -158,13 +158,14 @@
                         <button style="width:14%" type="button" class="btn btn-xs btn-warning" data-toggle="modal" data-target="#myModal">Create Observation</button>
                         <button style="width:16%" type="button" class="btn btn-xs btn-info" onclick="ViewTestInterPretation()">Add Test Interpretation</button>
                         <button style="width:14%;" type="button" class="btn btn-xs btn-danger" onclick="ViewTestComment()">Add Test Comment</button>
+                        <button style="width:8%;" type="button" class="btn btn-xs btn-primary" onclick="CheckedMark()"><i class="fa fa-check-circle">&nbsp;</i>Checked</button>
                     </div>
                     <div class="table-responsive" style="height:200px;overflow-y:auto;display:inline-block">
                         <table class="table table-bordered" id="tblObservationDetails">
                             <thead>
                                 <tr>
                                     <th style="width:2%">Edit</th>
-                                    <th style="width:2%">S.No.</th>
+                                    <th style="width:2%"><button onclick="SetSeqOfObservation()" style="height: 16px;line-height: 0;" class="btn btn-danger btn-xs">Set SN</button></th>
                                     <th style="width:30%">Observation Name</th>
                                     <th style="width:3%">Bold</th>
                                     <th style="width:3%">Italic</th>
@@ -200,7 +201,7 @@
                         <input id="chkDelta" type="checkbox" />
                     </div>
 
-                    <div class="form-group">                        
+                    <div class="form-group">
                         <select id="ddlValueType" class="form-control">
                             <option value="0">Select Value Type</option>
                             <option value="Numeric" selected="selected">Numeric</option>
@@ -499,7 +500,7 @@
                     </div>
                     <input type="submit" id="btnObservation" class="btn btn-success btn-xs pull-right" value="Save" onclick="AddObservation();" />
                 </div>
-            </div>          
+            </div>
         </div>
 
     </div>

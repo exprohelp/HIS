@@ -264,7 +264,11 @@ function GetInvestigations() {
             if (Object.keys(data.ResultSet).length > 0) {
                 if (Object.keys(data.ResultSet.Table).length > 0) {
                     $.each(data.ResultSet.Table, function (k, v) {
-                        htmldata += '<tr>';
+                        if (v.tmp_chk == 'Y')
+                            htmldata += '<tr class="bg-success">';
+                        else
+                            htmldata += '<tr>';
+
                         htmldata += '<td><a style="height: 15px;line-height: 12px;" class="btn btn-warning btn-xs" href="javascript:void(0)" id="btnView' + k + '" data-testcode="' + v.testcode + '" onclick="selectRow(this);ViewDetails(this)"><i class="fa fa-sign-in"></i></a>';
                         htmldata += '<td>' + v.TestName + '</td>';
                         htmldata += '</tr>';
@@ -517,9 +521,8 @@ function GetObservationDetails(testCode) {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-
             var htmldata = "";
-            var temp = "-";
+            var temp = null;
             if (Object.keys(data.ResultSet).length > 0) {
                 if (Object.keys(data.ResultSet.Table).length > 0) {
                     $.each(data.ResultSet.Table, function (k, v) {
@@ -529,9 +532,9 @@ function GetObservationDetails(testCode) {
                             htmldata += '</tr>';
                             temp = v.HeaderName;
                         }
-                        htmldata += '<tr>';
+                        htmldata += '<tr data-autoid=' + v.AutoId + '>';
                         htmldata += '<td><a href = "javascript:void(0)" id = "btnDelete' + k + '" data-testcode="' + v.testcode + '" data-observationid="' + v.ObservationId + '"  onclick = "selectRow(this);EditObservationDetails(this)"><i class="fa fa-edit fa-lg text-blue"></i></a ></td>';
-                        htmldata += '<td>' + parseInt(k + 1) + '</td>';
+                        htmldata += '<td>' + v.seqNo + '</td>';
                         htmldata += '<td>' + v.ObservationName + '</td>';
 
                         htmldata += (v.IsBold == 0) ? "<td><input type='checkbox' style='margin:0 3px 0;' onchange=StyleFlag(" + v.AutoId + ",'IsBold') />" : "<td><input onchange=StyleFlag(" + v.AutoId + ",'IsBold') type='checkbox' checked style='margin:0 3px 0;' /></td>";
@@ -844,7 +847,7 @@ function ViewInterpretationModal(element) {
     $('#hidObservationidIntpretation').val(observationid);
     GetInterpretation(autoid);
 }
-function GetInterpretation(autoid) {   
+function GetInterpretation(autoid) {
     var url = config.baseUrl + "/api/Lab/mObservationQueries";
     var objBO = {};
     objBO.Logic = "GetInterpretation";
@@ -1125,6 +1128,75 @@ function AddUpdateTestInterpretation() {
     });
 
 }
+function CheckedMark() {
+    if (confirm('Are you sure?')) {
+        var objBO = {};
+        var url = config.baseUrl + "/api/Lab/mInsertUpdateTestInterpretation";
+        if (typeof _testCode == 'undefined' || _testCode == "") {
+            alert('Please select test from left side');
+            return false;
+        }
+        objBO.investcode = _testCode;
+        objBO.text = '-';
+        objBO.login_id = Active.userId;
+        objBO.Logic = "CheckMark";
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: JSON.stringify(objBO),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data == 'Success') {
+                    GetInvestigations();
+                    alert('Marked Successfully');
+                }
+                else {
+                    alert(data);
+                }
+            },
+            error: function (response) {
+                alert('Server Error...!');
+            }
+        });
+    }
+}
+function SetSeqOfObservation() {
+    if (confirm('Are you sure?')) {
+        var objBO = {};
+        var SeqInfo = [];
+        var url = config.baseUrl + "/api/Lab/mInsertUpdateTestInterpretation";
+        $("#tblObservationDetails tbody tr[data-autoid]").each(function () {
+            SeqInfo.push({
+                'AutoId': $(this).data('autoid'),
+                'SeqNo': $(this).find('td:eq(1)').text()
+            })
+        });
+        objBO.investcode = '-';
+        objBO.text = JSON.stringify(SeqInfo);
+        objBO.login_id = Active.userId;
+        objBO.Logic = "SetSeqOfObservation";        
+        $.ajax({
+            method: "POST",
+            url: url,
+            data: JSON.stringify(objBO),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                if (data.includes('Success')) {
+                    alert('Set Successfully');
+                    GetObservationDetails(_testCode)
+                }
+                else {
+                    alert(data);
+                }
+            },
+            error: function (response) {
+                alert('Server Error...!');
+            }
+        });
+    }
+}
 function AddUpdateTestComment() {
     var objBO = {};
     var url = config.baseUrl + "/api/Lab/mInsertUpdateTestInterpretation";
@@ -1229,9 +1301,6 @@ function DeleteTestComment() {
         }
     });
 }
-
-
-
 function ViewDefaultValues() {
     $("#myDefaultValueModal").modal('show');
     var observationid = $("#tblObservationDetails tbody").find('tr.select-row').find('td:eq(0)').find('a').data('observationid');

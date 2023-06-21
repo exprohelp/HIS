@@ -131,6 +131,7 @@ namespace HISWebApi.Repository.Lab
             dataSet dsObj = new dataSet();
             string processInfo = string.Empty;
             var VisitNo = string.Empty;
+            var dispatchLab = string.Empty;
             var SubCat = string.Empty;
             var DoctorSignId = string.Empty;
             var EntrySaveType = string.Empty;
@@ -156,6 +157,7 @@ namespace HISWebApi.Repository.Lab
                 foreach (LabTestResultEntry obj in objBO)
                 {
                     VisitNo = obj.VisitNo;
+                    dispatchLab = obj.dispatchLab;
                     SubCat = obj.SubCat;
                     DoctorSignId = obj.DoctorSignId;
                     login_id = obj.login_id;
@@ -185,6 +187,7 @@ namespace HISWebApi.Repository.Lab
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 2500;
                         cmd.Parameters.Add("@VisitNo", SqlDbType.VarChar, 20).Value = VisitNo;
+                        cmd.Parameters.Add("@dispatchLab", SqlDbType.VarChar, 20).Value = dispatchLab;
                         cmd.Parameters.Add("@SubCat", SqlDbType.VarChar, 100).Value = SubCat;
                         cmd.Parameters.AddWithValue("UDT_LabTestResultEntry", dt);
                         cmd.Parameters.Add("@LoginId", SqlDbType.VarChar, 20).Value = login_id;

@@ -395,6 +395,9 @@
     <Content Include="Areas\IPD\Views\Indent\IPD_MedicineIndent.cshtml" />
     <Content Include="Areas\IPD\Views\Indent\PharSalesRegister.cshtml" />
     <Content Include="Areas\IPD\Views\web.config" />
+    <Content Include="Areas\Lab\JsModule\LabDoctorSignature.js" />
+    <Content Include="Areas\Lab\JsModule\Labobservation.js" />
+    <Content Include="Areas\Lab\JsModule\LabTemplate.js" />
     <Content Include="Areas\Lab\JsModule\Master\LabDoctorSignature - Copy.js" />
     <Content Include="Areas\Lab\JsModule\Master\LabOutSource.js" />
     <Content Include="Areas\Lab\JsModule\LabReceive.js" />
@@ -402,6 +405,8 @@
     <Content Include="Areas\Lab\JsModule\Master\LabTransportTime.js" />
     <Content Include="Areas\Lab\JsModule\Master\OutSourceTestLinking.js" />
     <Content Include="Areas\Lab\JsModule\Master\OutSourceTestLinkingTo.js" />
+    <Content Include="Areas\Lab\JsModule\Master\SetDeptSeq.js" />
+    <Content Include="Areas\Lab\JsModule\PackageMaster.js" />
     <Content Include="Areas\Lab\JsModule\PatientInOut.js" />
     <Content Include="Areas\Lab\JsModule\ReportEditing.js" />
     <Content Include="Areas\Lab\JsModule\SampleCollection.js" />
@@ -409,9 +414,11 @@
     <Content Include="Areas\Lab\JsModule\SampleDispatchNew.js" />
     <Content Include="Areas\Lab\JsModule\SampleDistribution.js" />
     <Content Include="Areas\Lab\JsModule\SampleLogisticReceive.js" />
+    <Content Include="Areas\Lab\JsModule\Test.js" />
     <Content Include="Areas\Lab\JsModule\UnApproveReport.js" />
     <Content Include="Areas\Lab\JsModule\_SampleTracking.js" />
     <Content Include="Areas\Lab\JsModule\Master\TestProcessingTime.js" />
+    <Content Include="Areas\LinenLaundry\JsModule\LLDamageTransfer.js" />
     <Content Include="Areas\LinenLaundry\JsModule\LLDressIssueToStaff.js" />
     <Content Include="Areas\LinenLaundry\JsModule\LLIndentAudit.js" />
     <Content Include="Areas\Masters\JsModule\AmbulanceMaster.js" />
@@ -1813,6 +1820,7 @@
     <Compile Include="Areas\Lab\Controllers\PrintController.cs" />
     <Compile Include="Areas\Lab\Controllers\SampleController.cs" />
     <Compile Include="Areas\Lab\LabAreaRegistration.cs" />
+    <Compile Include="Areas\Lab\Repository\GenReport.cs" />
     <Compile Include="Areas\LinenLaundry\Controllers\LinenMovementController.cs" />
     <Compile Include="Areas\LinenLaundry\Controllers\MasterController.cs" />
     <Compile Include="Areas\LinenLaundry\Controllers\PrintController.cs" />
@@ -2145,6 +2153,8 @@
     <Content Include="Areas\MIS\Views\Finance\DailyCollectionReport.cshtml" />
     <Content Include="Areas\MIS\Views\Finance\UserwiseCollectionReport.cshtml" />
     <Content Include="Areas\OPD\Views\Appointment\DoctorDisplayView.cshtml" />
+    <Content Include="Areas\LinenLaundry\Views\LinenMovement\LLDamageTransfer.cshtml" />
+    <Content Include="Areas\Lab\Views\Master\SetDeptSeq.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

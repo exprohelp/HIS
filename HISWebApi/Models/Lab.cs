@@ -36,6 +36,7 @@ namespace HISWebApi.Models
     }
     public class LabTestResultEntry : ipLabMaster {
         public string VisitNo { get; set; }
+        public string dispatchLab { get; set; }
         public string SubCat { get; set; }
         public int AutoTestId { get; set; }
         public string DoctorSignId { get; set; }

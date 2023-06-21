@@ -48,7 +48,10 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
         public ActionResult OutSourceTestLinkingTo()
         {
             return View();
-        }     
-        
+        }        
+        public ActionResult SetDeptSeq()
+        {
+            return View();
+        }
     }
 }

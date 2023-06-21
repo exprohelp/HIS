@@ -11,6 +11,23 @@ namespace HISWebApi.Repository.Utilities
 {
 	public class UploadClass
 	{
+        public static string UploadLabReport(out string vertual_path, out string outFileName, byte[] imageByte, string ImageName)
+        {
+            outFileName = "Error";
+            string result = "Not Saved";
+            vertual_path = "/Lab/Report/" + System.DateTime.Now.Year +"/"+ ImageName;
+            string directory = "D:\\Hospital\\Lab\\Report\\"+System.DateTime.Now.Year+"\\";
+            try
+            {
+                if (!Directory.Exists(directory))
+                    Directory.CreateDirectory(directory);
+                outFileName = directory + ImageName;
+                File.WriteAllBytes(outFileName, imageByte);
+                result = "Success";
+            }
+            catch (Exception ex) { result = ex.Message; }
+            return result;
+        }
         public static string UploadDoctorSign(out string vertual_path, out string outFileName, byte[] imageByte, string ImageName)
         {            
             outFileName = "Error";

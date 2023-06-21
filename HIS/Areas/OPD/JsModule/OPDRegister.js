@@ -56,7 +56,6 @@
 			RescheduleBooking();
 		}
 	});
-
 });
 
 function DoctorTimeSlots(date, doctor, doctorName, appTime) {
