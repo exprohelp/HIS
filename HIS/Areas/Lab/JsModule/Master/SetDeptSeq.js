@@ -39,7 +39,7 @@ function GetSubCat() {
 }
 function GetTestBySubCat() {
     $("#tblInvestigation tbody").empty();
-    if ($("#ddlSubCategory option:selected").val() == 'Select') {
+    if ($("#ddlSubCategory option:selected").val() == 'Select' && $("input[type=radio]:checked").val() =='investigation') {
         alert('Please Select Sub Category.')
         return
     }
