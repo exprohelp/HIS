@@ -48,6 +48,6 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
         public ActionResult UnApproveReport()
         {
             return View();
-        }
+        }       
     }
 }

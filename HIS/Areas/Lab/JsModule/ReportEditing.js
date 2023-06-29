@@ -779,6 +779,10 @@ function UploadLabReport() {
     UploadDocumentInfo.send(data);
 }
 function Print() {
-    var url = config.rootUrl + "/lab/Print/LabReport?visitNo=" + _VisitNo;
+    var url = config.rootUrl + "/lab/Print/PrintLabReport?visitNo=" + _VisitNo + "&SubCat=" + _SubCat;
+    window.open(url, '_blank');
+}
+function PrintAll() {
+    var url = config.rootUrl + "/lab/Print/PrintLabReport?visitNo=" + _VisitNo + "&SubCat=ALL";
     window.open(url, '_blank');
 }

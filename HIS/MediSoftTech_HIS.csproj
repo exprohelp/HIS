@@ -1477,6 +1477,7 @@
     <Content Include="JsModule\FileSaver.min.js" />
     <Content Include="JsModule\global.js" />
     <Content Include="JsModule\mdb.min.js" />
+    <Content Include="JsModule\_PatientDeltaReport.js" />
     <Content Include="JsModule\_PatientMasterInfo.js" />
     <Content Include="loading.html" />
     <Content Include="packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll" />
@@ -2155,6 +2156,7 @@
     <Content Include="Areas\OPD\Views\Appointment\DoctorDisplayView.cshtml" />
     <Content Include="Areas\LinenLaundry\Views\LinenMovement\LLDamageTransfer.cshtml" />
     <Content Include="Areas\Lab\Views\Master\SetDeptSeq.cshtml" />
+    <Content Include="Areas\IPD\Views\DoctorView\_PatientReportAnalysis.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -2330,6 +2332,7 @@
     </None>
     <Content Include="Views\Shared\UploadDocumentInfo.cshtml" />
     <Content Include="Views\Shared\speedTest.cshtml" />
+    <Content Include="Views\Shared\_PatientDeltaReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -19,7 +19,7 @@ function loadBody(page) {
         type: 'POST',
         url: 'IPDBody',
         data: { page: '../DoctorView/' + page },
-        success: function (data) {
+        success: function (data) {            
             $('#dash-dynamic').empty();
             $('#dash-dynamic').html(data);
         }

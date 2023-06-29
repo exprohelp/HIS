@@ -426,10 +426,10 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
             pdfConverter.PageOrientation = "Portrait";
             return pdfConverter.ConvertToPdf(h.ToString(), b.ToString(), f.ToString(), "Print-Invoice.pdf");
         }
-        public FileResult PrintLabReport(string visitNo)
+        public FileResult PrintLabReport(string visitNo, string SubCat)
         {
             GenReport rep = new GenReport();
-            return rep.PrintLabReport("OW-2324-00000088");
+            return rep.PrintLabReport(visitNo, SubCat);
         }
     }
 }

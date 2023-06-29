@@ -1,0 +1,87 @@
+﻿<style>
+    .panelControl {
+        background: #f5f5f5;
+        line-height: 0;
+        padding: 3px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        margin: 4px 0px;
+    }
+    #deltaReport {
+        height: 70vh;
+        overflow: auto;
+        border: 1px solid #edd0af;
+    }
+
+    .labelGroup {
+        margin-top: 5px;
+        width: 100%;
+        background: #fbeedf;
+        padding: 2px 5px;
+        border-radius: 2px;
+    }
+
+    .reportRound {
+        display: inline-block;
+        margin: 2px;
+        width: 60px;
+        height: 60px;
+        background: #fff;
+        border-radius: 60px;
+        text-align: center;
+        padding: 12px 0px;
+        font-size: 10.5px;
+        font-weight: 700;
+    }
+
+    .highReading {
+        border: 4px double #c75151;
+    }
+
+    .lowReading {
+        border: 4px double #c79851;
+    }
+
+    .normalReading {
+        border: 4px double #619957;
+    }
+
+    .reportRound hr {
+        margin: 0;
+    }
+
+    canvas {
+        width: 100% !important;
+        height: 140px !important;
+    }
+
+    .flex {
+        margin: 0;
+        display: flex;
+        align-items: baseline;
+    }
+</style>
+<script src="~/JsModule/_PatientDeltaReport.js"></script>
+<script src="~/JsModule/mdb.min.js?his-version-1.0"></script>
+
+<div class="row panelControl">
+    <div class="col-md-6">
+        <select id="ddlSubCat" class="form-control"></select>
+    </div>
+    <div class="col-md-6">
+        <label class="flex">
+            Last &nbsp;&nbsp;<input type="text" id="txtReading" value="7" style="margin:0 4px" class="form-control" />&nbsp;Reading
+            <button style="width:65%" onclick="PatientDeltaReport()" class="btn btn-warning"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+        </label>
+    </div>
+</div>
+<div class="col-md-12" id="deltaReport">
+    @*<label class="labelGroup">Immulogy Report</label>
+    <div class="reportRound lowReading">95.46<hr />20/06</div>
+    <div class="reportRound highReading">95.46<hr />20/06</div>
+    <div class="reportRound lowReading">95.46<hr />20/06</div>
+    <div class="reportRound normalReading">95.46<hr />20/06</div>
+    <div class="reportRound lowReading">95.46<hr />20/06</div>
+    <div class="reportRound highReading">95.46<hr />20/06</div>
+    <div class="reportRound highReading">95.46<hr />20/06</div>*@
+</div>
