@@ -7,6 +7,7 @@
         border-radius: 2px;
         margin: 4px 0px;
     }
+
     #deltaReport {
         height: 70vh;
         overflow: auto;
@@ -60,28 +61,69 @@
         display: flex;
         align-items: baseline;
     }
+    .select2-container .select2-selection--single {
+        position: relative;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        height: 28px;
+        user-select: none;
+        -webkit-user-select: none;
+    }  
+    #tblReportSummary th, #tblReportSummary tr:not(.group) td {
+        text-align: center;
+        padding: 1px;
+    }
+    .group {
+        background: #fbe9df;
+    }
+    #tblReportSummary th {
+        background: #d9d9d9;
+        color: #626261;
+        padding: 5px;
+    }
 </style>
 <script src="~/JsModule/_PatientDeltaReport.js"></script>
 <script src="~/JsModule/mdb.min.js?his-version-1.0"></script>
-
-<div class="row panelControl">
-    <div class="col-md-6">
-        <select id="ddlSubCat" class="form-control"></select>
+<div class="col-md-6">
+    <div class="row panelControl">
+        <div class="col-md-7">
+            <label class="flex">
+                <label style="white-space:pre">Department : </label>
+                <select id="ddlSubCat" class="form-control"></select>
+                </label>
+        </div>
+        <div class="col-md-5">
+            <label class="flex">
+                Last &nbsp;&nbsp;<input type="text" id="txtReading" value="7" style="margin:0 4px" class="form-control" />&nbsp;Reading
+                <button style="width:100%;margin-left: 5px;" onclick="PatientDeltaReport()" class="btn btn-warning"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+            </label>
+        </div>
     </div>
-    <div class="col-md-6">
-        <label class="flex">
-            Last &nbsp;&nbsp;<input type="text" id="txtReading" value="7" style="margin:0 4px" class="form-control" />&nbsp;Reading
-            <button style="width:65%" onclick="PatientDeltaReport()" class="btn btn-warning"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
-        </label>
-    </div>
+    <div id="deltaReport"></div>
 </div>
-<div class="col-md-12" id="deltaReport">
+<div class="col-md-6" id="reportSummary">
     @*<label class="labelGroup">Immulogy Report</label>
-    <div class="reportRound lowReading">95.46<hr />20/06</div>
-    <div class="reportRound highReading">95.46<hr />20/06</div>
-    <div class="reportRound lowReading">95.46<hr />20/06</div>
-    <div class="reportRound normalReading">95.46<hr />20/06</div>
-    <div class="reportRound lowReading">95.46<hr />20/06</div>
-    <div class="reportRound highReading">95.46<hr />20/06</div>
-    <div class="reportRound highReading">95.46<hr />20/06</div>*@
+        <div class="reportRound lowReading">95.46<hr />20/06</div>
+        <div class="reportRound highReading">95.46<hr />20/06</div>
+        <div class="reportRound lowReading">95.46<hr />20/06</div>
+        <div class="reportRound normalReading">95.46<hr />20/06</div>
+        <div class="reportRound lowReading">95.46<hr />20/06</div>
+        <div class="reportRound highReading">95.46<hr />20/06</div>
+        <div class="reportRound highReading">95.46<hr />20/06</div>*@
+    <div class="table-responsive vertiscrl" style="overflow:auto;height:75vh;margin:10px 0;">     
+        <table id="tblReportSummary" class="table table-condensed">
+            <thead style="background: #00a65a;color: #fff;">
+                <tr>
+                    <th>#</th>
+                    <th>Reg Date</th>
+                    <th>Reading</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Ref Range</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
 </div>

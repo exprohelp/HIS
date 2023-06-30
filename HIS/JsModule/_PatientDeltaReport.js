@@ -1,7 +1,7 @@
 ﻿var _deltaIPOPNo = "2324-000076";
 var _deltaVisitNo = "IW-2324-00000037";
 $(document).ready(function () {
-    GetSubCat();   
+    GetSubCat();
 });
 function GetSubCat() {
     $('#ddlSubCat').empty().append($('<option selected="selected"></option>').val("ALL").html("ALL")).select2();
@@ -41,6 +41,7 @@ function GetSubCat() {
 }
 function PatientDeltaReport() {
     $('#deltaReport').empty();
+    $('#tblReportSummary tbody').empty();
     var url = config.baseUrl + "/api/sample/LabReporting_Queries";
     var objBO = {};
     objBO.LabCode = Active.HospId;
@@ -62,7 +63,6 @@ function PatientDeltaReport() {
         dataType: "json",
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            console.log(data)
             if (Object.keys(data.ResultSet).length > 0) {
                 if (Object.keys(data.ResultSet.Table).length > 0) {
                     var tbody = '';
@@ -93,6 +93,28 @@ function PatientDeltaReport() {
                     });
                     tbody += "<div class='divChartTemp'><canvas id='chartDelta'></canvas></div>";
                     $('#deltaReport').append(tbody);
+
+                    var temp1 = '';
+                    var tbody1 = '';
+                    //table bind
+                    $.each(data.ResultSet.Table, function (key, val) {
+                        if (temp1 != val.ObservationId) {
+                            tbody1 += "<tr class='group'>";
+                            tbody1 += "<td colspan='6'>" + val.ObservationName + "</td>";
+                            tbody1 += "</tr>";
+                            temp1 = val.ObservationId;
+                        }
+                        count++;
+                        tbody1 += "<tr>";
+                        tbody1 += "<td>" + val.rowNo + "</td>";
+                        tbody1 += "<td>" + val.RegDate.split('T')[0] + "</td>";
+                        tbody1 += "<td>" + val.read_1 + "</td>";
+                        tbody1 += "<td>" + val.min_value + "</td>";
+                        tbody1 += "<td>" + val.max_value + "</td>";
+                        tbody1 += "<td>" + val.ref_range + "</td>";
+                        tbody1 += "</tr>";
+                    });
+                    $('#tblReportSummary tbody').append(tbody1);
                 }
             }
         },
