@@ -29,5 +29,9 @@ namespace MediSoftTech_HIS.Areas.EDP.Controllers
         {
             return View();
         }
+        public ActionResult PanelRateUpdate()
+        {
+            return View();
+        }
     }
 }

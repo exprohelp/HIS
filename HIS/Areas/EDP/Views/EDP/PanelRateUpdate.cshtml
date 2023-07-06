@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "PanelRateUpdate";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/EDP/JsModule/PanelRateUpdate.js"></script>
+
+<style>
+    .btnRate {
+        line-height: 0;
+        height: 18px;
+        margin: 0;
+        border-radius: 0;
+    }
+    .rate {
+        width: 80%;
+        height: 18px;
+        border: 1px solid #f39c12;
+        border-radius: 0;
+    }
+    .section-header {
+        background: #ffffff;
+        min-height: 570px;
+        max-height: 570px;
+        padding: 3px;
+        margin-bottom: 3px;
+        border: 1px solid #2478a9;
+    }
+
+    .title {
+        background: #2478a9;
+        color: #fff;
+        padding: 3px 63px 2px 6px;
+        top: 3px;
+        position: relative;
+    }
+
+        .title:after {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            content: '';
+            border-right: -2px solid transparent;
+            border-left: 25px solid transparent;
+            border-top: 25px solid #fff;
+        }
+
+    .category {
+        font-weight: bold;
+        background: #fafcfe;
+        display: flow-root;
+        border: 1px solid #2478a9;
+    }
+
+    .section {
+        min-height: 142px;
+        max-height: 142px;
+        overflow: auto;
+        margin-bottom: 5px;
+        border: 1px solid #2478a9;
+    }
+
+    .flex {
+        display: flex !important;
+        align-items: center;
+    }
+
+    .btn-flat {
+        padding: 2px;
+        border: none;
+    }
+
+    .scroll {
+        width: 100%;
+        background: #fff;
+        overflow: overlay;
+        max-height: 450px;
+        display: block;
+    }
+
+    .panel-body {
+        /*box-shadow: 1px 1px 10px #d2d2d2;*/
+        border-radius: 10px;
+        padding: 5px 3px 0px 3px;
+        position: relative;
+    }
+
+
+    .bn {
+        margin: 0px;
+        font-size: 10pt;
+        padding: 0px 10px;
+        border-radius: 0;
+        text-align: left;
+        height: 30px;
+    }
+
+    .select-row {
+        background: #cfcfcf;
+        color: #000 !important;
+    }
+
+    .bc {
+        border: 1px solid #00a65a;
+        border-radius: 0;
+    }
+</style>
+<div id="page-content">
+    <div class="row">
+        <div class="ml15" style="margin-left:27px;">
+            <div class="category"><span class="title" style="top:0;padding:0px 50px 0px 6px">Panel Rate Link</span></div>
+            <div class="section-header">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="pwd">Rate List:</label>
+                            <select id="ddlRateList" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label Class="col-sm-2">Category:</label>
+                            <select id="ddlCategory" class="form-control" onchange="BindSubCategory()"></select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label>Sub Category:</label>
+                        <div class="flex">
+                            <select id="ddlSubCategory" class="form-control"></select>
+                            <button style="width:9vmax;border-radius:0;height:27px" class="btn btn-warning" onclick="GetItemList()"><i class="fa fa-search">&nbsp;</i>Search</button>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="table-responsive tableFixHead" style="height:495px;overflow:auto;border: 1px solid #2478a9;">
+                            <table class="table table-bordered" id="tblItemList">
+                                <thead>
+                                    <tr>
+                                        <th style="width:1%">#</th>                                    
+                                        <th style="width:15%">Item Id</th>
+                                        <th>Item Name</th>                                       
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="padding:0">
+                        <button style="top: 15vh;position:absolute" id="btnSaveUpdate" class="btn btn-warning" onclick="GetItemRateList()"><i class="fa fa-sign-in">&nbsp;</i>Get Rate</button>
+                        <button style="top: 35vh;position:absolute;padding: 0 5px;" id="btnSaveUpdate" class="btn btn-success" onclick="RoomChargesUpdate()"><i class="fa fa-check-circle">&nbsp;</i>Update Rate</button>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive tableFixHead" style="height:495px;overflow:auto;border: 1px solid #2478a9;">
+                            <table class="table table-bordered" id="tblRateListInfo">
+                                <thead>
+                                    <tr>                                                                                                                 
+                                        <th>Rate List Name</th>                                                                       
+                                        <th style="width: 25%;">Rate</th>                                     
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

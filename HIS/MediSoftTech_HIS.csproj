@@ -331,6 +331,7 @@
     <Content Include="Areas\EDP\JsModule\ConsultationRateList.js" />
     <Content Include="Areas\EDP\JsModule\PanelItemRate.js" />
     <Content Include="Areas\EDP\JsModule\PanelRateLink.js" />
+    <Content Include="Areas\EDP\JsModule\PanelRateUpdate.js" />
     <Content Include="Areas\EDP\JsModule\RateForceToSelfPanel.js" />
     <Content Include="Areas\EDP\JsModule\RoomCharges.js" />
     <Content Include="Areas\EDP\Views\EDP\PanelRateItem.cshtml" />
@@ -2157,6 +2158,7 @@
     <Content Include="Areas\LinenLaundry\Views\LinenMovement\LLDamageTransfer.cshtml" />
     <Content Include="Areas\Lab\Views\Master\SetDeptSeq.cshtml" />
     <Content Include="Areas\IPD\Views\DoctorView\_PatientReportAnalysis.cshtml" />
+    <Content Include="Areas\EDP\Views\EDP\PanelRateUpdate.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

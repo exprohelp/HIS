@@ -6,12 +6,24 @@
 
 
 <style>
+    .bookingInfo td, .bookingInfo th {
+        border-top: none !important;
+        font-size: 13px;
+        padding-top: 7px !important;
+    }
+
+    .bookingInfo select, input {
+        border: 1px solid #c1bfbd !important;
+    }
+
     .bg1 {
         background: #ffc1c1;
     }
+
     .bg2 {
         background: #e2efff;
     }
+
     .btn-close {
         right: 5px;
         opacity: 100%;
@@ -122,8 +134,9 @@
                                     <label>To</label>
                                     <input type="date" class="form-control" id="txtTo" />
                                 </div>
-                                <div class="col-md-3 form-group">
-                                    <button class="btn btn-success bn" style="margin-top: 22px;" onclick="ConferneceSchedule();"><i class="fa fa-user">&nbsp;</i>Search</button>&nbsp;&nbsp;
+                                <div class="col-md-4 form-group">
+                                    <button class="btn btn-success bn" style="margin-top: 22px;" onclick="ConferenceSchedule();"><i class="fa fa-user">&nbsp;</i>Search</button>&nbsp;&nbsp;
+                                    <button class="btn btn-warning bn" style="margin-top: 22px;" onclick="ConferenceRoomList();$('#modalBooking').modal('show')"><i class="fa fa-sign-in">&nbsp;</i>Conference Booking</button>&nbsp;&nbsp;
                                 </div>
                                 <div class="col-md-12">
                                     <div class="scroll">
@@ -197,6 +210,60 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalBooking" tabindex="-1" role="dialog" aria-labelledby="True">
+    <div class="modal-dialog modal-md" style="width: 30%;margin-top:10%;">
+        <div class="modal-content">
+            <div class="panel-heading flex" style="background:#0076d0;padding:1px 5px;">
+                <h5 class="text-white">Conference Booking</h5>
+                <span data-dismiss="modal" class="btn-close">x</span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table bookingInfo">
+                            <tr>
+                                <th><b>Hall List</b></th>
+                                <th><b>:</b></th>
+                                <td><select class="form-control" id="ddlHallList"></select></td>
+                            </tr>
+                            <tr>
+                                <th><b>Booking Date</b></th>
+                                <th><b>:</b></th>
+                                <td><input type="date" class="form-control" id="txtBookingDate" /></td>
+                            </tr>
+                            <tr>
+                                <th><b>Booking Type</b></th>
+                                <th><b>:</b></th>
+                                <td><select class="form-control" id="ddlBookingType"><option>Normal</option><option>Certification</option></select></td>
+                            </tr>
+                            <tr>
+                                <th><b>Booking From</b></th>
+                                <th><b>:</b></th>
+                                <td><select class="form-control" id="ddlBookingFrom"></select></td>
+                            </tr>
+                            <tr>
+                                <th><b>Booking To</b></th>
+                                <th><b>:</b></th>
+                                <td><select class="form-control" id="ddlBookingTo"></select></td>
+                            </tr>
+                            <tr>
+                                <th><b>Subject</b></th>
+                                <th><b>:</b></th>
+                                <td><input type="text" class="form-control" id="txtBookingSubject" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><textarea class="form-control" placeholder="Remark" id="txtBookingRemark"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><button class="btn btn-warning pull-right" onclick="ConferenceBooking()"><i class="fa fa-sign-in">&nbsp;</i>Book</button></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
