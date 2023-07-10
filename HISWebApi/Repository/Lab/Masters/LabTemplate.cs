@@ -60,6 +60,7 @@ namespace HISWebApi.Repository.Lab.Masters
                     cmd.Parameters.Add("@testcode", SqlDbType.VarChar, 15).Value = objBO.testcode;
                     cmd.Parameters.Add("@templatename", SqlDbType.VarChar, 100).Value = objBO.templatename;
                     cmd.Parameters.Add("@templatecontent", SqlDbType.VarChar).Value = objBO.templatecontent;                    
+                    cmd.Parameters.Add("@prm1", SqlDbType.VarChar, 200).Value = objBO.prm1;
                     cmd.Parameters.Add("@login_id", SqlDbType.VarChar, 15).Value = objBO.login_id;
                     cmd.Parameters.Add("@Logic", SqlDbType.VarChar, 50).Value = objBO.Logic;
                     cmd.Parameters.Add("@result", SqlDbType.VarChar, 50).Value = "";

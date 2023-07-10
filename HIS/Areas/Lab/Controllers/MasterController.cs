@@ -53,5 +53,9 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
         {
             return View();
         }
+        public ActionResult ConsentMaster()
+        {
+            return View();
+        }
     }
 }

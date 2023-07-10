@@ -5,19 +5,21 @@
 }
 <script src="~/Areas/EDP/JsModule/PanelRateUpdate.js"></script>
 
-<style>
+<style>  
     .btnRate {
         line-height: 0;
         height: 18px;
         margin: 0;
         border-radius: 0;
     }
+
     .rate {
-        width: 80%;
+        width: 85%;
         height: 18px;
         border: 1px solid #f39c12;
         border-radius: 0;
     }
+
     .section-header {
         background: #ffffff;
         min-height: 570px;
@@ -128,7 +130,7 @@
                         <label>Sub Category:</label>
                         <div class="flex">
                             <select id="ddlSubCategory" class="form-control"></select>
-                            <button style="width:9vmax;border-radius:0;height:27px" class="btn btn-warning" onclick="GetItemList()"><i class="fa fa-search">&nbsp;</i>Search</button>                            
+                            <button style="width:9vmax;border-radius:0;height:27px" class="btn btn-warning" onclick="GetItemList()"><i class="fa fa-search">&nbsp;</i>Search</button>
                         </div>
                     </div>
                 </div>
@@ -138,9 +140,9 @@
                             <table class="table table-bordered" id="tblItemList">
                                 <thead>
                                     <tr>
-                                        <th style="width:1%">#</th>                                    
+                                        <th style="width:1%">#</th>
                                         <th style="width:15%">Item Id</th>
-                                        <th>Item Name</th>                                       
+                                        <th><input type="text" id="txtItemSearch" onkeyup="searchTable('txtItemSearch','tblItemList')" class="form-control" placeholder="Search Item Name.." style="height:19px;margin: 2px 0;width:200px" /></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -155,9 +157,9 @@
                         <div class="table-responsive tableFixHead" style="height:495px;overflow:auto;border: 1px solid #2478a9;">
                             <table class="table table-bordered" id="tblRateListInfo">
                                 <thead>
-                                    <tr>                                                                                                                 
-                                        <th>Rate List Name</th>                                                                       
-                                        <th style="width: 25%;">Rate</th>                                     
+                                    <tr>
+                                        <th>Rate List Name</th>
+                                        <th style="width: 25%;">Rate</th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -168,5 +170,5 @@
             </div>
         </div>
     </div>
-
+</div>
 

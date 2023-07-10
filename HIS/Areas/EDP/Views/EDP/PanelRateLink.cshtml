@@ -5,6 +5,10 @@
 <script src="~/Areas/EDP/JsModule/PanelRateLink.js"></script>
 
 <style>
+    .loading {
+        border-width: 2px;
+        border-image: url(/images/loading.gif) 60;
+    }
     .section-header {
         background: #ffffff;
         min-height: 570px;
@@ -87,7 +91,6 @@
         border-radius: 0;
     }
 </style>
-
 <div id="page-content">      
     <div class="row">
         <div class="ml15">
@@ -134,7 +137,9 @@
                                     <label>Rate List</label>
                                     <div class="flex">
                                         <select id="ddlBulkRatePanel" class="form-control border-imp"></select>
-                                        <button id="btnDownloadExcel" class="btn btn-warning" style="width:27%;height:27px" onclick="DownloadPanelRateList()"><i class="fa fa-download">&nbsp;</i>Download Excel</button>
+                                        <button id="btnDownloadExcel" class="btn btn-warning" style="width:30%;height:27px" onclick="DownloadPanelRateList(this)">
+                                            <i class="fa fa-download">&nbsp;</i>Download Excel
+                                        </button>                                        
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +148,7 @@
                                     <label>Select File</label>
                                     <div class="flex">
                                         <input type="file" id="ExcelImage" class="form-control" />
-                                        <button id="btnuploadExcel" class="btn btn-success" style="width:27%;height:27px" onclick="UploadPanelRateList()"><i class="fa fa-upload">&nbsp;</i>Upload Excel</button>
+                                        <button id="btnuploadExcel" class="btn btn-success" style="width:27%;height:27px" onclick="UploadPanelRateList(this)"><i class="fa fa-upload">&nbsp;</i>Upload Excel</button>                                       
                                     </div>
                                 </div>
                             </div>

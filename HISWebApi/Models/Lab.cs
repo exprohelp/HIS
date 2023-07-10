@@ -188,6 +188,7 @@ namespace HISWebApi.Models
         public string hosp_id { get; set; }        
         public string subcatid { get; set; }
         public string testcode { get; set; }
+        public string prm1 { get; set; }
         public string templatename { get; set; }
         public string templatecontent { get; set; }        
     }

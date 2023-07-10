@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {  
+﻿$(document).ready(function () {
     CloseSidebar();
     Onload();
     searchTable('txtSearch', 'tblRateLinkDetails');
@@ -16,7 +16,7 @@ function Onload() {
         contentType: "application/json;charset=utf-8",
         success: function (data) {
             if (Object.keys(data.ResultSet).length > 0) {
-                if (Object.keys(data.ResultSet.Table2).length > 0) {       
+                if (Object.keys(data.ResultSet.Table2).length > 0) {
                     $("#ddlRateList").empty().append($("<option></option>").val("0").html("Select")).select2();
                     $("#ddlBulkRatePanel").empty().append($("<option></option>").val("0").html("Select")).select2();
                     $("#ddlRateListCopyTo").empty().append($("<option></option>").val("0").html("Select")).select2();
@@ -166,15 +166,35 @@ function onPanelChange() {
     var PanelId = $("#ddlPanel option:selected").val();
     BindPanelRateLinkItem(PanelId);
 }
-function DownloadPanelRateList() {
+function DownloadPanelRateList(elem) {
+    if ($("#ddlBulkRatePanel option:selected").val() == '0') {
+        alert('Please Select Rate List Panel')
+        return
+    }
     var objBO = {};
     var url = config.baseUrl + "/api/EDP/PanelRateQueries";
     objBO.Logic = "DownloadRateList";
     objBO.FileType = "Excel";
     objBO.RateListId = $("#ddlBulkRatePanel option:selected").val();
-    Global_DownloadExcel(url, objBO, $("#ddlBulkRatePanel option:selected").text() + ".xlsx");
+    Global_DownloadExcel(url, objBO, $("#ddlBulkRatePanel option:selected").text() + ".xlsx", elem);
 }
-function UploadPanelRateList() {
+function Global_DownloadExcel(Url, objBO, fileName, elem) {
+    $(elem).addClass('loading');
+    var ajax = new XMLHttpRequest();
+    ajax.open("Post", Url, true);
+    ajax.responseType = "blob";
+    ajax.setRequestHeader("Content-type", "application/json")
+    ajax.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            var blob = new Blob([this.response], { type: "application/octet-stream" });
+            saveAs(blob, fileName); //refernce by ~/JsModule/FileSaver.min.js
+            $(elem).removeClass('loading');
+        }
+    };
+    ajax.send(JSON.stringify(objBO));
+}
+function UploadPanelRateList(elem) {
+    $(elem).addClass('loading');
     var RateListId = $("#ddlBulkRatePanel option:selected").val();
     if (RateListId != "0" && RateListId != "" && typeof RateListId != 'undefined') {
         var uploadFile = $("#ExcelImage");
@@ -193,6 +213,7 @@ function UploadPanelRateList() {
                 processData: false,
                 success: function (response) {
                     alert('RateListId Updated successfully');
+                    $(elem).removeClass('loading');
                 },
                 error: function (response) {
                     alert('Server Error...!');

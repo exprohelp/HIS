@@ -399,6 +399,7 @@
     <Content Include="Areas\Lab\JsModule\LabDoctorSignature.js" />
     <Content Include="Areas\Lab\JsModule\Labobservation.js" />
     <Content Include="Areas\Lab\JsModule\LabTemplate.js" />
+    <Content Include="Areas\Lab\JsModule\Master\ConsentMaster.js" />
     <Content Include="Areas\Lab\JsModule\Master\LabDoctorSignature - Copy.js" />
     <Content Include="Areas\Lab\JsModule\Master\LabOutSource.js" />
     <Content Include="Areas\Lab\JsModule\LabReceive.js" />
@@ -2159,6 +2160,7 @@
     <Content Include="Areas\Lab\Views\Master\SetDeptSeq.cshtml" />
     <Content Include="Areas\IPD\Views\DoctorView\_PatientReportAnalysis.cshtml" />
     <Content Include="Areas\EDP\Views\EDP\PanelRateUpdate.cshtml" />
+    <Content Include="Areas\Lab\Views\Master\ConsentMaster.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

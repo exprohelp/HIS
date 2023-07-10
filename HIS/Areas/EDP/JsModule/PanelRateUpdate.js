@@ -3,20 +3,20 @@
     Onload();
     searchTable('txtSeachRatePanel', 'tblRatePanelDetails');
     $("select").select2();
-    $("#tblRateListInfo tbody").on('keyup', 'input:text', function (e) {      
-        if (/[^\d.]/g.test(this.value)) {         
+    $("#tblRateListInfo tbody").on('keyup', 'input:text', function (e) {
+        if (/[^\d.]/g.test(this.value)) {
             this.value = this.value.replace(/[^\d.]/g, '');
         }
     });
-    $("#tblRateListInfo tbody").on('keyup', 'input:text', function () {      
-        var rate =parseFloat($(this).val());
+    $("#tblRateListInfo tbody").on('keyup', 'input:text', function () {
+        var rate = parseFloat($(this).val());
         if (rate < 0) {
             $(this).val('');
-        }      
+        }
     });
     $("#tblRateListInfo tbody").on('click', 'button', function () {
         var ItemId = $(this).closest('tr').find('td:eq(0)').text();
-        var rate = $(this).siblings('input').val();        
+        var rate = $(this).siblings('input').val();
         $("#tblRateListInfo tbody tr").each(function () {
             if ($(this).find('td:eq(0)').text() == ItemId)
                 $(this).find('input:text').val(rate);
@@ -162,10 +162,10 @@ function GetItemRateList() {
                 if (Object.keys(data.ResultSet.Table).length > 0) {
                     $.each(data.ResultSet.Table, function (k, v) {
                         if (temp != v.ItemId) {
-                            htmldata += '<tr style="background:#f7f0cb">';
+                            htmldata += '<tr class="itemGroup" style="background:#f7f0cb">';
                             htmldata += '<td class="hide">' + v.ItemId + '</td>';
                             htmldata += '<td colspan="1">' + v.ItemName + '</td>';
-                            htmldata += '<td class="flex"><input  type="text" class="rate"/><button class="btnRate btn btn-warning btn-xs">Save</button></td>';
+                            htmldata += '<td class="flex"><input  type="text" class="rate"/><button class="btnRate btn btn-warning btn-xs"><i class="fa fa-refresh"></i></button></td>';
                             htmldata += '</tr>';
                             temp = v.ItemId;
                         }
@@ -183,6 +183,19 @@ function GetItemRateList() {
                 }
             }
         },
+        complete: function (response) {         
+            var index = -1;
+            $("#tblRateListInfo tbody tr").each(function () {
+                if ($(this).hasClass('itemGroup'))
+                    index++;
+                    
+                if ($(this).find('td:eq(1)').text() == 'OPD') {
+                    var content = $(this).closest('tr').html();
+                    $(this).closest('tr').remove();
+                    $('#tblRateListInfo > tbody > tr.itemGroup').eq(index).after("<tr class='bg-success'>" + content+"</tr>");                    
+                }
+            });
+        },
         error: function (response) {
             alert('Server Error...!');
         }
@@ -193,8 +206,8 @@ function RoomChargesUpdate() {
     var objBO = [];
     $('#tblRateListInfo tbody tr').each(function () {
         if ($(this).attr('style') != 'background:#f7f0cb') {
-            var rate =parseFloat($(this).find("td:eq(2) input").val());
-            if (rate >0) {
+            var rate = parseFloat($(this).find("td:eq(2) input").val());
+            if (rate > 0) {
                 objBO.push({
                     'RateListId': $("#ddlRateList option:selected").val(),
                     'ItemId': $(this).find("td:eq(0)").text(),
@@ -215,7 +228,7 @@ function RoomChargesUpdate() {
         data: JSON.stringify(objBO),
         dataType: "json",
         contentType: "application/json;charset=utf-8",
-        success: function (data) {            
+        success: function (data) {
             if (data == 'Success') {
                 alert('Successfully Updated');
             }
