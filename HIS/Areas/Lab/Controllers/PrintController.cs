@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace MediSoftTech_HIS.Areas.Lab.Controllers
 {
     public class PrintController : Controller
-    {        
+    {
         public FileResult SampleTransferSheet(string DispatchNo)
         {
             PdfGenerator pdfConverter = new PdfGenerator();
@@ -113,7 +113,65 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
             pdfConverter.PageOrientation = "Portrait";
             return pdfConverter.ConvertToPdf("-", b.ToString(), "-", "Sample-Transfer-Sheet.pdf");
         }
+        public FileResult PrintConsentForm()
+        {
+            PdfGenerator pdfConverter = new PdfGenerator();
+            LabTemplates obj = new LabTemplates();
+            obj.hosp_id = "-";
+            obj.subcatid = "-";
+            obj.testcode = "-";
+            obj.prm_1 = "-";
+            obj.prm_2 = "-";
+            obj.login_id = "-";
+            obj.Logic = "PrintConsentForm";
+            dataSet dsResult = APIProxy.CallWebApiMethod("Lab/mLabTemplateQueries", obj);
 
+            DataSet ds = dsResult.ResultSet;
+            StringBuilder b = new StringBuilder();
+            string content = string.Empty;            
+            string PatientName = "Nitin Srivastava";            
+            string Gender = "Male";            
+            string Age = "30 year";
+            string MobileNo = "9670244590";
+            string Address ="Jankipuram, Lucknow, Uttar Pradesh-229801";         
+            string Investigation ="Jankipuram, Lucknow, Uttar Pradesh-229801";         
+            if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    content = dr["t_content"].ToString();
+                    foreach (var var1 in dr["var_list"].ToString().Split(','))
+                    {
+                        var oldString = "{<strong>" + var1 + "</strong>}";
+                        var newString = "<strong>" + var1 + "</strong>";
+                        if (var1== "PatientName")
+                            content = content.Replace(oldString, "<strong>" + PatientName + "</strong>");
+                        if (var1 == "Gender")
+                            content = content.Replace(oldString, "<strong>" + Gender + "</strong>");                        
+                        if (var1 == "Age")
+                            content = content.Replace(oldString, "<strong>" + Age + "</strong>");                        
+                        if (var1 == "MobileNo")
+                            content = content.Replace(oldString, "<strong>" + MobileNo + "</strong>");
+                        if (var1 == "Address")
+                            content = content.Replace(oldString, "<strong>" + Address + "</strong>");
+                    }
+                    b.Append(content);
+
+                }                
+            }
+            pdfConverter.Header_Enabled = false;
+            pdfConverter.Footer_Enabled = false;
+            pdfConverter.Footer_Hight = 17;
+            pdfConverter.Header_Hight = 70;
+            pdfConverter.PageMarginLeft = 10;
+            pdfConverter.PageMarginRight = 10;
+            pdfConverter.PageMarginBottom = 10;
+            pdfConverter.PageMarginTop = 10;
+            pdfConverter.PageMarginTop = 10;
+            pdfConverter.PageName = "A5";
+            pdfConverter.PageOrientation = "Portrait";
+            return pdfConverter.ConvertToPdf("-", b.ToString(), "-", "ConsentForm.pdf");
+        }
         public FileResult LabReport(string visitNo)
         {
             PdfGenerator pdfConverter = new PdfGenerator();
@@ -219,7 +277,7 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
                     h.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
                     h.Append("</tr>");
                     h.Append("</table>");
-                }                
+                }
             }
 
             var deptName = "BIOCHEMISTRY";
@@ -246,7 +304,7 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
                 }).OrderBy(y => y.TestSeqNo).ToList();
                 if (ObsTest.Count > 0)
                 {
-                  
+
                     b.Append("<hr/>");
                     b.Append("<h3 style='text-align:center;margin-top:5px;'>" + report.First().SubCatName + " REPORTS</h3>");
                     var tempCatName = "";
