@@ -127,50 +127,136 @@ namespace MediSoftTech_HIS.Areas.Lab.Controllers
             dataSet dsResult = APIProxy.CallWebApiMethod("Lab/mLabTemplateQueries", obj);
 
             DataSet ds = dsResult.ResultSet;
+            StringBuilder h = new StringBuilder();
             StringBuilder b = new StringBuilder();
-            string content = string.Empty;            
-            string PatientName = "Nitin Srivastava";            
-            string Gender = "Male";            
+            StringBuilder f = new StringBuilder();
+            string content = string.Empty;
+            string PatientName = "Nitin Srivastava";
+            string Gender = "Male";
             string Age = "30 year";
             string MobileNo = "9670244590";
-            string Address ="Jankipuram, Lucknow, Uttar Pradesh-229801";         
-            string Investigation ="Jankipuram, Lucknow, Uttar Pradesh-229801";         
+            string Address = "Jankipuram, Lucknow, Uttar Pradesh-229801";
+            string Investigation = "Jankipuram, Lucknow, Uttar Pradesh-229801";
+            b.Append("<div style='width:100%;height:1005px;font-family:calibri'>");
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    b.Append("<div style='width:100%;font-size:15px;float:left;margin-top:-12px;padding:8px;font-family:calibri'>");
+                    string chandanLogo = HttpContext.Server.MapPath(@"/Content/logo/logo.png");
+                    b.Append("<div style='text-align:left;width:32%;float:left'>");
+                    b.Append("<img src=" + chandanLogo + " style='width:180px;margin-top:5px;' />");
+                    b.Append("</div>");
+                    b.Append("<div style='text-align:left;width:auto;float:left;width:43%;'>");
+                    b.Append("<h2 style='font-weight:bold;margin:0'>" + dr["Hospital_Name"].ToString() + "</h2>");
+                    b.Append("<span style='text-align:left;'>" + dr["Full_Address"].ToString() + "</span><br/>");
+                    b.Append("<span style='text-align:left;'><b>Landline No : </b>" + dr["LandlineNo"].ToString() + "</span><br/>");
+                    //b.Append("<span style='text-align:left;'><b>Email ID : </b>" + dr["EmailID"].ToString() + "</span><br/>");
+                    b.Append("<span style='text-align:left;'><b>CIN No: " + dr["cin_no"].ToString() + "</b></span><br/>");
+                    b.Append("</div>");
+                    b.Append("<div style='text-align:left;width:25%;float:left'>");
+                    b.Append("<img src=" + chandanLogo + " style='width:180px;' />");
+                    b.Append("</div>");
+                    b.Append("</div>");
+                    b.Append("<hr/>");
+                }
+            }
+            //if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            //{
+            //    foreach (DataRow dr in ds.Tables[1].Rows)
+            //    {
+            //        h.Append("<table style='width:1200px;font-size:22px;font-family:calibri;text-align:left;background:#ececec;'>");
+            //        h.Append("<tr>");
+            //        h.Append("<td><b>Patient Name</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td><b>" + dr["patient_name"].ToString() + "</b></td>");
+            //        h.Append("<td colspan='4'>&nbsp;</td>");
+            //        h.Append("<td><b>Registered On</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+            //        h.Append("</tr>");
+            //        h.Append("<tr>");
+            //        h.Append("<td><b>Age/Gender</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["ageInfo"].ToString() + "</td>");
+            //        h.Append("<td colspan='4'>&nbsp;</td>");
+            //        h.Append("<td><b>Collected</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+            //        h.Append("</tr>");
+            //        h.Append("<tr>");
+            //        h.Append("<td><b>UHID/MR NO</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["UHID"].ToString() + "</td>");
+            //        h.Append("<td colspan='4'>&nbsp;</td>");
+            //        h.Append("<td><b>Received</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+            //        h.Append("</tr>");
+            //        h.Append("<tr>");
+            //        h.Append("<td><b>Visit ID</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
+            //        h.Append("<td colspan='4'>&nbsp;</td>");
+            //        h.Append("<td><b>Reported</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["RegDate"].ToString() + "</td>");
+            //        h.Append("</tr>");
+            //        h.Append("<tr>");
+            //        h.Append("<td><b>Ref Doctor</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["ref_name"].ToString() + "</td>");
+            //        h.Append("<td colspan='4'>&nbsp;</td>");
+            //        h.Append("<td><b>Status</b></td>");
+            //        h.Append("<td><b>:</b></td>");
+            //        h.Append("<td>" + dr["VisitNo"].ToString() + "</td>");
+            //        h.Append("</tr>");
+            //        h.Append("</table>");
+            //    }
+            //}
+            if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[1].Rows)
                 {
                     content = dr["t_content"].ToString();
                     foreach (var var1 in dr["var_list"].ToString().Split(','))
                     {
                         var oldString = "{<strong>" + var1 + "</strong>}";
                         var newString = "<strong>" + var1 + "</strong>";
-                        if (var1== "PatientName")
+                        if (var1 == "PatientName")
                             content = content.Replace(oldString, "<strong>" + PatientName + "</strong>");
                         if (var1 == "Gender")
-                            content = content.Replace(oldString, "<strong>" + Gender + "</strong>");                        
+                            content = content.Replace(oldString, "<strong>" + Gender + "</strong>");
                         if (var1 == "Age")
-                            content = content.Replace(oldString, "<strong>" + Age + "</strong>");                        
+                            content = content.Replace(oldString, "<strong>" + Age + "</strong>");
                         if (var1 == "MobileNo")
                             content = content.Replace(oldString, "<strong>" + MobileNo + "</strong>");
                         if (var1 == "Address")
                             content = content.Replace(oldString, "<strong>" + Address + "</strong>");
                     }
                     b.Append(content);
-
-                }                
+                }
             }
+            b.Append("<div style='width:100%;position:absolute;bottom:5px;right:10px'>");
+            b.Append("<div style='width:50%;float:left;text-align:center'>");
+            b.Append("<hr style='width:60%;' />Patient Signature");
+            b.Append("</div>");
+            b.Append("<div style='width:50%;float:right;text-align:center'>");
+            b.Append("<hr style='width:60%;'/>Authorized Signature");
+            b.Append("</div>");
+            b.Append("</div>");
+            b.Append("</div>");
             pdfConverter.Header_Enabled = false;
-            pdfConverter.Footer_Enabled = false;
-            pdfConverter.Footer_Hight = 17;
+            pdfConverter.Footer_Enabled = true;
+            pdfConverter.Footer_Hight = 50;
             pdfConverter.Header_Hight = 70;
             pdfConverter.PageMarginLeft = 10;
             pdfConverter.PageMarginRight = 10;
-            pdfConverter.PageMarginBottom = 10;
-            pdfConverter.PageMarginTop = 10;
-            pdfConverter.PageMarginTop = 10;
+            pdfConverter.PageMarginBottom = 5;
+            pdfConverter.PageMarginTop = 10;         
             pdfConverter.PageName = "A5";
             pdfConverter.PageOrientation = "Portrait";
-            return pdfConverter.ConvertToPdf("-", b.ToString(), "-", "ConsentForm.pdf");
+            return pdfConverter.ConvertToPdf("-", b.ToString(), f.ToString(), "ConsentForm.pdf");
         }
         public FileResult LabReport(string visitNo)
         {

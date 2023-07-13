@@ -1,6 +1,8 @@
 ﻿using HISWebApi.Models;
 using HISWebApi.Repository.Accounts;
+using HISWebApi.Repository.Pharmacy;
 using MISWebApi.Repository.Accounts;
+using System.Data;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -10,6 +12,7 @@ namespace MISWebApi.Controllers
 	[RoutePrefix("api/Account")]
 	public class AccountController : ApiController
 	{
+		private Pharmacy repositoryPharmacy = new Pharmacy();
 		private Account repositoryAccount = new Account();
 
 		[HttpPost]
@@ -104,5 +107,19 @@ namespace MISWebApi.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
         #endregion #Tally
+        [HttpPost]
+        [Route("HOTO_Queries")]
+        public HttpResponseMessage HOTO_Queries([FromBody] Hoto obj)
+        {
+            dataSet result = repositoryPharmacy.HOTO_Queries(obj);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
+        [HttpPost]
+        [Route("Insert_Modify_AC_Collection_Info")]
+        public HttpResponseMessage Insert_Modify_AC_Collection_Info([FromBody] Hoto obj)
+        {
+            string result = repositoryPharmacy.Insert_Modify_AC_Collection_Info(obj);
+            return Request.CreateResponse(HttpStatusCode.OK, result);
+        }
     }
 }

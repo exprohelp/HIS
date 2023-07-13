@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Phar Amount Take Over";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/Accounts/JsModule/PharAmountTakeOver.js"></script>
+<style>
+    #tblReport thead th {
+        background: #2a86cd !important;
+        color: #fff;
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    .scroll {
+        width: 100%;
+        background: #fff;
+        overflow: overlay;
+        max-height: 480px;
+        display: block;
+    }
+
+    .panel-body {
+        /*box-shadow: 1px 1px 10px #d2d2d2;*/
+        border-radius: 10px;
+        padding: 5px 3px 0px 3px;
+        position: relative;
+    }
+
+    .ml15 {
+        margin-left: 15px;
+    }
+</style>
+<div id="page-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ml15">
+                    <div class="">
+                        <div class="panel">
+                            <div class="panel-heading" style="background:#026cbd;padding: 4px;">
+                                <h4 class="text-white">Pharmacy Amount Take Over Report</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <dic class="scroll" style="border: 1px solid #2478a9;height: 230px;overflow: auto;">
+                                        <table id="tblToBereceivedByHosp" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8%;">cmd</th>
+                                                    <th>Collect Date</th>
+                                                    <th>Tnx To</th>
+                                                    <th>Tnx By Name</th>
+                                                    <th class="text-right">Amount</th>
+                                                    <th>Remarks</th>                                                                                                 
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </dic>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>From</label>
+                                    <input type="date" id="txtFrom" class="form-control" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label>To</label>
+                                    <div class="flex">
+                                        <input type="date" id="txtTo" class="form-control" />
+                                        <button style="width:30%" id="btnSearch" class="btn btn-primary" onclick="HospRcvdInfoByDate()"><i class="fa fa-sign-in">&nbsp;</i>Get</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <dic class="scroll" style="border: 1px solid #2478a9;height: 230px;overflow: auto;margin-bottom:20px">
+                                        <table id="tblHospRcvdInfoByDate" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8%;">cmd</th>
+                                                    <th>Collect Date</th>
+                                                    <th>Tnx To</th>
+                                                    <th>Tnx By Name</th>
+                                                    <th class="text-right">Amount</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </dic>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

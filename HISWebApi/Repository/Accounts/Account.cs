@@ -14,6 +14,7 @@ namespace MISWebApi.Repository.Accounts
 {
     public class Account
     {
+       
         public PaymentInfo[] BindOnloadData([FromBody] ipAccounts ipAcc)
         {
             List<PaymentInfo> prpArr = new List<PaymentInfo>();

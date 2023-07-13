@@ -9,7 +9,74 @@ namespace HISWebApi.Repository.Pharmacy
     public class Pharmacy
     {
         private HISDBLayer hisDB = new HISDBLayer();
-
+        
+        public dataSet HOTO_Queries(Hoto p)
+        {
+            string processInfo = string.Empty;
+            dataSet dsObj = new dataSet();
+            SqlConnection con = new SqlConnection(GlobalConfig.ConStr_ChandanPharmacyLive);
+            SqlCommand cmd = new SqlCommand("pHOTO_Queries", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = 2500;
+            cmd.Parameters.Add("@unit_id", SqlDbType.VarChar, 10).Value = p.unit_id;
+            cmd.Parameters.Add("@loginId", SqlDbType.VarChar, 15).Value = p.login_id;
+            cmd.Parameters.Add("@Logic", SqlDbType.VarChar, 50).Value = p.logic;
+            cmd.Parameters.Add("@shiftID", SqlDbType.VarChar, 20).Value = p.shiftID;
+            cmd.Parameters.Add("@prm_1", SqlDbType.VarChar, 50).Value = p.prm_1;
+            cmd.Parameters.Add("@prm_2", SqlDbType.VarChar, 50).Value = p.prm_2;
+            cmd.Parameters.Add("@result", SqlDbType.VarChar, 200).Value = "N/A";
+            cmd.Parameters["@result"].Direction = ParameterDirection.InputOutput;
+            try
+            {
+                con.Open();
+                DataSet ds = new DataSet();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(ds);
+                dsObj.ResultSet = ds;
+                dsObj.Msg = (string)cmd.Parameters["@result"].Value.ToString();
+                con.Close();           
+            }
+            catch (SqlException sqlEx)
+            {
+                dsObj.Msg = sqlEx.ToString();
+            }
+            finally { con.Close(); }
+            return dsObj;
+        }
+        public string Insert_Modify_AC_Collection_Info(Hoto p)
+        {
+            string processInfo = string.Empty;
+            DataSet ds = new DataSet();
+            SqlConnection con = new SqlConnection(GlobalConfig.ConStr_ChandanPharmacyLive);
+            SqlCommand cmd = new SqlCommand("Insert_Modify_AC_Collection_Info", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandTimeout = 2500;
+            cmd.Parameters.Add("@autoId", SqlDbType.NVarChar, 20).Value = p.autoId;
+            cmd.Parameters.Add("@unit_id", SqlDbType.NVarChar, 20).Value = p.unit_id;
+            cmd.Parameters.Add("@tnxDate", SqlDbType.Date, 10).Value = p.tnxDate;
+            cmd.Parameters.Add("@tnxBy", SqlDbType.NVarChar, 20).Value = p.tnxBy;
+            cmd.Parameters.Add("@tnxTo", SqlDbType.NVarChar, 20).Value = p.tnxTo;
+            cmd.Parameters.Add("@amount", SqlDbType.Decimal).Value = p.amount;
+            cmd.Parameters.Add("@logic", SqlDbType.NVarChar, 50).Value = p.logic;
+            cmd.Parameters.Add("@shiftID", SqlDbType.NVarChar, 20).Value = p.shiftID;
+            cmd.Parameters.Add("@prm_1", SqlDbType.NVarChar, 50).Value = p.prm_1;
+            cmd.Parameters.Add("@prm_2", SqlDbType.NVarChar, 50).Value = p.prm_2;
+            cmd.Parameters.Add("@login_id", SqlDbType.NVarChar, 16).Value = p.login_id;
+            cmd.Parameters.Add("@result", SqlDbType.NVarChar, 50).Value = "N/A";
+            cmd.Parameters["@result"].Direction = ParameterDirection.InputOutput;
+            try
+            {
+                con.Open();
+                cmd.ExecuteNonQuery();
+                processInfo = (string)cmd.Parameters["@result"].Value.ToString();
+            }
+            catch (SqlException sqlEx)
+            {
+                processInfo = "Error Found   : " + sqlEx.Message;
+            }
+            finally { con.Close(); }
+            return processInfo;
+        }
         public dataSet Hospital_BillPushReport(ipPharmacyInfo ip)
         {
             if (ip.Logic == "HIS:PushDataSummary" && ip.prm_1!= "ByIPDNo")

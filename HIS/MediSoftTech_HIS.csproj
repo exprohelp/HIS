@@ -215,6 +215,7 @@
     <Content Include="Areas\Accounts\JsModule\ledgerBook.js" />
     <Content Include="Areas\Accounts\JsModule\Master\CreateGroup.js" />
     <Content Include="Areas\Accounts\JsModule\Master\CreateLedger.js" />
+    <Content Include="Areas\Accounts\JsModule\PharAmountTakeOver.js" />
     <Content Include="Areas\Accounts\JsModule\Tally\TallyTransfer.js" />
     <Content Include="Areas\Accounts\JsModule\VoucherEntry.js" />
     <Content Include="Areas\Accounts\Views\Ledger\Contra.cshtml" />
@@ -2161,6 +2162,7 @@
     <Content Include="Areas\IPD\Views\DoctorView\_PatientReportAnalysis.cshtml" />
     <Content Include="Areas\EDP\Views\EDP\PanelRateUpdate.cshtml" />
     <Content Include="Areas\Lab\Views\Master\ConsentMaster.cshtml" />
+    <Content Include="Areas\Accounts\Views\Ledger\PharAmountTakeOver.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

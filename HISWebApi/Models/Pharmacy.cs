@@ -19,6 +19,21 @@ namespace HISWebApi.Models
         public string login_id { get; set; }
         public string Logic { get; set; }
     }
+    public class Hoto
+    {
+        public string unit_id { get; set; }
+        public string login_id { get; set; }
+        public string logic { get; set; }
+        public string shiftID { get; set; }
+        public string prm_1 { get; set; }
+        public string prm_2 { get; set; }
+        public string autoId { get; set; }
+        public string tnxDate { get; set; }
+        public string tnxBy { get; set; }
+        public string tnxTo { get; set; }
+        public decimal amount { get; set; }
+        public string result { get; set; }
+    }
     public class PharmacyBillInfo : ipPharmacyInfo
     {
         public string indent_no { get; set; }
