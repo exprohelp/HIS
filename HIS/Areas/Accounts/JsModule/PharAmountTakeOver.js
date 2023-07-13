@@ -26,7 +26,7 @@ function ToBereceivedByHosp() {
                 $.each(data.ResultSet.Table, function (key, val) {
                     count++;
                     tbody += "<tr>";
-                    tbody += "<td><button onclick=ReceivedByHosp('" + val.autoId + "')  class='btn btn-warning btn-xs'><i class='fa fa-check-circle'>&nbsp;</i>Receive</button></td>";
+                    tbody += "<td><button onclick=ReceivedByHosp(this)  class='btn btn-warning btn-xs'><i class='fa fa-check-circle'>&nbsp;</i>Receive</button></td>";
                     tbody += "<td class='hide'>" + val.autoId + "</td>";
                     tbody += "<td>" + val.colldate + "</td>";
                     tbody += "<td>" + val.tnxTo + "</td>";
@@ -83,7 +83,8 @@ function HospRcvdInfoByDate() {
         }
     });
 }
-function ReceivedByHosp(autoId) {
+function ReceivedByHosp(elem) {
+    var autoId = $(elem).closest('tr').find('td:eq(1)').text();
     if (confirm('Are you sure?')) {
         var url = config.baseUrl + "/api/Account/Insert_Modify_AC_Collection_Info";
         var objBO = {};
@@ -106,6 +107,7 @@ function ReceivedByHosp(autoId) {
             success: function (data) {
                 if (data.includes('Success')) {
                     alert(data)
+                    $(elem).closest('tr').remove();
                 }
                 else {
                     alert(data)
