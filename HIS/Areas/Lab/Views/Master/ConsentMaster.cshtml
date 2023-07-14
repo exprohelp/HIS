@@ -5,6 +5,9 @@
 }
 <script src="~/Areas/Lab/JsModule/Master/ConsentMaster.js"></script>
 <style type="text/css">
+    table {
+        margin-bottom: 0;
+    }
 
     .p {
         margin: 0 !important
@@ -25,7 +28,7 @@
     .form-group {
         margin-bottom: 5px;
     }
-  
+
     h4, .h4, h5, .h5, h6, .h6 {
         margin-top: 2px;
         margin-bottom: 2px;
@@ -70,15 +73,42 @@
     #cke_1_contents {
         height: 350px !important;
     }
+    .flex {
+        display: flex;
+        align-items: baseline;
+    }
+    .consentName {
+        width: 50%;
+        border-radius: 0;
+        margin-bottom: 6px;
+        border-color: #f39c12;
+    }
+    .clear {
+        margin: 0;
+        border-radius: 0;
+        height: 27.5px;
+    }
 </style>
 <div id="page-content">
-    <div class="col-lg-3">
+    <div class="col-lg-4">
         <div class="row">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h4>Variable Details</h4>
+                    <h4>Consent Master</h4>
                 </div>
-                <div class="panel-body" style="height:530px;overflow:auto; border: 1px solid #86b3de;padding: 4px;">
+                <div class="panel-body" style="height:540px;overflow:auto; border: 1px solid #86b3de;padding: 4px;">
+                    <div class="table-responsive" style="height:330px;overflow:auto;border:1px solid #86b3de;margin-bottom:5px;">
+                        <table class="table table-bordered" id="tblConsentMaster">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%">Active</th>
+                                    <th>Consent Name</th>
+                                    <th style="width:1%">cmd</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="tblTestDetails">
                             <thead>
@@ -126,14 +156,17 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-8">
         <div class="row">
             <div class="panel panel-primary" style="height:490px;">
                 <div class="panel-body">
                     <div class="col-sm-12 form-group">
-                        <input type="text" style="margin-bottom:6px" id="txtConsentTemplateName" class="form-control" placeholder="Consent Template Name" />
+                        <div class="flex">
+                            <input type="text" id="txtConsentTemplateName" class="consentName form-control" placeholder="Consent Template Name" />
+                            <button onclick="Clear()" class="btn btn-warning clear"><i class="fa fa-sign-in">&nbsp;</i>New</button>
+                        </div>
                         <textarea class="form-control" id="txtContent"></textarea>
-                        <button onclick="InsertConsentForm()" class="btn btn-warning pull-right" style="margin-top:10px"><i class="fa fa-sign-in">&nbsp;</i>Submit</button>
+                        <button id="btnSubmit" onclick="InsertConsentForm()" class="btn btn-success pull-right" style="margin-top:10px">Submit</button>
                     </div>
                 </div>
             </div>

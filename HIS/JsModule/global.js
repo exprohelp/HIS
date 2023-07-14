@@ -109,7 +109,7 @@ function Global_DownloadPdf(Url, objBO, fileName) {
 function lockPreviousDate(elementid) {
     //var today = new Date().toISOString().split('T')[0];	
     var today = sessionStorage.getItem('ServerTodayDate').split('T')[0];
-    alert(today);
+    alert(today);   
     $("#" + elementid).attr("min", today);
 }
 function FillCurrentDate(elementid) {
